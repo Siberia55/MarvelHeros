@@ -206,12 +206,13 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                     .background(Color.Green)
             )
 
-            //Spacer(modifier = Modifier.height(1.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "Choose your hero",
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White//MaterialTheme.colorScheme.onSurface
             )
+            Spacer(modifier = Modifier. height(80.dp))
             val lazyListState = rememberLazyListState()
             val snapLayoutInfoProvider = remember(lazyListState) {
                 SnapLayoutInfoProvider(lazyListState)
@@ -222,8 +223,8 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .height(450.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-                //verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 items(heroes) { hero ->
                     HeroItem(
@@ -265,8 +266,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = hero.name,
-                /*
+                //text = hero.name,
                 text = hero.name,
                 style = MaterialTheme.typography.titleLarge.copy(
                     color = Color.White,
@@ -274,11 +274,9 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                         color = Color.Black,
                         offset = Offset(2f, 2f),
                         blurRadius = 4f
-                        *
+
                     )
                 ),
-
-                 */
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(16.dp)
