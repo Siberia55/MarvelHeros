@@ -12,6 +12,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -62,7 +63,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-//import androidx.compose.ui.Alignment
 
 
 data class Hero(
@@ -212,14 +212,24 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White//MaterialTheme.colorScheme.onSurface
             )
-            Spacer(modifier = Modifier. height(80.dp))
+            Spacer(modifier = Modifier.height(80.dp))
             val lazyListState = rememberLazyListState()
             val snapLayoutInfoProvider = remember(lazyListState) {
-                SnapLayoutInfoProvider(lazyListState)
+                SnapLayoutInfoProvider(
+                    lazyListState = lazyListState,
+                    snapPosition = SnapPosition.Center
+                )
             }
+
+            //val lazyListState = rememberLazyListState()
+            // val snapLayoutInfoProvider = remember(lazyListState) {
+            //    SnapLayoutInfoProvider(lazyListState)
+            //}
             val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
 
             LazyRow(
+                state = lazyListState,
+                flingBehavior = snapFlingBehavior,
                 modifier = Modifier
                     .fillMaxSize()
                     .height(450.dp),
