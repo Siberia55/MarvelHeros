@@ -58,6 +58,12 @@ import androidx.compose.ui.Alignment
 //import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+
 
 data class Hero(
     val id: Int,
@@ -104,16 +110,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MarvelHerosTheme {
-                val selectedHero = remember { mutableSetOf<Hero?>(null) }
+                var selectedHero by remember { mutableStateOf<Hero?>(null) }
 
                 Box(modifier = Modifier.fillMaxSize()){
                     MainContent(
-                    onHeroClick = { hero -> selectedHero.value = hero }
+                    onHeroClick = { hero -> selectedHero = hero }//onHeroClick = { hero -> selectedHero.value = hero }
                     )
-                    selectedHero.value?.let { hero ->
+                    selectedHero?.let {hero ->//selectedHero.value?.let { hero ->
                         FullScreenHero(
                             hero = hero,
-                            onDismiss = { selectedHero.value = null }
+                            onDismiss = { selectedHero = null }//{ selectedHero.value = null }
                         )
 
                     }
@@ -262,11 +268,11 @@ fun HeroItem(hero: Hero, onClick: () -> Unit){
 }
 // Полный экран
 @Composable
-fun FullScreenHero(hero: Hero, onDimiss: () -> Unit) {
+fun FullScreenHero(hero: Hero, onDismiss: () -> Unit) {
     Box (modifier = Modifier
         .fillMaxSize()
         .background(Color.Black.copy(alpha = 0.95f))
-        .clickable(onClick = onDimiss)
+        .clickable(onClick = onDismiss)
     ){
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -453,5 +459,3 @@ AsyncImage(
 fun MarvelPriv(){
 MarvelChoose("IronMan")
 }*/
-
-
