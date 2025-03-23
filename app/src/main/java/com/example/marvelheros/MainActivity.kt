@@ -62,7 +62,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-
+//import androidx.compose.ui.Alignment
 
 
 data class Hero(
@@ -95,12 +95,12 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
         drawRect(color = color2)
 // разделение экрана
         val path =Path().apply {
-        moveTo(0f, height)  //левый нижний угол //(0f, 0f) начало правый верхний угол
-        lineTo(width, 0f)   //линия к правому верхнему углу //(width, height)
-        lineTo(0f, 0f)      //замыкание треугольника
-        close()
-    }
-    drawPath(path = path, color = color1)
+            moveTo(0f, height)  //левый нижний угол //(0f, 0f) начало правый верхний угол
+            lineTo(width, 0f)   //линия к правому верхнему углу //(width, height)
+            lineTo(0f, 0f)      //замыкание треугольника
+            close()
+        }
+        drawPath(path = path, color = color1)
     }
 )
 
@@ -111,10 +111,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MarvelHerosTheme {
                 var selectedHero by remember { mutableStateOf<Hero?>(null) }
-
                 Box(modifier = Modifier.fillMaxSize()){
                     MainContent(
-                    onHeroClick = { hero -> selectedHero = hero }//onHeroClick = { hero -> selectedHero.value = hero }
+                        onHeroClick = { /*hero -> */selectedHero = it }//onHeroClick = { hero -> selectedHero.value = hero }
                     )
                     selectedHero?.let {hero ->//selectedHero.value?.let { hero ->
                         FullScreenHero(
@@ -124,57 +123,57 @@ class MainActivity : ComponentActivity() {
 
                     }
                 }
-                   /* modifier = Modifier
-                        .fillMaxSize()
-                        .diagonalSplit(
-                            color1 = Color.DarkGray,
-                            color2 = Color.Red,
-                        )*/
+                /* modifier = Modifier
+                     .fillMaxSize()
+                     .diagonalSplit(
+                         color1 = Color.DarkGray,
+                         color2 = Color.Red,
+                     )*/
                 //)
-            /*    {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(30.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.logo),
-                            contentDescription = null,
+                /*    {
+                        Column(
                             modifier = Modifier
-                                .width(100.dp)
-                                .height(50.dp)
-                                .padding(vertical = 10.dp)
-                        )
-                        Text(
-                            text = "Choose your hero",
-                            style = MaterialTheme.typography.headlineMedium,
-                            color = Color.White
-                        )
-                        val lazyListState = rememberLazyListState()
-                        val snapLayoutInfoProvider = remember(lazyListState){
-                            SnapLayoutInfoProvider(lazyListState)
-                        }
-                        val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
-
-                        Spacer(modifier = Modifier.height(100.dp))
-                        LazyRow(
-                            state = lazyListState,
-                            flingBehavior = snapFlingBehavior,
-                            modifier = Modifier.fillMaxWidth()
-                            .height(450.dp),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                                .fillMaxSize()
+                                .padding(30.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            items(heroes) { hero ->
-                                HeroItem(hero = hero)
-
+                            Image(
+                                painter = painterResource(R.drawable.logo),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .width(100.dp)
+                                    .height(50.dp)
+                                    .padding(vertical = 10.dp)
+                            )
+                            Text(
+                                text = "Choose your hero",
+                                style = MaterialTheme.typography.headlineMedium,
+                                color = Color.White
+                            )
+                            val lazyListState = rememberLazyListState()
+                            val snapLayoutInfoProvider = remember(lazyListState){
+                                SnapLayoutInfoProvider(lazyListState)
                             }
-                        }
+                            val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
 
+                            Spacer(modifier = Modifier.height(100.dp))
+                            LazyRow(
+                                state = lazyListState,
+                                flingBehavior = snapFlingBehavior,
+                                modifier = Modifier.fillMaxWidth()
+                                .height(450.dp),
+                                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                items(heroes) { hero ->
+                                    HeroItem(hero = hero)
+
+                                }
+                            }
+
+                        }
                     }
-                }
-*/            }
+    */            }
         }
     }
 }
@@ -207,17 +206,24 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                     .background(Color.Green)
             )
 
-            Spacer(modifier = Modifier.height(1.dp))
+            //Spacer(modifier = Modifier.height(1.dp))
             Text(
                 text = "Choose your hero",
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White//MaterialTheme.colorScheme.onSurface
             )
+            val lazyListState = rememberLazyListState()
+            val snapLayoutInfoProvider = remember(lazyListState) {
+                SnapLayoutInfoProvider(lazyListState)
+            }
+            val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
+
             LazyRow(
                 modifier = Modifier
                     .fillMaxSize()
                     .height(450.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
+                //verticalAlignment = Alignment.CenterVertically
             ) {
                 items(heroes) { hero ->
                     HeroItem(
@@ -231,101 +237,121 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
 }
 // обновленный hero
 @Composable
-fun HeroItem(hero: Hero, onClick: () -> Unit){
-    Box(
+fun HeroItem(hero: Hero, onClick: () -> Unit) {
+    Column( // Возвращаем Column вместо Box для правильного выравнивания
         modifier = Modifier
             .width(300.dp)
             .padding(8.dp)
-            .clickable(onClick = onClick)
-    ){
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(hero.imageUrl)
-                .crossfade(true)
-                .build(),
-            contentDescription = hero.name,
+            .clickable(onClick = onClick),
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        Box(
             modifier = Modifier
-                .width(250.dp)
-                .clip(RoundedCornerShape(10.dp)),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            text = hero.name,
-            style = MaterialTheme.typography.titleLarge.copy(
-                color = Color.White,
-                shadow = Shadow(
-                    color = Color.Black,
-                    offset = Offset(2f, 2f),
-                    blurRadius = 4f
-                )
-            ),
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(16.dp)
-
-        )
-    }
-}
-// Полный экран
-@Composable
-fun FullScreenHero(hero: Hero, onDismiss: () -> Unit) {
-    Box (modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Black.copy(alpha = 0.95f))
-        .clickable(onClick = onDismiss)
-    ){
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(hero.imageUrl)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
-            contentScale = ContentScale.Fit
-        )
-        Column (
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(32.dp)
-                    ) {
+                .width(300.dp)
+                .height(400.dp)
+            // .padding(8.dp)
+            // .clickable(onClick = onClick)
+        ) {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(hero.imageUrl)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = hero.name,
+                modifier = Modifier
+                    .width(250.dp)
+                    .clip(RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.Crop
+            )
             Text(
                 text = hero.name,
-                style = MaterialTheme.typography.displaySmall.copy(
-                    color = Color.White,
-                    shadow = Shadow(
-                    color = Color.Black,
-                    offset = Offset(2f, 2f),
-                    blurRadius = 8f
-
-                    )
-                )
-            )
-             Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = hero.description,
-                style = MaterialTheme.typography.bodyLarge.copy(
+                /*
+                text = hero.name,
+                style = MaterialTheme.typography.titleLarge.copy(
                     color = Color.White,
                     shadow = Shadow(
                         color = Color.Black,
-                        offset = Offset(1f,1f),
+                        offset = Offset(2f, 2f),
                         blurRadius = 4f
+                        *
                     )
                 ),
-                modifier = Modifier.background(
-                    color = Color.Black.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(8.dp)
-                )
+
+                 */
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
                     .padding(16.dp)
+
             )
-
-
-
         }
     }
 }
+    // Полный экран
+@Composable
+    fun FullScreenHero(hero: Hero, onDismiss: () -> Unit) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.95f))
+                .clickable(onClick = onDismiss)
+        ) {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(hero.imageUrl)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize(),
+                   // .padding(32.dp)
+                contentScale = ContentScale.Fit
+            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(32.dp)
+            ) {
+                Text(
+                    text = hero.name,
+                    style = MaterialTheme.typography.displaySmall.copy(
+                        color = Color.White,
+                        /*
+                        shadow = Shadow(
+                            color = Color.Black,
+                            offset = Offset(2f, 2f),
+                            blurRadius = 8f
+
+                         */
+
+                        )
+                    )
+                //)
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = hero.description,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = Color.White,
+                        shadow = Shadow(
+                            color = Color.Black,
+                            offset = Offset(1f, 1f),
+                            blurRadius = 4f
+                        )
+                    ),
+                    modifier = Modifier.background(
+                        color = Color.Black.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                        .padding(16.dp)
+                )
+
+
+            }
+        }
+    }
+
+
 /* modifier = Modifier
      .padding(vertical = 5.dp)
      .width(220.dp)
