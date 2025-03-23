@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
@@ -172,8 +173,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 //ImageFromUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s")
+
 @Composable // основной контент
-fun MainContent(onHeroClick: (Hero) -> Unit){
+fun MainContent(onHeroClick: (Hero) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -182,133 +184,267 @@ fun MainContent(onHeroClick: (Hero) -> Unit){
                 color2 = Color.Red
             )
     )
-            {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ){
-
-                }
-
-                    )
-            }
-    )
-}
-@Composable
-fun HeroItem(hero: Hero){
-    Column (
-        modifier = Modifier
-            .width(300.dp)
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            modifier = Modifier
-                //.fillMaxWidth()
-                .width(280.dp)
-                .padding(10.dp),
-            //horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(hero.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(300.dp)
-                    .height(400.dp)
-                    .clip(RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop
-            )
-            Text(
-                text = hero.name,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    color = Color.Green,
-                    shadow = Shadow(
-                        color = Color.Black,
-                        offset = Offset(2f, 2f),
-                        blurRadius = 4f
-                    )
-                ),
-                //color = Color.White,
-                modifier = Modifier.padding(top = 5.dp)
-                    .align(Alignment.BottomStart)
-            )
-        }
-    }
-}
-/*fun ImageFromUrl(imageUrl: String) {
-    Box (
-modifier = Modifier
-    .fillMaxSize()
-    .diagonalSplit(
-        color1 = Color.DarkGray,
-        color2 = Color.Red
-    )
-    )
+    {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(5.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-
-            //verticalArrangement = Arrangement.Center
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Image(painter = painterResource(R.drawable.logo),
+            Image(
+                painter = painterResource(R.drawable.logo),
                 contentDescription = null,
                 modifier = Modifier
                     .width(100.dp)
                     .height(50.dp)
                     .padding(top = 20.dp)
-                    .background(Color.Green))
+                    .background(Color.Green)
+            )
 
             Spacer(modifier = Modifier.height(1.dp))
             Text(
                 text = "Choose your hero",
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White//MaterialTheme.colorScheme.onSurface
-               /* modifier = Modifier
-                    .padding(vertical = 5.dp)
-                    .width(220.dp)
-                    .height(50.dp)
-                    .background(Color.LightGray)
-                    .wrapContentSize(Alignment.Center)*/
+            )
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .height(450.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(heroes) { hero ->
+                    HeroItem(
+                        hero = hero,
+                        onClick = { onHeroClick(hero) }
+                    )
+                }
+            }
+        }
+    }
+}
+// обновленный hero
+@Composable
+fun HeroItem(hero: Hero, onClick: () -> Unit){
+    Box(
+        modifier = Modifier
+            .width(300.dp)
+            .padding(8.dp)
+            .clickable(onClick = onClick)
+    ){
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(hero.imageUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = hero.name,
+            modifier = Modifier
+                .width(250.dp)
+                .clip(RoundedCornerShape(10.dp)),
+            contentScale = ContentScale.Crop
+        )
+        Text(
+            text = hero.name,
+            style = MaterialTheme.typography.titleLarge.copy(
+                color = Color.White,
+                shadow = Shadow(
+                    color = Color.Black,
+                    offset = Offset(2f, 2f),
+                    blurRadius = 4f
+                )
+            ),
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp)
+
+        )
+    }
+}
+// Полный экран
+@Composable
+fun FullScreenHero(hero: Hero, onDimiss: () -> Unit) {
+    Box (modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Black.copy(alpha = 0.95f))
+        .clickable(onClick = onDimiss)
+    ){
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(hero.imageUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(32.dp),
+            contentScale = ContentScale.Fit
+        )
+        Column (
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(32.dp)
+                    ) {
+            Text(
+                text = hero.name,
+                style = MaterialTheme.typography.displaySmall.copy(
+                    color = Color.White,
+                    shadow = Shadow(
+                    color = Color.Black,
+                    offset = Offset(2f, 2f),
+                    blurRadius = 8f
+
+                    )
+                )
+            )
+             Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = hero.description,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = Color.White,
+                    shadow = Shadow(
+                        color = Color.Black,
+                        offset = Offset(1f,1f),
+                        blurRadius = 4f
+                    )
+                ),
+                modifier = Modifier.background(
+                    color = Color.Black.copy(alpha = 0.5f),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                    .padding(16.dp)
             )
 
-            Spacer(modifier = Modifier.height(150.dp))
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data (imageUrl)//("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s")
-                    .crossfade(true)
-                    .listener(
-                        onError = { _, throwable ->
-                            Log.e(
-                                "AsyncImage",
-                                "Error ${throwable.toString()}"
-                            )
-                        }
-                    )
-                    .build(),
-                //placeholder = painterResource(R.drawable.placeholder),
-                contentDescription = "Hero image",//stringResource(R.string.description),
-                error = painterResource(R.drawable.error_connect),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(350.dp)
-                    .clip(RectangleShape)
-                    .background(Color.Blue)
-            )
-                    //.size(250.dp)
-                    // .clip(RoundedCornerShape(10.dp)
-                    //.width(20.dp)
+
 
         }
     }
+}
+/* modifier = Modifier
+     .padding(vertical = 5.dp)
+     .width(220.dp)
+     .height(50.dp)
+     .background(Color.LightGray)
+     .wrapContentSize(Alignment.Center)
+ }
+
+     )
+}
+)
+}
+@Composable
+fun HeroItem(hero: Hero){
+Column (
+modifier = Modifier
+.width(300.dp)
+.padding(8.dp),
+horizontalAlignment = Alignment.CenterHorizontally
+) {
+Box(
+modifier = Modifier
+ //.fillMaxWidth()
+ .width(280.dp)
+ .padding(10.dp),
+//horizontalAlignment = Alignment.CenterHorizontally
+) {
+AsyncImage(
+ model = ImageRequest.Builder(LocalContext.current)
+     .data(hero.imageUrl)
+     .crossfade(true)
+     .build(),
+ contentDescription = null,
+ modifier = Modifier
+     .width(300.dp)
+     .height(400.dp)
+     .clip(RoundedCornerShape(10.dp)),
+ contentScale = ContentScale.Crop
+)
+Text(
+ text = hero.name,
+ style = MaterialTheme.typography.titleLarge.copy(
+     color = Color.Green,
+     shadow = Shadow(
+         color = Color.Black,
+         offset = Offset(2f, 2f),
+         blurRadius = 4f
+     )
+ ),
+ //color = Color.White,
+ modifier = Modifier.padding(top = 5.dp)
+     .align(Alignment.BottomStart)
+)
+}
+}
+}
+/*fun ImageFromUrl(imageUrl: String) {
+Box (
+modifier = Modifier
+.fillMaxSize()
+.diagonalSplit(
+color1 = Color.DarkGray,
+color2 = Color.Red
+)
+)
+Column(
+modifier = Modifier
+ .fillMaxSize()
+ .padding(5.dp),
+horizontalAlignment = Alignment.CenterHorizontally,
+
+//verticalArrangement = Arrangement.Center
+) {
+
+Image(painter = painterResource(R.drawable.logo),
+ contentDescription = null,
+ modifier = Modifier
+     .width(100.dp)
+     .height(50.dp)
+     .padding(top = 20.dp)
+     .background(Color.Green))
+
+Spacer(modifier = Modifier.height(1.dp))
+Text(
+ text = "Choose your hero",
+ style = MaterialTheme.typography.headlineMedium,
+ color = Color.White//MaterialTheme.colorScheme.onSurface
+/* modifier = Modifier
+     .padding(vertical = 5.dp)
+     .width(220.dp)
+     .height(50.dp)
+     .background(Color.LightGray)
+     .wrapContentSize(Alignment.Center)*/
+)
+
+Spacer(modifier = Modifier.height(150.dp))
+AsyncImage(
+ model = ImageRequest.Builder(LocalContext.current)
+     .data (imageUrl)//("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s")
+     .crossfade(true)
+     .listener(
+         onError = { _, throwable ->
+             Log.e(
+                 "AsyncImage",
+                 "Error ${throwable.toString()}"
+             )
+         }
+     )
+     .build(),
+ //placeholder = painterResource(R.drawable.placeholder),
+ contentDescription = "Hero image",//stringResource(R.string.description),
+ error = painterResource(R.drawable.error_connect),
+ contentScale = ContentScale.Crop,
+ modifier = Modifier
+     .width(200.dp)
+     .height(350.dp)
+     .clip(RectangleShape)
+     .background(Color.Blue)
+)
+     //.size(250.dp)
+     // .clip(RoundedCornerShape(10.dp)
+     //.width(20.dp)
+
+}
+}
 
 */
 
