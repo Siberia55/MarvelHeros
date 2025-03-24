@@ -3,6 +3,7 @@ package com.example.marvelheros
 import android.R.attr.path
 import android.R.attr.top
 import android.annotation.SuppressLint
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -54,6 +56,13 @@ import coil3.request.crossfade
 import com.example.marvelheros.ui.theme.MarvelHerosTheme
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 //import androidx.compose.ui.Alignment
@@ -111,6 +120,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MarvelHerosTheme {
                 var selectedHero by remember { mutableStateOf<Hero?>(null) }
+                //LaunchedEffect (Unit){ lazyListState.scrollToItem(0) }
+
                 Box(modifier = Modifier.fillMaxSize()){
                     MainContent(
                         onHeroClick = { /*hero -> */selectedHero = it }//onHeroClick = { hero -> selectedHero.value = hero }
@@ -203,7 +214,7 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                     .width(100.dp)
                     .height(50.dp)
                     .padding(top = 20.dp)
-                    .background(Color.Green)
+                    .background(Color.DarkGray)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -301,9 +312,43 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.95f))
-                .clickable(onClick = onDismiss)
+                .background(Color.Black)//(Color.Transparent)
+        ) { // фон на весть экран
+            Box( modifier = Modifier
+                .fillMaxSize()
+                .diagonalSplit(
+                    color1 = Color.DarkGray,
+                    color2 = Color.Red
+                )
+            )
+        //}
+        // Button back
+        IconButton(
+            onClick = onDismiss,
+            modifier = Modifier
+                .padding(16.dp)
         ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Назад",
+                tint = Color.White
+            )
+        }
+            }
+        //Hero
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+       // Box(
+         //   modifier = Modifier
+           //     .fillMaxSize()
+             //   .background(Color.Black.copy(alpha = 0.95f))
+            //    .clickable(onClick = onDismiss)
+      //  )
+          //  {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(hero.imageUrl)
@@ -311,15 +356,21 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                     .build(),
                 contentDescription = null,
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxWidth(0.8f)
+                    .aspectRatio(0.7f)
+                    .clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.Crop
+                   // .fillMaxSize(),
                    // .padding(32.dp)
-                contentScale = ContentScale.Fit
+                   //contentScale = ContentScale.Fit
             )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(32.dp)
-            ) {
+Spacer(modifier = Modifier.height(25.dp))
+
+          //  Column(
+           //     modifier = Modifier
+           //         .align(Alignment.BottomCenter)
+           //         .padding(32.dp)
+          //  ) {
                 Text(
                     text = hero.name,
                     style = MaterialTheme.typography.displaySmall.copy(
@@ -329,35 +380,35 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                             color = Color.Black,
                             offset = Offset(2f, 2f),
                             blurRadius = 8f
-
                          */
 
                         )
                     )
                 //)
-                Spacer(modifier = Modifier.height(16.dp))
+              //  Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
                     text = hero.description,
                     style = MaterialTheme.typography.bodyLarge.copy(
-                        color = Color.White,
-                        shadow = Shadow(
-                            color = Color.Black,
-                            offset = Offset(1f, 1f),
-                            blurRadius = 4f
-                        )
-                    ),
-                    modifier = Modifier.background(
-                        color = Color.Black.copy(alpha = 0.5f),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                        .padding(16.dp)
+                        color = Color.White),
+                        modifier = Modifier.padding(24.dp)
+                       // shadow = Shadow(
+                        //    color = Color.Black,
+                       //     offset = Offset(1f, 1f),
+                        //    blurRadius = 4f
+                  //      )
+                  //  ),
+                  //  modifier = Modifier.background(
+                  //      color = Color.Black.copy(alpha = 0.5f),
+                   //     shape = RoundedCornerShape(8.dp)
+                   // )
+                  //      .padding(16.dp)
                 )
 
 
             }
         }
-    }
+    //}
 
 
 /* modifier = Modifier
