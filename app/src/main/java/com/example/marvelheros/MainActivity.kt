@@ -135,57 +135,8 @@ class MainActivity : ComponentActivity() {
 
                     }
                 }
-                /* modifier = Modifier
-                     .fillMaxSize()
-                     .diagonalSplit(
-                         color1 = Color.DarkGray,
-                         color2 = Color.Red,
-                     )*/
-                //)
-                /*    {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(30.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.logo),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .width(100.dp)
-                                    .height(50.dp)
-                                    .padding(vertical = 10.dp)
-                            )
-                            Text(
-                                text = "Choose your hero",
-                                style = MaterialTheme.typography.headlineMedium,
-                                color = Color.White
-                            )
-                            val lazyListState = rememberLazyListState()
-                            val snapLayoutInfoProvider = remember(lazyListState){
-                                SnapLayoutInfoProvider(lazyListState)
-                            }
-                            val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
 
-                            Spacer(modifier = Modifier.height(100.dp))
-                            LazyRow(
-                                state = lazyListState,
-                                flingBehavior = snapFlingBehavior,
-                                modifier = Modifier.fillMaxWidth()
-                                .height(450.dp),
-                                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                items(heroes) { hero ->
-                                    HeroItem(hero = hero)
-
-                                }
-                            }
-
-                        }
-                    }
-    */            }
+            }
         }
     }
 }
@@ -273,8 +224,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
             modifier = Modifier
                 .width(300.dp)
                 .height(400.dp)
-            // .padding(8.dp)
-            // .clickable(onClick = onClick)
+
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -339,18 +289,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                         )
                     )
             )
-            /*
-            )
-            Box( modifier = Modifier
-                .fillMaxSize()
-                .diagonalSplit(
-                    color1 = Color.DarkGray,
-                    color2 = Color.Red
-                )
-            )
-        //}
 
-             */
             // Button back
             IconButton(
                 onClick = onDismiss,
@@ -437,7 +376,7 @@ Spacer(modifier = Modifier.height(25.dp))
 
                         )
                     )
-                )
+
 
         */
         Spacer(modifier = Modifier.height(16.dp))
@@ -456,149 +395,8 @@ Spacer(modifier = Modifier.height(25.dp))
             )
         ),
         modifier = Modifier.padding(bottom = 64.dp)
-        //  modifier = Modifier.background(
-        //      color = Color.Black.copy(alpha = 0.5f),
-        //     shape = RoundedCornerShape(8.dp)
-        // )
-        //      .padding(16.dp)
+
         )
 
 
             }
-//}
-    //}
-
-
-/* modifier = Modifier
-     .padding(vertical = 5.dp)
-     .width(220.dp)
-     .height(50.dp)
-     .background(Color.LightGray)
-     .wrapContentSize(Alignment.Center)
- }
-
-     )
-}
-)
-}
-@Composable
-fun HeroItem(hero: Hero){
-Column (
-modifier = Modifier
-.width(300.dp)
-.padding(8.dp),
-horizontalAlignment = Alignment.CenterHorizontally
-) {
-Box(
-modifier = Modifier
- //.fillMaxWidth()
- .width(280.dp)
- .padding(10.dp),
-//horizontalAlignment = Alignment.CenterHorizontally
-) {
-AsyncImage(
- model = ImageRequest.Builder(LocalContext.current)
-     .data(hero.imageUrl)
-     .crossfade(true)
-     .build(),
- contentDescription = null,
- modifier = Modifier
-     .width(300.dp)
-     .height(400.dp)
-     .clip(RoundedCornerShape(10.dp)),
- contentScale = ContentScale.Crop
-)
-Text(
- text = hero.name,
- style = MaterialTheme.typography.titleLarge.copy(
-     color = Color.Green,
-     shadow = Shadow(
-         color = Color.Black,
-         offset = Offset(2f, 2f),
-         blurRadius = 4f
-     )
- ),
- //color = Color.White,
- modifier = Modifier.padding(top = 5.dp)
-     .align(Alignment.BottomStart)
-)
-}
-}
-}
-/*fun ImageFromUrl(imageUrl: String) {
-Box (
-modifier = Modifier
-.fillMaxSize()
-.diagonalSplit(
-color1 = Color.DarkGray,
-color2 = Color.Red
-)
-)
-Column(
-modifier = Modifier
- .fillMaxSize()
- .padding(5.dp),
-horizontalAlignment = Alignment.CenterHorizontally,
-
-//verticalArrangement = Arrangement.Center
-) {
-
-Image(painter = painterResource(R.drawable.logo),
- contentDescription = null,
- modifier = Modifier
-     .width(100.dp)
-     .height(50.dp)
-     .padding(top = 20.dp)
-     .background(Color.Green))
-
-Spacer(modifier = Modifier.height(1.dp))
-Text(
- text = "Choose your hero",
- style = MaterialTheme.typography.headlineMedium,
- color = Color.White//MaterialTheme.colorScheme.onSurface
-/* modifier = Modifier
-     .padding(vertical = 5.dp)
-     .width(220.dp)
-     .height(50.dp)
-     .background(Color.LightGray)
-     .wrapContentSize(Alignment.Center)*/
-)
-
-Spacer(modifier = Modifier.height(150.dp))
-AsyncImage(
- model = ImageRequest.Builder(LocalContext.current)
-     .data (imageUrl)//("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s")
-     .crossfade(true)
-     .listener(
-         onError = { _, throwable ->
-             Log.e(
-                 "AsyncImage",
-                 "Error ${throwable.toString()}"
-             )
-         }
-     )
-     .build(),
- //placeholder = painterResource(R.drawable.placeholder),
- contentDescription = "Hero image",//stringResource(R.string.description),
- error = painterResource(R.drawable.error_connect),
- contentScale = ContentScale.Crop,
- modifier = Modifier
-     .width(200.dp)
-     .height(350.dp)
-     .clip(RectangleShape)
-     .background(Color.Blue)
-)
-     //.size(250.dp)
-     // .clip(RoundedCornerShape(10.dp)
-     //.width(20.dp)
-
-}
-}
-
-*/
-
-/*@Preview
-@Composable
-fun MarvelPriv(){
-MarvelChoose("IronMan")
-}*/
