@@ -72,7 +72,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
+import java.nio.file.WatchEvent
 
 
 data class Hero(
@@ -152,6 +154,18 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
                 color2 = Color.Red
             )
     )
+    //------
+   /* {
+    heroes.forEach { hero ->
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current).data(hero.imageUrl).build(),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize().alpha(0.2f),
+            contentScale = ContentScale.Crop
+        )
+    }
+    //------
+*/
     {
         Column(
             modifier = Modifier
@@ -282,10 +296,10 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                         brush = Brush.verticalGradient(
                             colors = listOf(
                                 Color.Transparent,
-                                Color.Black.copy(alpha = 0.7f)
+                                Color.Black.copy(alpha = 0.1f)// gradient level
                             ),
-                            startY = 0f,
-                            endY = 500f
+                            startY = 0.3f,
+                            endY = 1f
                         )
                     )
             )
@@ -308,8 +322,8 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
         // Text up on image
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
+               .fillMaxSize()
+               .padding(32.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
@@ -318,85 +332,35 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                     color = Color.White,
                     shadow = Shadow(
                         color = Color.Black,
-                        offset = Offset(4f, 4f),
-                        blurRadius = 8f
+                        offset = Offset(2f, 2f),
+                        blurRadius = 4f
                     )
-                )
+                ),
+                modifier = Modifier.padding(bottom = 16.dp)
             )
-        }
+       // }
         //Hero
-        /*
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
 
-       // Box(
-         //   modifier = Modifier
-           //     .fillMaxSize()
-             //   .background(Color.Black.copy(alpha = 0.95f))
-            //    .clickable(onClick = onDismiss)
-      //  )
-          //  {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(hero.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .aspectRatio(0.7f)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
-                   // .fillMaxSize(),
-                   // .padding(32.dp)
-                   //contentScale = ContentScale.Fit
-            )
-
-
-Spacer(modifier = Modifier.height(25.dp))
-
-          //  Column(
-           //     modifier = Modifier
-           //         .align(Alignment.BottomCenter)
-           //         .padding(32.dp)
-          //  ) {
-                Text(
-                    text = hero.name,
-                    style = MaterialTheme.typography.displaySmall.copy(
-                        color = Color.White,
-                        /*
-                        shadow = Shadow(
-                            color = Color.Black,
-                            offset = Offset(2f, 2f),
-                            blurRadius = 8f
-                         */
-
-                        )
-                    )
-
-
-        */
-        Spacer(modifier = Modifier.height(16.dp))
+       // Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = hero.description,
-            style = MaterialTheme.typography.headlineMedium.
-                /*bodyLarge.*/copy(
+            style = MaterialTheme.typography./*headlineMedium.*/
+                bodyLarge.copy(
                 color = Color.White,
-
-            //   modifier = Modifier.padding(24.dp)
+           // ),
+           //   modifier = Modifier.padding(24.dp)/*
             shadow = Shadow(
                 color = Color.Black,
                 offset = Offset(2f, 2f),
                 blurRadius = 4f
             )
-        ),
-        modifier = Modifier.padding(bottom = 64.dp)
+       ),
 
+        modifier = Modifier.padding(bottom = 32.dp)
         )
+        }
+    }
+       // )
+       // }
 
-
-            }
