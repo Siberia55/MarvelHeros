@@ -123,7 +123,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MarvelHerosTheme {
                 var selectedHero by remember { mutableStateOf<Hero?>(null) }
-                //LaunchedEffect (Unit){ lazyListState.scrollToItem(0) }
+                LaunchedEffect (Unit){ /*lazyListState.scrollToItem(0)*/ }
 
                 Box(modifier = Modifier.fillMaxSize()){
                     MainContent(
@@ -202,15 +202,19 @@ fun MainContent(onHeroClick: (Hero) -> Unit) {
             // val snapLayoutInfoProvider = remember(lazyListState) {
             //    SnapLayoutInfoProvider(lazyListState)
             //}
-            val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
-
+           val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
+            // val lazyListState = rememberLazyListState()
+            LaunchedEffect(Unit) {
+                lazyListState.scrollToItem(index = 10)
+            }
             LazyRow(
                 state = lazyListState,
-                flingBehavior = snapFlingBehavior,
+flingBehavior = snapFlingBehavior,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .height(450.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    .fillMaxSize(),
+                    //.height(450.dp),
+
+               // horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 items(heroes) { hero ->
@@ -237,8 +241,8 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .width(300.dp)
-                .height(400.dp)
-
+                .height(400.dp),
+contentAlignment = Alignment.Center // центровка изображения
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -247,7 +251,9 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                     .build(),
                 contentDescription = hero.name,
                 modifier = Modifier
-                    .width(250.dp)
+                   // .width(250.dp)
+                    .fillMaxSize(0.9f) // 90% ширины
+                    .aspectRatio(0.7f) // пропорции
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop
             )
