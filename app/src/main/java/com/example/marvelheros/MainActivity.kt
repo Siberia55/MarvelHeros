@@ -96,6 +96,12 @@ val heroes = listOf(
         name = "Iron Man",
         imageUrl = "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598",
         description = "Hi, I'm Iron Man"
+    ),
+    Hero(
+        id = 3,
+        name = "Haley Quinn",
+        imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOTzkRwd_h8AYu__LcSNij7TKsgCjDzQ-a4A&s",
+        description = "Hi, I'm Harley Quin"
     )
 )
 
