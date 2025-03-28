@@ -65,8 +65,11 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
+
     // Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
+
 
 
 }
