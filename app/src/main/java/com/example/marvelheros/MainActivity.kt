@@ -75,14 +75,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import java.nio.file.WatchEvent
+import com.example.marvelheros.data.model.Hero
 
 
+
+/*
 data class Hero(
     val id: Int,
     val name: String,
     val imageUrl: String,
     val description: String
 )
+
+ */
 
 val heroes = listOf(
     Hero(
