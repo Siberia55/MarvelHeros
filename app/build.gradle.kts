@@ -5,8 +5,14 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
-   // id("kotlin-kapt")
-   // id("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt.android)
+   // id("com.google.dagger.hilt.android") version "2.51.1" apply false
+/*
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
+ */
+    kotlin("kapt")
 }
 
 android {
@@ -33,8 +39,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11 // по документации Hilt использует функции Java 8
+        targetCompatibility = JavaVersion.VERSION_11 //
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -72,7 +78,18 @@ dependencies {
 
     // Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
+//Hilt
+  //  implementation("com.google.dagger:hilt-android:2.51.1")
+  //  kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
+    kapt(libs.hilt.android)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
+}
+
+kapt {
+  correctErrorTypes = true
 }
