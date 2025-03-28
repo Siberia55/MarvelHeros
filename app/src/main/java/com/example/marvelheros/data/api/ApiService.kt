@@ -10,6 +10,7 @@ interface ApiService {
     }
 
     // Пример запроса для получения списка героев
-    @GET("characters/{characterId}")
-    suspend fun getAllHeroes(): List<Hero>
+    @GET("heroes"/*"/characters/{characterId}"*/)
+   // suspend fun getAllHeroes(): List<Hero>
+    suspend fun getHeroes(): List<Hero>
 }

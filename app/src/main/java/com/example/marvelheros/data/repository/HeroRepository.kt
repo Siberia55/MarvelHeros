@@ -5,7 +5,9 @@ import com.example.marvelheros.data.model.Hero
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
+/*
 class HeroRepository(private val apiService: ApiService) {
 
     // Кэш для хранения данных (опционально)
@@ -28,6 +30,17 @@ class HeroRepository(private val apiService: ApiService) {
             }
         } catch (e: Exception) {
             Result.failure(e) // Возвращаем ошибку
+        }
+    }
+}*/
+class HeroRepository @Inject constructor(
+    private val apiService: ApiService
+) {
+    suspend fun getHeroes(): Result<List<Hero>> {
+        return try {
+            Result.success(apiService.getHeroes())
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }
