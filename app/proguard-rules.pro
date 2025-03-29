@@ -21,14 +21,3 @@
 #-renamesourcefileattribute SourceFile
 
 #my text
-# Retrofit
--keep class retrofit2.** { *; }
--keepclasseswithmembers class * {
-    @retrofit2.http.* <methods>;
-}
-
-# Moshi
--keep class com.squareup.moshi.** { *; }
--keepclasseswithmembers class * {
-    @com.squareup.moshi.* <annotations>;
-}

@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">MarvelHeros</string>
     <string name="description">description</string>
-
-    <string name="error_no_internet">Нет подключения к интернету</string>
-    <string name="error_server">Ошибка сервера</string>
-    <string name="error_unknown">Неизвестная ошибка</string>
-    <string name="retry">Повторить</string>
 </resources>
 

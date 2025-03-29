@@ -4,8 +4,7 @@ package com.example.marvelheros.data.model
 import androidx.annotation.Keep
 
 @Keep // Эта аннотация поможет избежать проблем с Proguard
-// старый код лаб1
-/*
+
 data class Hero(
     val id: Int,
     val name: String,
@@ -16,7 +15,7 @@ data class Hero(
    // constructor() : this(0, "", "", "") // Пустой конструктор для Firebase и т.д.
 }
 
- */
+/*
 data class Hero(
 val id: Int,
 val name: String,
@@ -38,3 +37,5 @@ val eventsCount: Int
         )
     }
 }
+
+ */

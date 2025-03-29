@@ -1,5 +1,5 @@
 package com.example.marvelheros.ui.heroeslist
-
+/*
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,3 +51,5 @@ sealed class HeroesListState {
         val error: String? = null
     ) : HeroesListState()
 }
+
+ */
