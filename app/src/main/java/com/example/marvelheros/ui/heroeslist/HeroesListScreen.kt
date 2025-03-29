@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.marvelheros.HeroItem
 import com.example.marvelheros.data.model.Hero
-
+/*
 class HeroesListScreen {
     @Composable
     fun HeroesListScreen(
@@ -34,4 +34,4 @@ class HeroesListScreen {
             is HeroesListState.Error -> ErrorScreen()
         }
     }
-}
+}*/

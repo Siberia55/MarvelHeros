@@ -1,4 +1,4 @@
-import com.android.tools.r8.internal.kt
+//import com.android.tools.r8.internal.kt
 
 plugins {
     alias(libs.plugins.android.application)
@@ -27,6 +27,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//добавил ключи от marvel API
+        buildConfigField("String", "MARVEL_PUBLIC_KEY", "\"${properties["MARVEL_PUBLIC_KEY"]}\"")
+        buildConfigField("String", "MARVEL_PRIVATE_KEY", "\"${properties["MARVEL_PRIVATE_KEY"]}\"")
     }
 
     buildTypes {
@@ -47,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
