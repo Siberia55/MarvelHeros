@@ -79,7 +79,7 @@ import com.example.marvelheros.data.model.Hero
 
 
 
-/*
+///*
 data class Hero(
     val id: Int,
     val name: String,
@@ -87,7 +87,7 @@ data class Hero(
     val description: String
 )
 
- */
+// */
 
 val heroes = listOf(
     Hero(

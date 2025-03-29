@@ -51,7 +51,7 @@ android {
 }
 
 dependencies {
-
+// default
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -67,16 +67,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
+// coil
     implementation(libs.coil.compose)
     implementation (libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
+// ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+//Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
+// retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+//  Для проверки интернет-соединения
+    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
-
-    // Moshi (для преобразования JSON)
+// Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
 //Hilt
   //  implementation("com.google.dagger:hilt-android:2.51.1")
