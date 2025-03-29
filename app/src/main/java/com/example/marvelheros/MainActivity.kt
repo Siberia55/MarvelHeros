@@ -128,6 +128,56 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
 )
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: HeroViewModel by viewModels {
+        HeroViewModelFactory(
+            MarvelRepositoryImpl(
+                provideMarvelApi()
+            )
+        )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MarvelHerosTheme {
+                val state by viewModel.state.collectAsState()
+
+                Box(modifier = Modifier.fillMaxSize()) {
+                    when {
+                        state.isLoading -> LoadingScreen()
+                        state.error != null -> ErrorScreen(error = state.error!!, onRetry = { viewModel.loadHeroes() })
+                        else -> MainContent(
+                            heroes = state.heroes,
+                            onHeroClick = { viewModel.selectHero(it) }
+                        )
+                    }
+
+                    state.selectedHero?.let { hero ->
+                        FullScreenHero(
+                            hero = hero,
+                            onDismiss = { viewModel.clearSelection() }
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun provideMarvelApi(): MarvelApi {
+        return Retrofit.Builder()
+            .baseUrl("https://gateway.marvel.com/")
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(MarvelAuthInterceptor())
+                    .build()
+            )
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(MarvelApi::class.java)
+    }
+}
+// старый код лаб1
+    /*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -152,9 +202,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+}*/
 //ImageFromUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s")
-
+/*
 @Composable // основной контент
 fun MainContent(onHeroClick: (Hero) -> Unit) {
     Box(
@@ -381,3 +431,4 @@ contentAlignment = Alignment.Center // центровка изображения
        // )
        // }
 
+*/
