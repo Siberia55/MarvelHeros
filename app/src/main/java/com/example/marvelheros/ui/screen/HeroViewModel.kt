@@ -23,6 +23,8 @@ class HeroViewModel @Inject constructor() : ViewModel() {
             is HeroEvent.HeroSelected -> {
                 _uiState.update { it.copy(selectedHero = event.hero) }
             }
+
+            else ->  Unit
         }
     }
 
