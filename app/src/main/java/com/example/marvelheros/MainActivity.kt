@@ -78,7 +78,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MainScreen(
                 state = viewModel.uiState.collectAsState().value, // Передаём состояние
-                onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) } // Передаём обработчик клика
+                onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },// Передаём обработчик клика
+                onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) }
             )
         }
     }

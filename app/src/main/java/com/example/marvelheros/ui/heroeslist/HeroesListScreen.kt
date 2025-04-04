@@ -1,10 +1,13 @@
-package com.example.marvelheros.ui.heroeslist
+/*package com.example.marvelheros.ui.heroeslist
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.runtime.collectAsState
+import com.example.marvelheros.data.main.MainContent
 //import com.example.marvelheros.HeroItem
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.ui.screen.HeroEvent
+import com.example.marvelheros.ui.screen.HeroViewModel
+
 /*
 class HeroesListScreen {
     @Composable
@@ -34,4 +37,31 @@ class HeroesListScreen {
             is HeroesListState.Error -> ErrorScreen()
         }
     }
-}*/
+}
+
+ */
+@Composable
+fun HeroListScreen(viewModel: HeroViewModel) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    if (uiState.isLoading) {
+        CircularProgressIndicator()
+    } else if (uiState.errorMessage != null) {
+        ErrorScreen(message = uiState.errorMessage)
+    } else {
+        MainContent(
+            heroes = uiState.heroes
+        ) { hero ->
+            viewModel.onEvent(HeroEvent.HeroSelected(hero))
+        }
+    }
+}
+
+@Composable
+fun ErrorScreen(message: errorMessage) {
+    TODO("Not yet implemented")
+}
+
+annotation class errorMessage
+
+*/

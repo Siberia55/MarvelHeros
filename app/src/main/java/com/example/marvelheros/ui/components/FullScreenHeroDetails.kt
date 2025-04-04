@@ -1,0 +1,119 @@
+package com.example.marvelheros.ui.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import com.example.marvelheros.data.model.Hero
+
+
+@Composable
+fun FullScreenHeroDetails(
+    hero: Hero, // Модель героя
+    onDismiss: () -> Unit, // Функция закрытия
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black.copy(alpha = 0.9f)),
+        color = Color.Transparent
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp)
+        ) {
+            // Кнопка "Назад"
+            IconButton(
+                onClick = onDismiss,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(50.dp)
+            ) {
+                androidx.compose.material3.Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Назад",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+          /*  IconButton (
+                onClick = onDismiss,
+                modifier = Modifier.align(Alignment.Start)
+            ) {
+                Icon(
+                   // imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                   // contentDescription = "Back",
+
+                    tint = Color.White
+                )
+            }
+*/
+            // Контент героя
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // Изображение
+                AsyncImage(
+                    model = hero.imageUrl,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize(),
+                        //.size(300.dp)
+                        //.clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Имя героя
+                Text(
+                    text = hero.name,
+                    style = MaterialTheme.typography.displayMedium,
+                    color = Color.White
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Описание
+                Text(
+                    text = hero.description,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.White.copy(alpha = 0.9f),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+

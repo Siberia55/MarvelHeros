@@ -75,6 +75,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation (libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
+//
+    //implementation ("androidx.compose.material:material-icons-extended:2.51.1")
+    implementation ("androidx.compose.material:material-icons-extended:1.7.8")
 // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 //Coroutines

@@ -44,7 +44,7 @@ class HeroViewModel @Inject constructor() : ViewModel() {
             }
 
             HeroEvent.LoadHeroes -> {
-                _uiState.update { it.copy(heroes = getMockHeroes()) }
+               _uiState.update { it.copy(heroes = getMockHeroes()) }
 
             }
             // else ->  Unit
