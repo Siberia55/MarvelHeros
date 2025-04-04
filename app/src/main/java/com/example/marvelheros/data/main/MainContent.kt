@@ -10,6 +10,7 @@ import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -101,7 +102,9 @@ fun MainContent(
             LazyRow(
                 state = lazyListState,
                 flingBehavior = snapFlingBehavior,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 10.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(heroes) { hero ->
                     HeroItem(
