@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvelheros.data.model.Hero
 import com.example.marvelheros.data.repository.HeroRepository
-import com.example.marvelheros.ui.heroeslist.HeroesListState
+//import com.example.marvelheros.ui.heroeslist.HeroesListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+/*
 @HiltViewModel
 class HeroesListViewModel @Inject constructor(
     private val repository: HeroRepository
@@ -50,4 +50,4 @@ sealed class HeroesListState {
         val isLoading: Boolean = false,
         val error: String? = null
     ) : HeroesListState()
-}
+}*/
