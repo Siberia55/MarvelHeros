@@ -88,8 +88,8 @@ dependencies {
 // Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
 //Hilt
-  //  implementation("com.google.dagger:hilt-android:2.51.1")
-  //  kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+   //implementation("com.google.dagger:hilt-android:2.51.1")
+   //kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
     kapt(libs.hilt.android)
