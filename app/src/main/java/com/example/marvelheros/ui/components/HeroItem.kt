@@ -24,7 +24,7 @@ import com.example.marvelheros.data.model.Hero
 fun HeroItem(hero: Hero, onClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(20.dp)
             .width(200.dp)  // Ограничиваем ширину карточки
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
@@ -39,7 +39,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
                 contentDescription = hero.name,
                 modifier = Modifier
                     .size(120.dp)
-                    .padding(8.dp)
+                    .padding(10.dp)
             )
             Text(
                 text = hero.name,
