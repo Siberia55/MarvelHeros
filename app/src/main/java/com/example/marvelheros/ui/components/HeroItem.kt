@@ -25,20 +25,20 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(20.dp)
-            .width(200.dp)  // Ограничиваем ширину карточки
+            .width(300.dp)  // Ограничиваем ширину карточки
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Gray)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(5.dp)
         ) {
             AsyncImage(
                 model = hero.imageUrl,
                 contentDescription = hero.name,
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(400.dp)
                     .padding(10.dp)
             )
             Text(
