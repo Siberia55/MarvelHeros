@@ -24,10 +24,16 @@ class HeroViewModel @Inject constructor() : ViewModel() {
                 _uiState.update { it.copy(selectedHero = event.hero) }
             }
 
-            else ->  Unit
+            HeroEvent.DismissHero -> {
+                _uiState.update { it.copy(selectedHero = null) }
+            }
+
+            HeroEvent.LoadHeroes -> {
+                _uiState.update { it.copy(heroes = getMockHeroes()) }
+                // else ->  Unit
+            }
         }
     }
-
     companion object {
         private fun getMockHeroes(): List<Hero> = listOf(
             Hero(
