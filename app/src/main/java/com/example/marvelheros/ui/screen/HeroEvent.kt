@@ -7,6 +7,7 @@ sealed class HeroEvent {
     data class HeroSelected(val hero: Hero) : HeroEvent()
     data object LoadHeroes : HeroEvent()
     data object DismissHero : HeroEvent()
+    //object Retry : HeroEvent()
 }
 
 

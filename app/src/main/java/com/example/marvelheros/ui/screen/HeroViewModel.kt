@@ -1,5 +1,6 @@
 package com.example.marvelheros.ui.screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.marvelheros.data.model.Hero
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,12 +12,26 @@ import kotlinx.coroutines.flow.update
 @HiltViewModel
 class HeroViewModel @Inject constructor() : ViewModel() {
 
+    //---------DS
+    /*
     private val _uiState = MutableStateFlow(
         HeroUiState(
-            heroes = getMockHeroes() // Передаём список героев
+            heroes = getMockHeroes(),
+            isLoading = false,
+            errorMassage = "Error loading: ${e.localizedMessage}" // Передаём список героев
         )
     )
     val uiState: StateFlow<HeroUiState> get() = _uiState // Теперь это поток, а не просто объект
+
+  init {
+      loadHeroes()
+  }
+//------end
+*/
+    private val _uiState = MutableStateFlow(
+        HeroUiState(heroes = getMockHeroes())
+    )
+    val uiState: StateFlow<HeroUiState> get() = _uiState
 
     fun onEvent(event: HeroEvent) {
         when (event) {
@@ -30,10 +45,43 @@ class HeroViewModel @Inject constructor() : ViewModel() {
 
             HeroEvent.LoadHeroes -> {
                 _uiState.update { it.copy(heroes = getMockHeroes()) }
-                // else ->  Unit
+
+            }
+            // else ->  Unit
+            //HeroEvent.Retry -> retry() //---- DS
+        }
+    }
+    //-----------------DS
+    /*  private fun loadHeroes() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMassage = null) }
+            try {
+                val heroes = marvelReposytory.getCharacters()
+                _uiState.update {
+                    it.copy(
+                        heroes = heroes,
+                        isLoading = false
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(errorMassage =  "Error loading: ${e.localizedMessage}",
+                    isLoading = false )
+                }
             }
         }
     }
+    private fun selectHero (hero: Hero) {
+        _uiState.update { it.copy(selectedHero = hero) }
+    }
+    private fun dismissHero () {
+        _uiState.update { it.copy(selectedHero = null) }
+    }
+    private fun retry(){
+        loadHeroes()
+    }
+   //---------------- end
+*/
+
     companion object {
         private fun getMockHeroes(): List<Hero> = listOf(
             Hero(
@@ -55,5 +103,10 @@ class HeroViewModel @Inject constructor() : ViewModel() {
                 description = "Hi, I'm Harley Quinn"
             )
         )
+    }
+
+    //}
+    init {
+        Log.d("HeroDebug", "Loaded heroes: ${_uiState.value.heroes}")
     }
 }

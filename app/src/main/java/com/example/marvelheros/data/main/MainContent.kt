@@ -10,6 +10,7 @@ import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.data.model.Hero
 import com.example.marvelheros.ui.components.HeroItem
-import com.example.marvelheros.data.main.MainScreen
+//import com.example.marvelheros.data.main.MainScreen
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -112,3 +113,18 @@ fun MainContent(
         }
     }
 }
+//--- временный
+/*
+@Composable
+fun MainContent(
+    heroes: List<Hero>,
+    onHeroClick: (Hero) -> Unit
+) {
+    LazyColumn {
+        items(heroes) { hero ->
+            Text(text = hero.name, modifier = Modifier.padding(16.dp))
+        }
+    }
+}
+
+ */
