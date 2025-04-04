@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,6 +48,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 //import androidx.compose.ui.Alignment
@@ -60,10 +62,30 @@ import com.example.marvelheros.data.main.MainScreen
 
 
 import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.ui.screen.HeroEvent
+import com.example.marvelheros.ui.screen.HeroViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 //---------- проба MVI
 
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    private val viewModel: HeroViewModel by viewModels() // Создаём ViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MainScreen(
+                state = viewModel.uiState.collectAsState().value, // Передаём состояние
+                onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) } // Передаём обработчик клика
+            )
+        }
+    }
+}
+
+
+/*   13:30 04.04
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +99,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+*/
 //---------- ниже первая лаба
 /*
 data class Hero(

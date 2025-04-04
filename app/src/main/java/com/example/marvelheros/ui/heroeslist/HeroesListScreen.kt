@@ -3,7 +3,7 @@ package com.example.marvelheros.ui.heroeslist
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.marvelheros.HeroItem
+//import com.example.marvelheros.HeroItem
 import com.example.marvelheros.data.model.Hero
 /*
 class HeroesListScreen {
