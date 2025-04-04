@@ -128,7 +128,8 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
         drawPath(path = path, color = color1)
     }
 )
-
+*/
+/*
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

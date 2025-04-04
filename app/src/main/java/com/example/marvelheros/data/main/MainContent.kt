@@ -3,6 +3,7 @@ package com.example.marvelheros.data.main
 //package com.example.marvelheros.presentation.main
 
 //import com.example.marvelheros.ui.theme.diagonalSplit
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
@@ -18,12 +19,32 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.data.model.Hero
 import com.example.marvelheros.ui.components.HeroItem
+import com.example.marvelheros.data.main.MainScreen
+
+@SuppressLint("SuspiciousModifierThen")
+fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
+    drawBehind {
+        val width = size.width
+        val height = size.height
+        drawRect(color = color2)
+// разделение экрана
+        val path =Path().apply {
+            moveTo(0f, height)  //левый нижний угол //(0f, 0f) начало правый верхний угол
+            lineTo(width, 0f)   //линия к правому верхнему углу //(width, height)
+            lineTo(0f, 0f)      //замыкание треугольника
+            close()
+        }
+        drawPath(path = path, color = color1)
+    }
+)
 
 @Composable
 fun MainContent(
