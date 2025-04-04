@@ -56,11 +56,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Brush
+import com.example.marvelheros.data.main.MainScreen
 
 
 import com.example.marvelheros.data.model.Hero
+import dagger.hilt.android.AndroidEntryPoint
 
+//---------- проба MVI
 
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            MarvelHerosTheme {
+                MainScreen()
+            }
+        }
+    }
+}
+
+//---------- ниже первая лаба
 /*
 data class Hero(
     val id: Int,
@@ -93,7 +111,7 @@ val heroes = listOf(
 
 
 )*/
-
+/*
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
     drawBehind {
@@ -365,3 +383,4 @@ contentAlignment = Alignment.Center // центровка изображения
        // )
        // }
 
+*/
