@@ -1,4 +1,4 @@
-package com.example.marvelheros.data.repository
+/*package com.example.marvelheros.data.repository
 
 import com.example.marvelheros.data.model.Hero
 import javax.inject.Inject
@@ -66,3 +66,31 @@ class HeroRepository @Inject constructor(
 }
 
  */
+ */
+package com.example.marvelheros.data.repository
+
+import com.example.marvelheros.data.api.ApiService
+import com.example.marvelheros.data.model.Hero
+import javax.inject.Inject
+
+interface HeroRepository {
+    suspend fun getHeroes(): List<Hero>
+}
+
+class HeroRepositoryImpl @Inject constructor(
+    private val apiService: ApiService
+) : HeroRepository {
+    override suspend fun getHeroes(): List<Hero> {
+        return try {
+            apiService.getHeroes()
+        } catch (e: Exception) {
+            getMockHeroes()
+        }
+    }
+
+    private fun getMockHeroes() = listOf(
+        Hero(1, "Deadpool", "https://...", "Hi, I'm Deadpool"),
+        Hero(2, "Iron Man", "https://...", "Hi, I'm Iron Man"),
+        Hero(3, "Harley Quinn", "https://...", "Hi, I'm Harley Quinn")
+    )
+}

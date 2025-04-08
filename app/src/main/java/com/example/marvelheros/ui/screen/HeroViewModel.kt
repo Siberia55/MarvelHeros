@@ -9,25 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
+
+
 @HiltViewModel
 class HeroViewModel @Inject constructor() : ViewModel() {
 
-    //---------DS
-    /*
-    private val _uiState = MutableStateFlow(
-        HeroUiState(
-            heroes = getMockHeroes(),
-            isLoading = false,
-            errorMassage = "Error loading: ${e.localizedMessage}" // Передаём список героев
-        )
-    )
-    val uiState: StateFlow<HeroUiState> get() = _uiState // Теперь это поток, а не просто объект
-
-  init {
-      loadHeroes()
-  }
-//------end
-*/
     private val _uiState = MutableStateFlow(
         HeroUiState(heroes = getMockHeroes())
     )
@@ -51,36 +37,6 @@ class HeroViewModel @Inject constructor() : ViewModel() {
             //HeroEvent.Retry -> retry() //---- DS
         }
     }
-    //-----------------DS
-    /*  private fun loadHeroes() {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, errorMassage = null) }
-            try {
-                val heroes = marvelReposytory.getCharacters()
-                _uiState.update {
-                    it.copy(
-                        heroes = heroes,
-                        isLoading = false
-                    )
-                }
-            } catch (e: Exception) {
-                _uiState.update { it.copy(errorMassage =  "Error loading: ${e.localizedMessage}",
-                    isLoading = false )
-                }
-            }
-        }
-    }
-    private fun selectHero (hero: Hero) {
-        _uiState.update { it.copy(selectedHero = hero) }
-    }
-    private fun dismissHero () {
-        _uiState.update { it.copy(selectedHero = null) }
-    }
-    private fun retry(){
-        loadHeroes()
-    }
-   //---------------- end
-*/
 
     companion object {
         private fun getMockHeroes(): List<Hero> = listOf(

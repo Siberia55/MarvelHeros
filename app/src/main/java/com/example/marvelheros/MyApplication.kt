@@ -1,7 +1,9 @@
-package com.example.marvelheros
+/*package com.example.marvelheros
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MyApplication: Application()
+
+ */
