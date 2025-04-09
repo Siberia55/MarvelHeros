@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen
+/*package com.example.marvelheros.ui.screen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -64,5 +64,71 @@ class HeroViewModel @Inject constructor() : ViewModel() {
     //}
     init {
         Log.d("HeroDebug", "Loaded heroes: ${_uiState.value.heroes}")
+    }
+}
+
+ */
+
+package com.example.marvelheros.ui.screen
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.data.repository.HeroRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class HeroViewModel @Inject constructor(
+    private val repository: HeroRepository
+) : ViewModel() {
+    private val _uiState = MutableStateFlow(HeroUiState())
+    val uiState: StateFlow<HeroUiState> = _uiState
+
+    init {
+        loadHeroes()
+    }
+
+    fun onEvent(event: HeroEvent) {
+        when (event) {
+            is HeroEvent.HeroSelected -> selectHero(event.hero)
+            HeroEvent.DismissHero -> dismissHero()
+            HeroEvent.LoadHeroes -> loadHeroes()
+        }
+    }
+
+    private fun loadHeroes() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            try {
+                val heroes = repository.getHeroes()
+                _uiState.update {
+                    it.copy(
+                        heroes = heroes,
+                        isLoading = false,
+                        errorMessage = null
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = e.message ?: "Unknown error"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun selectHero(hero: Hero) {
+        _uiState.update { it.copy(selectedHero = hero) }
+    }
+
+    private fun dismissHero() {
+        _uiState.update { it.copy(selectedHero = null) }
     }
 }

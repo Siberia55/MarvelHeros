@@ -1,12 +1,6 @@
-package com.example.marvelheros.data.model
-/*
-data class ApiResponse<T>(
-    val code: Int,
-    val status: String,
-    val data: T
-)
+/*package com.example.marvelheros.data.model
 
- */
+// data/model/MarvelResponse.kt
 data class MarvelResponse(
     val data: MarvelData
 )
@@ -27,10 +21,10 @@ data class MarvelHeroDTO(
         imageUrl = "${thumbnail.path}.${thumbnail.extension}",
         description = description
     )
-
+}
 
     data class MarvelThumbnail(
         val path: String,
         val extension: String
     )
-}
+*/

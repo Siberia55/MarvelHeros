@@ -58,12 +58,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Brush
-import com.example.marvelheros.data.main.MainScreen
+//import com.example.marvelheros.data.main.MainScreen
 
 
 import com.example.marvelheros.data.model.Hero
 import com.example.marvelheros.ui.screen.HeroEvent
 import com.example.marvelheros.ui.screen.HeroViewModel
+import com.example.marvelheros.ui.screen.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 //---------- проба MVI
@@ -76,8 +77,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val state = viewModel.uiState.collectAsState().value
             MainScreen(
-                state = viewModel.uiState.collectAsState().value, // Передаём состояние
+                state = state,//viewModel.uiState.collectAsState().value, // Передаём состояние
                 onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },// Передаём обработчик клика
                 onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) }
             )

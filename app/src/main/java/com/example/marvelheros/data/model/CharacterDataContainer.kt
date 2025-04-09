@@ -1,4 +1,4 @@
-package com.example.marvelheros.data.model
+/*package com.example.marvelheros.data.model
 
 data class CharacterDataContainer(
     val offset: Int,
@@ -6,4 +6,4 @@ data class CharacterDataContainer(
     val total: Int,
     val count: Int,
     val results: List<CharacterDto>
-)
+)*/

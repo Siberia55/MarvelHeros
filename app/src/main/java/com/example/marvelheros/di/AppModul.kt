@@ -1,4 +1,4 @@
-package com.example.marvelheros.di
+/*package com.example.marvelheros.di
 
 import com.example.marvelheros.data.api.ApiService
 import com.example.marvelheros.data.repository.HeroRepository
@@ -36,6 +36,7 @@ object AppModule {
 }
 
  */
+/*
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -47,5 +48,49 @@ object AppModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+    }
+}
+
+ */
+
+ */
+package com.example.marvelheros.di
+
+import com.example.marvelheros.data.api.ApiService
+import com.example.marvelheros.data.repository.HeroRepository
+import com.example.marvelheros.data.repository.HeroRepositoryImpl
+import com.example.marvelheros.utils.MarvelAuth
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides
+    @Singleton
+    fun provideApiService(): ApiService {
+        return Retrofit.Builder()
+            .baseUrl(ApiService.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMarvelAuth(): MarvelAuth = MarvelAuth()
+
+    @Provides
+    @Singleton
+    fun provideHeroRepository(
+        apiService: ApiService,
+        marvelAuth: MarvelAuth // Добавляем зависимость
+    ): HeroRepository {
+        return HeroRepositoryImpl(apiService, marvelAuth)
     }
 }

@@ -1,20 +1,26 @@
-package com.example.marvelheros.data.main
+package com.example.marvelheros.ui.screen
 
-//package com.example.marvelheros.presentation.main
-
-//import com.example.marvelheros.ui.theme.diagonalSplit
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -27,9 +33,50 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.data.model.Hero
-//import com.example.marvelheros.ui.components.FullScreenHeroDetails
 import com.example.marvelheros.ui.components.HeroItem
+//import com.example.marvelheros.ui.components.diagonalSplit
 
+/*
+@Composable
+fun MainContent(
+    heroes: List<Hero>,
+    onHeroClick: (Hero) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(heroes) { hero ->
+            HeroItem(
+                hero = hero,
+                onClick = { onHeroClick(hero) }
+            )
+        }
+    }
+}
+*/
+/*
+@Composable
+fun MainContent(
+    heroes: List<Hero>,  // Принимаем List<Hero>
+    onHeroClick: (Hero) -> Unit
+) {
+    LazyRow {
+        items(
+            items = heroes,
+            key = { it.id }  // Используем ID как ключ
+        ) { hero ->
+            HeroItem(
+                hero = hero,
+                onClick = { onHeroClick(hero) }
+            )
+        }
+    }
+}
+
+ */
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
     drawBehind {
@@ -58,7 +105,8 @@ fun MainContent(
             .fillMaxSize()
             .diagonalSplit(
                 color1 = Color.DarkGray,
-                color2 = Color.Red)
+                color2 = Color.Red
+            )
     ) {
         Column(
             modifier = Modifier
@@ -106,33 +154,18 @@ fun MainContent(
                 modifier = Modifier.padding(horizontal = 10.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                 items(heroes) { hero ->
+                items(heroes) { hero ->
                     HeroItem(
-                //uiState.selectedHero?.let { hero ->
-                  //  FullScreenHeroDetails(
+                        //uiState.selectedHero?.let { hero ->
+                        //  FullScreenHeroDetails(
                         hero = hero,
-                  //      onDismiss = onDismissHero
+                        //      onDismiss = onDismissHero
                         onClick = { onHeroClick(hero) }
                     )
 
                 }
 
+                }
             }
         }
     }
-}
-//--- временный
-/*
-@Composable
-fun MainContent(
-    heroes: List<Hero>,
-    onHeroClick: (Hero) -> Unit
-) {
-    LazyColumn {
-        items(heroes) { hero ->
-            Text(text = hero.name, modifier = Modifier.padding(16.dp))
-        }
-    }
-}
-
- */

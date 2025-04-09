@@ -18,7 +18,7 @@ object RetrofitClient {
 
  */
 // data/api/RetrofitClient.kt
-
+/*
 package com.example.marvelheros.data.api
 
 import com.example.marvelheros.BuildConfig.MARVEL_PRIVATE_KEY
@@ -67,5 +67,22 @@ object RetrofitClient {
         val md = MessageDigest.getInstance("MD5")
         return md.digest(toByteArray())
             .joinToString("") { "%02x".format(it) }
+    }
+}
+
+ */
+
+package com.example.marvelheros.data.api
+
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+
+object RetrofitClient {
+    val instance: ApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(ApiService.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
     }
 }

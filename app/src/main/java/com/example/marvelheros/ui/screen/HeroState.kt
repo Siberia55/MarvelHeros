@@ -6,7 +6,7 @@ data class HeroUiState(
     val heroes: List<Hero> = emptyList(),
     val selectedHero: Hero? = null,
     val isLoading: Boolean = false,
-    val errorMassage: String? = null,
+    val errorMessage: String? = null,
     val onDismissHero: (() -> Unit)? = null,
     //val onHeroClick: (() -> Unit)
 )
