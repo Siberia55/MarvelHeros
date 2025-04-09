@@ -60,6 +60,8 @@ import com.example.marvelheros.data.api.ApiService
 import com.example.marvelheros.data.repository.HeroRepository
 import com.example.marvelheros.data.repository.HeroRepositoryImpl
 import com.example.marvelheros.utils.MarvelAuth
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,9 +76,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
         return Retrofit.Builder()
             .baseUrl(ApiService.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(ApiService::class.java)
     }

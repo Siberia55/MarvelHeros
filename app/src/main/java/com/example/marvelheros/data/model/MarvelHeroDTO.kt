@@ -19,5 +19,4 @@ data class MarvelThumbnail(
     val path: String,
     val extension: String
 )
-
- */
+*/

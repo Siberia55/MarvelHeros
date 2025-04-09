@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 //import com.android.tools.r8.internal.kt
 
 plugins {
@@ -26,11 +28,16 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 //добавил ключи от marvel API
         buildConfigField("String", "MARVEL_PUBLIC_KEY", "\"${properties["MARVEL_PUBLIC_KEY"]}\"")
         buildConfigField("String", "MARVEL_PRIVATE_KEY", "\"${properties["MARVEL_PRIVATE_KEY"]}\"")
     }
+
+    buildFeatures {buildConfig = true}
+
+    //val key = gradleLocalProperties(project.rootDir).getProperty()
 
     buildTypes {
         release {
@@ -90,6 +97,7 @@ dependencies {
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
 
 // Moshi (для преобразования JSON)
+    implementation ("com.squareup.moshi:moshi:1.14.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
 //Hilt
    //implementation("com.google.dagger:hilt-android:2.51.1")

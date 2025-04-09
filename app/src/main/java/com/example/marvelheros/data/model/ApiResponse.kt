@@ -1,4 +1,4 @@
-package com.example.marvelheros.data.model
+/*package com.example.marvelheros.data.model
 /*
 data class ApiResponse<T>(
     val code: Int,
@@ -34,3 +34,5 @@ data class MarvelHeroDTO(
         val extension: String
     )
 }
+
+ */
