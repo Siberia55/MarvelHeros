@@ -70,13 +70,23 @@ class HeroRepository @Inject constructor(
 package com.example.marvelheros.data.repository
 
 import android.R.attr.apiKey
+import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import com.example.marvelheros.R
 import com.example.marvelheros.data.api.ApiService
 import com.example.marvelheros.data.model.Hero
 import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
+import com.example.marvelheros.utils.MyResult
+
+
 
 interface HeroRepository {
-    suspend fun getHeroes(): List<Hero>
+    suspend fun getHeroes(): MyResult<List<Hero>>
+    //suspend fun getHeroes(): List<Hero>
     //suspend fun getHeroById(id: Int): Hero
 }
 
@@ -84,25 +94,57 @@ class HeroRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val marvelAuth: MarvelAuth
 ) : HeroRepository {
-    override suspend fun getHeroes(): List<Hero> {
-       /*val ts = marvelAuth.getTimestamp()
-        val hash = marvelAuth.generateHash(ts)
-        val apiKey = marvelAuth.publicKey
+    // override suspend fun getHeroes(): List<Hero> {
+    override suspend fun getHeroes(): MyResult<List<Hero>> {
         return try {
-            apiService.getHeroes(ts, apiKey, hash)
-                .data.results
-                .map { it.toHero() }
-        } catch (e: Exception) {
-            //getMockHeroes()
-            emptyList<Hero>()
-        }*/
-        return getMockHeroes()
-    }
-}
+            val ts = marvelAuth.getTimestamp()
+            val hash = marvelAuth.generateHash(ts)
+            val response = apiService.getHeroes(
+                ts, marvelAuth.publicKey, hash
+            )
+            val heroes = response.data.results.map { it.toHero() }
+            MyResult.Success(heroes)
 
+            //Result.Success(response.data.results.map { it.toHero() })
+            //      val apiKey = marvelAuth.publicKey
+            //      return try {
+            //      apiService.getHeroes(ts, apiKey, hash)
+            //      .data.results
+            //      .map { it.toHero() }
+        } catch (e: Exception) {
+            getMockHeroes()
+            //emptyList<Hero>()
+            Log.e("HeroRepository", "Ошибка загрузки героев: ${e.message}")
+            MyResult.Error("Ошибка загрузки: ${e.localizedMessage ?: "Unknown error"}")
+            //MyResult.Success(getMockHeroes()).also {
+            //    Log.e("Repository", "Using mock data due to error: ${e.message}")
+            }
+        }
+
+    }
+
+    //  return getMockHeroes()
+/*
+    @Composable
+    fun ImageError (){
+        Image( painter = painterResource(R.drawable.errorload),
+                modifier = Modifier)
+   }
+*/
     private fun getMockHeroes() = listOf(
-        Hero(1, "Deadpool", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s", "Hi, I'm Deadpool"),
-       // Hero(2, "Iron Man", "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598", "Hi, I'm Iron Man"),
-       // Hero(3, "Harley Quinn", "https://...", "Hi, I'm Harley Quinn")
+        Hero(
+            1,
+            "Deadpool",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s",
+            "Hi, I'm Deadpool"
+        ),
+        Hero(
+            2,
+            "Iron Man",
+            "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598",
+            "Hi, I'm Iron Man"
+        ),
+        // Hero(3, "Harley Quinn", "https://...", "Hi, I'm Harley Quinn")
     )
 
+//}

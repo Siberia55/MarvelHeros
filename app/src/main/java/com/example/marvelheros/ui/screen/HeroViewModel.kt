@@ -71,6 +71,12 @@ class HeroViewModel @Inject constructor() : ViewModel() {
 
 package com.example.marvelheros.ui.screen
 
+import android.R.attr.onClick
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvelheros.data.model.Hero
@@ -81,7 +87,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.marvelheros.utils.MyResult
+import androidx.compose.runtime.getValue
 
+
+/*
 @HiltViewModel
 class HeroViewModel @Inject constructor(
     private val repository: HeroRepository
@@ -103,7 +113,8 @@ class HeroViewModel @Inject constructor(
 
     private fun loadHeroes() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+
             try {
                 val heroes = repository.getHeroes()
                 _uiState.update {
@@ -130,5 +141,77 @@ class HeroViewModel @Inject constructor(
 
     private fun dismissHero() {
         _uiState.update { it.copy(selectedHero = null) }
+    }
+}
+
+ */
+
+@HiltViewModel
+class HeroViewModel @Inject constructor(
+    private val repository: HeroRepository
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(HeroUiState())
+    val uiState: StateFlow<HeroUiState> = _uiState
+
+    init {
+        loadHeroes()
+    }
+
+    fun loadHeroes() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true)//, errorMessage = null)
+
+            when (val result = repository.getHeroes()) {
+                is MyResult.Success -> {
+                    _uiState.value = HeroUiState(
+                        //isLoading = false,
+                        heroes = result.data
+                    )
+                }
+
+                is MyResult.Error -> {
+                    _uiState.value = HeroUiState(
+                        // isLoading = false, //heroes = emptyList(),
+                        errorMessage = result.message
+                    )
+                }
+            }
+        }
+    }
+
+
+    fun onEvent(event: HeroEvent) {
+        when (event) {
+            is HeroEvent.HeroSelected -> {
+                _uiState.value = _uiState.value.copy(selectedHero = event.hero)
+            }
+
+            HeroEvent.DismissHero -> {
+                _uiState.value = _uiState.value.copy(selectedHero = null)
+            }
+
+            else -> {}
+        }
+    }
+}
+
+
+
+@Composable
+fun MainScreen(viewModel: HeroViewModel = hiltViewModel()) {
+    val state by viewModel.uiState.collectAsState()
+
+    when {
+        state.isLoading -> {
+            CircularProgressIndicator()
+        }
+        state.errorMessage != null -> {
+            Text("Ошибка: ${state.errorMessage}")
+        }
+        else -> {
+            MainContent(heroes = state.heroes,
+            onHeroClick =  {} )
+        }
     }
 }

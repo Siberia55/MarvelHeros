@@ -8,7 +8,6 @@ sealed class HeroEvent {
     data object LoadHeroes : HeroEvent()
     data object DismissHero : HeroEvent()
     //data object HeroClick: HeroEvent()
-    //object DismissHero : HeroEvent()
     //object Retry : HeroEvent()
 }
 

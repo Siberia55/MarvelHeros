@@ -67,7 +67,7 @@ import com.example.marvelheros.ui.screen.HeroViewModel
 import com.example.marvelheros.ui.screen.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
-//---------- проба MVI
+//----------
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -86,6 +86,31 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+           /*
+            setContent {
+                MarvelHerosTheme {
+                    val viewModel: HeroViewModel = viewModels()
+                    val state by viewModel.uiState.collectAsState()
+
+                    MainScreen(
+                        state = state,
+                        onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },
+                        onRetry = { viewModel.loadHeroes() }
+                    )
+                }
+            }
+        }
+    }
+}
+*/
+
+
+
+
+
+
 
 
 /*   13:30 04.04
