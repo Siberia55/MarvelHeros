@@ -102,7 +102,7 @@ class HeroRepositoryImpl @Inject constructor(
 
     private fun getMockHeroes() = listOf(
         Hero(1, "Deadpool", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s", "Hi, I'm Deadpool"),
-        Hero(2, "Iron Man", "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598", "Hi, I'm Iron Man"),
+       // Hero(2, "Iron Man", "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598", "Hi, I'm Iron Man"),
        // Hero(3, "Harley Quinn", "https://...", "Hi, I'm Harley Quinn")
     )
 
