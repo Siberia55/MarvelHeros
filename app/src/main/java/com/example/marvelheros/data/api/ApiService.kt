@@ -52,19 +52,8 @@ import com.example.marvelheros.data.model.MarvelResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-/*
 interface ApiService {
     companion object {
-        const val BASE_URL = "https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0/"
-    }
-
-    @GET("heroes")
-    suspend fun getHeroes(): List<Hero>
-}
-*/
-interface ApiService {
-    companion object {
-        // Используйте корректный URL Marvel API
         const val BASE_URL = "https://gateway.marvel.com/v1/public/"
     }
 
