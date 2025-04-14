@@ -112,7 +112,7 @@ class HeroRepositoryImpl @Inject constructor(
             //      .data.results
             //      .map { it.toHero() }
         } catch (e: Exception) {
-            getMockHeroes()
+            //getMockHeroes()
             //emptyList<Hero>()
             Log.e("HeroRepository", "Ошибка загрузки героев: ${e.message}")
             MyResult.Error("Ошибка загрузки: ${e.localizedMessage ?: "Unknown error"}")
@@ -130,7 +130,7 @@ class HeroRepositoryImpl @Inject constructor(
         Image( painter = painterResource(R.drawable.errorload),
                 modifier = Modifier)
    }
-*/
+*//*
     private fun getMockHeroes() = listOf(
         Hero(
             1,
@@ -148,3 +148,4 @@ class HeroRepositoryImpl @Inject constructor(
     )
 
 //}
+        */

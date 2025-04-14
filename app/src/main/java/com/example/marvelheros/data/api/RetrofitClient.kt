@@ -71,7 +71,7 @@ object RetrofitClient {
 }
 
  */
-
+/*
 package com.example.marvelheros.data.api
 
 import com.squareup.moshi.Moshi
@@ -91,4 +91,4 @@ object RetrofitClient {
             .create(ApiService::class.java)
     }
 
-}
+}*/

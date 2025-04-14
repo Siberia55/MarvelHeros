@@ -1,6 +1,8 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+//import org.jetbrains.kotlin.konan.properties.Properties
 
 //import com.android.tools.r8.internal.kt
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -17,6 +19,10 @@ plugins {
     kotlin("kapt")
 }
 
+val localProperties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+
 android {
     namespace = "com.example.marvelheros"
     compileSdk = 35
@@ -28,16 +34,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//добавил ключи от marvel API
-        buildConfigField("String", "MARVEL_PUBLIC_KEY", "\"${properties["MARVEL_PUBLIC_KEY"]}\"")
-        buildConfigField("String", "MARVEL_PRIVATE_KEY", "\"${properties["MARVEL_PRIVATE_KEY"]}\"")
+
+        buildConfigField("String", "MARVEL_PUBLIC_KEY", "\"${localProperties.getProperty("MARVEL_PUBLIC_KEY")}\"")
+        buildConfigField("String", "MARVEL_PRIVATE_KEY", "\"${localProperties.getProperty("MARVEL_PRIVATE_KEY")}\"")
     }
 
     buildFeatures {buildConfig = true}
-
-    //val key = gradleLocalProperties(project.rootDir).getProperty()
 
     buildTypes {
         release {
@@ -99,10 +102,13 @@ dependencies {
 // Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi:1.14.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 //Hilt
-   //implementation("com.google.dagger:hilt-android:2.51.1")
-   //kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+   implementation("com.google.dagger:hilt-android:2.51.1")
+   kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
+    //для логирования
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)

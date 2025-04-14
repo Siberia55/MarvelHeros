@@ -1,5 +1,6 @@
 package com.example.marvelheros.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -93,6 +94,7 @@ fun FullScreenHeroDetails(
                         //.clip(RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
+                Log.d("ImageDebug", "Image URL: ${hero.imageUrl}")
 
                 Spacer(modifier = Modifier.height(24.dp))
 
