@@ -180,7 +180,6 @@ class HeroViewModel @Inject constructor(
         }
     }
 
-
     fun onEvent(event: HeroEvent) {
         when (event) {
             is HeroEvent.HeroSelected -> {
@@ -195,8 +194,6 @@ class HeroViewModel @Inject constructor(
         }
     }
 }
-
-
 
 @Composable
 fun MainScreen(viewModel: HeroViewModel = hiltViewModel()) {

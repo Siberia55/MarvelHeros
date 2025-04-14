@@ -6,7 +6,7 @@ import java.security.MessageDigest
 import javax.inject.Inject
 
 class MarvelAuth (
-    val publicKey: String = BuildConfig.MARVEL_PUBLIC_KEY,
+    val publicKey: String = MARVEL_PUBLIC_KEY,
     private val privateKey: String = BuildConfig.MARVEL_PRIVATE_KEY
 ) {
     fun generateHash(ts: String): String {
@@ -24,11 +24,3 @@ class MarvelAuth (
             .toHexString()
     }
 }
-/*
-data class AuthParams(
-    val ts: String,
-    val apiKey: String,
-    val hash: String
-)
-
- */

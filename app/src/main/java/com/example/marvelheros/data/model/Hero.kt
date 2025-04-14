@@ -10,17 +10,7 @@ data class Hero(
     val name: String,
     val imageUrl: String,
     val description: String
-) {
-    // Дополнительные параметры по желанию:
-   // constructor() : this(0, "", "", "") // Пустой конструктор для Firebase и т.д.
-}
-
-
-/*
-data class Hero/*State*/(
-    val heroes: Int = emptyList(),
-    val selectedHero: String = null,
-    val isLoading: String = false,
-    val error: String? = null
 )
-*/
+
+
+
