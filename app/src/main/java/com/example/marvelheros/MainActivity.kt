@@ -61,7 +61,7 @@ import androidx.compose.ui.graphics.Brush
 //import com.example.marvelheros.data.main.MainScreen
 
 
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.screen.HeroEvent
 import com.example.marvelheros.ui.screen.HeroViewModel
 import com.example.marvelheros.ui.screen.MainScreen

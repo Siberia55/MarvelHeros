@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.sp
 import coil3.Image
 import coil3.compose.AsyncImage
 import com.example.marvelheros.R
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.screen.MainContent
 
 //data class HeroItem(val hero: Hero, val onClick: () -> Unit)

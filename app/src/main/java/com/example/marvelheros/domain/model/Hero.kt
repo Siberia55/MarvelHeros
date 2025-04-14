@@ -1,5 +1,4 @@
-
-package com.example.marvelheros.data.model
+package com.example.marvelheros.domain.model
 
 import androidx.annotation.Keep
 
@@ -11,6 +10,3 @@ data class Hero(
     val imageUrl: String,
     val description: String
 )
-
-
-

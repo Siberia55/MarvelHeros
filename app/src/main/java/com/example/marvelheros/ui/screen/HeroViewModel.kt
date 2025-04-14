@@ -2,7 +2,7 @@
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -79,7 +79,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.data.repository.HeroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

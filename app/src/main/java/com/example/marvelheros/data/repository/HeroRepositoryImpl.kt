@@ -1,6 +1,6 @@
 /*package com.example.marvelheros.data.repository
 
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import javax.inject.Inject
 
 
@@ -77,7 +77,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.marvelheros.R
 import com.example.marvelheros.data.api.ApiService
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
 import com.example.marvelheros.utils.MyResult

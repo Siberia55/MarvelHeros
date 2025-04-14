@@ -1,6 +1,6 @@
 package com.example.marvelheros.ui.screen
 
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 
 
 sealed class HeroEvent {

@@ -30,7 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 
 
 @Composable

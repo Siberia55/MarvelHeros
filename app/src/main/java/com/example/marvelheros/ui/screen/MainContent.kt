@@ -32,7 +32,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.HeroItem
 //import com.example.marvelheros.ui.components.diagonalSplit
 

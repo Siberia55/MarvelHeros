@@ -1,6 +1,6 @@
 /*package com.example.marvelheros.data.api
 
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import retrofit2.http.GET
 
 interface ApiService {
@@ -47,7 +47,7 @@ interface ApiService {
 
 package com.example.marvelheros.data.api
 
-import com.example.marvelheros.data.model.Hero
+import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.data.model.MarvelResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
