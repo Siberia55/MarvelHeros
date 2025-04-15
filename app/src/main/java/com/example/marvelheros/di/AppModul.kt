@@ -1,74 +1,25 @@
-/*package com.example.marvelheros.di
-
-import com.example.marvelheros.data.api.ApiService
-import com.example.marvelheros.data.repository.HeroRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
-/*
-@Module
-@InstallIn(SingletonComponent::class) // Модуль доступен везде в приложении
-object AppModule {
-
-    // 1. Создаем Retrofit
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl(ApiService.BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-
-    // 2. Создаем ApiService
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService =
-        retrofit.create(ApiService::class.java)
-
-    // 3. Создаем HeroRepository
-    @Provides
-    @Singleton
-    fun provideHeroRepository(apiService: ApiService): HeroRepository =
-        HeroRepository(apiService)
-}
-
- */
-/*
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
-    @Provides
-    @Singleton
-    fun provideApiService(): ApiService {
-        return Retrofit.Builder()
-            .baseUrl(ApiService.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-    }
-}
-
- */
-
- */
 package com.example.marvelheros.di
 
+import androidx.room.Room
 import com.example.marvelheros.data.api.ApiService
+import com.example.marvelheros.data.local.db.AppDatabase
 import com.example.marvelheros.data.repository.HeroRepository
 import com.example.marvelheros.data.repository.HeroRepositoryImpl
+import com.example.marvelheros.domain.usecase.GetHeroesUseCase
 import com.example.marvelheros.utils.MarvelAuth
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
+import android.content.Context
+import com.example.marvelheros.data.local.LocalDataSource
+import com.example.marvelheros.data.local.dao.HeroDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -94,8 +45,34 @@ object AppModule {
     @Singleton
     fun provideHeroRepository(
         apiService: ApiService,
-        marvelAuth: MarvelAuth // Добавляем зависимость
+        marvelAuth: MarvelAuth, // Добавляем зависимость
+        localDataSource: LocalDataSource
     ): HeroRepository {
-        return HeroRepositoryImpl(apiService, marvelAuth)
+        return HeroRepositoryImpl(apiService, marvelAuth,localDataSource)
+    }
+    @Provides
+    @Singleton
+    fun provideGetHeroesUseCase (repository: HeroRepository): GetHeroesUseCase {
+        return GetHeroesUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDataBase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "marvel_heroes_db"
+        ).build()
+    }
+    @Provides
+    @Singleton
+    fun provideHeroDao(database: AppDatabase): HeroDao {
+        return database.heroDao()
+    }
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(appDatabase: AppDatabase): LocalDataSource {
+        return LocalDataSource(appDatabase.heroDao())
     }
 }

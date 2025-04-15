@@ -106,9 +106,12 @@ dependencies {
 //Hilt
    implementation("com.google.dagger:hilt-android:2.51.1")
    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-
-    //для логирования
+//для логирования
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+// Room
+    implementation ("androidx.room:room-runtime:2.7.0")
+    implementation ("androidx.room:room-ktx:2.7.0")
+    kapt ("androidx.room:room-compiler:2.7.0")
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)

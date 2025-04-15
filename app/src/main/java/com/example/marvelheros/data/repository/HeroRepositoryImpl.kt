@@ -1,75 +1,7 @@
-/*package com.example.marvelheros.data.repository
-
-import com.example.marvelheros.domain.model.Hero
-import javax.inject.Inject
-
-
-/*
-interface HeroRepository {
-    suspend fun getHeroes(): List<Hero>
-}
-
-class HeroRepositoryImpl @Inject constructor() : HeroRepository {
-    override suspend fun getHeroes(): List<Hero> = heroes // Ваш существующий список
-}
-*/
-
-interface HeroRepository {
-    suspend fun getHeroes(): List<Hero>
-}
-
-class HeroRepositoryImpl @Inject constructor() : HeroRepository {
-    override suspend fun getHeroes(): List<Hero> = listOf(
-        Hero(1, "Deadpool", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvakm_zio2J6a-PadL8SE6DjgZOB_5FlJz3w&s", "Hi, I'm Deadpool"),
-        Hero(2, "Iron Man", "https://www.specfictionshop.com/cdn/shop/products/315455127_2253071438203857_6311282012262232749_n_2000x.jpg?v=1669836598", "Hi, I'm Iron Man"),
-        Hero(3, "Harley Quinn", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOTzkRwd_h8AYu__LcSNij7TKsgCjDzQ-a4A&s", "Hi, I'm Harley Quinn")
-    )
-}
-
-
-/*
-class HeroRepository(private val apiService: ApiService) {
-
-    // Кэш для хранения данных (опционально)
-    private var cachedHeroes: List<Hero>? = null
-
-    // Получение героев
-    suspend fun getHeroes(): Result<List<Hero>> {
-        return try {
-            // Проверяем кэш
-            if (cachedHeroes != null) {
-                Result.success(cachedHeroes!!)
-            } else {
-                // Делаем запрос к API
-                val heroes = withContext(Dispatchers.IO) {
-                    apiService.getAllHeroes()
-                }
-                // Сохраняем в кэш
-                cachedHeroes = heroes
-                Result.success(heroes)
-            }
-        } catch (e: Exception) {
-            Result.failure(e) // Возвращаем ошибку
-        }
-    }
-}
-class HeroRepository @Inject constructor(
-    private val apiService: ApiService
-) {
-    suspend fun getHeroes(): Result<List<Hero>> {
-        return try {
-            Result.success(apiService.getHeroes())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-}
-
- */
- */
 package com.example.marvelheros.data.repository
 
 import android.R.attr.apiKey
+import android.database.DataSetObservable
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
@@ -77,6 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.marvelheros.R
 import com.example.marvelheros.data.api.ApiService
+import com.example.marvelheros.data.local.LocalDataSource
+import com.example.marvelheros.data.local.db.AppDatabase
+import com.example.marvelheros.data.mapper.HeroMapper.toDomain
+import com.example.marvelheros.data.mapper.HeroMapper.toEntity
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
@@ -86,28 +22,68 @@ import com.example.marvelheros.utils.MyResult
 
 interface HeroRepository {
     suspend fun getHeroes(): MyResult<List<Hero>>
+    suspend fun getHeroById(heroId: Int): MyResult<Hero>
 }
 class HeroRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
-    private val marvelAuth: MarvelAuth
-) : HeroRepository {
+    private val marvelAuth: MarvelAuth,
+    private val localDataSource: LocalDataSource
+    ) : HeroRepository {
 
     override suspend fun getHeroes(): MyResult<List<Hero>> {
         return try {
+// из БД
+            val localHeroes = localDataSource.getAllHeroes().map { it.toDomain() }
+            //val localHero = localDataSource.getHeroById(heroId)
+            if (localHeroes.isNotEmpty()) {
+                return MyResult.Success(localHeroes)
+            }
+//запрос из сети
             val ts = marvelAuth.getTimestamp()
             val hash = marvelAuth.generateHash(ts)
             val response = apiService.getHeroes(
                 ts, marvelAuth.publicKey, hash
             )
             val heroes = response.data.results.map { it.toHero() }
+            val entities = response.data.results.map { it.toEntity() }
+            localDataSource.insertHeroes(entities)
             MyResult.Success(heroes)
 
         } catch (e: Exception) {
-
+            e.printStackTrace()
             Log.e("HeroRepository", "Ошибка загрузки героев: ${e.message}")
-            MyResult.Error("Ошибка загрузки: ${e.localizedMessage ?: "Unknown error"}")
+            val fallback = localDataSource.getAllHeroes().map { it.toDomain() }
+            if (fallback.isNotEmpty()) {
+                MyResult.Success(fallback)
+            } else
+                MyResult.Error("Ошибка загрузки: ${e.localizedMessage ?: "Unknown error"}")
 
-            }
         }
-
     }
+
+
+    override suspend fun getHeroById(heroId: Int): MyResult<Hero> {
+        return try {
+            val localHero = localDataSource.getHeroById(heroId)
+            if (localHero != null) {
+                return MyResult.Success(localHero.toDomain())
+            }
+            val ts = marvelAuth.getTimestamp()
+            val hash = marvelAuth.generateHash(ts)
+            val response = apiService.getHeroById(heroId, ts, marvelAuth.publicKey, hash)
+            val heroDto = response.data.results.firstOrNull()
+
+            if (heroDto != null) {
+                val entity = heroDto.toEntity()
+                localDataSource.insertHero(entity)
+                MyResult.Success(entity.toDomain())
+            } else {
+                MyResult.Error("Герой не найден")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            MyResult.Error("Ошибка загрузки героя: ${e.localizedMessage ?: "Unknown error"}")
+        }
+    }
+
+}
