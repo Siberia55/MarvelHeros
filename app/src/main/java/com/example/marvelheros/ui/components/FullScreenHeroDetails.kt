@@ -1,8 +1,6 @@
 package com.example.marvelheros.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,17 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.Backpack
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,165 +24,62 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.marvelheros.domain.model.Hero
 
-/*
-@Composable
-fun FullScreenHeroDetails(
-    hero: Hero, // Модель героя
-    onDismiss: () -> Unit, // Функция закрытия
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.9f)),
-        color = Color.Transparent
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp)
-        ) {
-            // Кнопка "Назад"
-            IconButton(
-                onClick = onDismiss,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .size(50.dp)
-            ) {
-                androidx.compose.material3.Icon(
-                    imageVector = Icons.Default.ArrowBackIosNew,
-                    contentDescription = "Назад",
-                    tint = Color.White,
-                    modifier = Modifier.size(32.dp)
-                )
-            }
-            // Контент героя
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                // Изображение
-                AsyncImage(
-                    model = hero.imageUrl,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-                Log.d("ImageDebug", "Image URL: ${hero.imageUrl}")
-                Spacer(modifier = Modifier.height(24.dp))
-                // Имя героя
-                Text(
-                    text = hero.name,
-                    style = MaterialTheme.typography.displayMedium,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                // Описание
-                Text(
-                    text = hero.description,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.White.copy(alpha = 0.9f),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
-*/
 @Composable
 fun FullScreenHeroDetails(
     hero: Hero,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val scrollState = rememberScrollState()
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        // 1. Полноэкранное изображение
+        // Фоновое изображение героя на весь экран
         AsyncImage(
             model = hero.imageUrl,
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-
-        // 2. Затемнение для лучшей читаемости текста
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black.copy(alpha = 0.3f),
-                            Color.Black.copy(alpha = 0.7f)
-                        ),
-                        startY = 0f,
-                        endY = Float.POSITIVE_INFINITY
-                    )
-                )
-        )
-
-        // 3. Кнопка "Назад" в верхнем левом углу
+        // Верхняя панель с кнопкой "Назад"
         IconButton(
             onClick = onDismiss,
             modifier = Modifier
                 .padding(16.dp)
-                .size(50.dp)
-                .background(
-                    color = Color.Black.copy(alpha = 0.5f),
-                    shape = CircleShape
-                )
+                .size(48.dp)
+                .align(Alignment.TopStart)
         ) {
-            Icon(
+            androidx.compose.material3.Icon(
                 imageVector = Icons.Default.ArrowBackIosNew,
                 contentDescription = "Назад",
                 tint = Color.White,
                 modifier = Modifier.size(32.dp)
             )
         }
-
-        // 4. Прокручиваемый контент
+        // Контент с именем и описанием героя
         Column(
             modifier = Modifier
-                .verticalScroll(scrollState)
-                .fillMaxSize()
-                .padding(top = 80.dp, bottom = 40.dp), // Отступы для кнопки и текста
-            horizontalAlignment = Alignment.CenterHorizontally
+                .align(Alignment.BottomCenter)
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f))
+                    )
+                )
+                .padding(24.dp)
         ) {
-            Spacer(modifier = Modifier.weight(1f))
-
-            // 5. Текстовый блок
-            Column(
-                modifier = Modifier
-                    .padding(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = hero.name,
-                    style = MaterialTheme.typography.displayMedium,
-                    color = Color.White
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = hero.description,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.White.copy(alpha = 0.9f),
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = hero.name,
+                style = MaterialTheme.typography.displayMedium,
+                color = Color.White
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = if (hero.description.isNotBlank()) hero.description else "Описание отсутствует.",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.White.copy(alpha = 0.9f),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
