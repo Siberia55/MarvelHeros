@@ -3,7 +3,6 @@ package com.example.marvelheros.utils
 import com.example.marvelheros.BuildConfig
 import com.example.marvelheros.BuildConfig.MARVEL_PUBLIC_KEY
 import java.security.MessageDigest
-import javax.inject.Inject
 
 class MarvelAuth (
     val publicKey: String = MARVEL_PUBLIC_KEY,

@@ -36,7 +36,6 @@ object AppModule {
             .build()
             .create(ApiService::class.java)
     }
-
     @Provides
     @Singleton
     fun provideMarvelAuth(): MarvelAuth = MarvelAuth()
@@ -55,7 +54,6 @@ object AppModule {
     fun provideGetHeroesUseCase (repository: HeroRepository): GetHeroesUseCase {
         return GetHeroesUseCase(repository)
     }
-
     @Provides
     @Singleton
     fun provideAppDataBase(@ApplicationContext context: Context): AppDatabase {

@@ -1,24 +1,14 @@
 package com.example.marvelheros.data.repository
 
-import android.R.attr.apiKey
-import android.database.DataSetObservable
 import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import com.example.marvelheros.R
 import com.example.marvelheros.data.api.ApiService
 import com.example.marvelheros.data.local.LocalDataSource
-import com.example.marvelheros.data.local.db.AppDatabase
 import com.example.marvelheros.data.mapper.HeroMapper.toDomain
 import com.example.marvelheros.data.mapper.HeroMapper.toEntity
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
 import com.example.marvelheros.utils.MyResult
-
-
 
 interface HeroRepository {
     suspend fun getHeroes(): MyResult<List<Hero>>
@@ -34,7 +24,6 @@ class HeroRepositoryImpl @Inject constructor(
         return try {
 // из БД
             val localHeroes = localDataSource.getAllHeroes().map { it.toDomain() }
-            //val localHero = localDataSource.getHeroById(heroId)
             if (localHeroes.isNotEmpty()) {
                 return MyResult.Success(localHeroes)
             }
@@ -44,7 +33,7 @@ class HeroRepositoryImpl @Inject constructor(
             val response = apiService.getHeroes(
                 ts, marvelAuth.publicKey, hash
             )
-            val heroes = response.data.results.map { it.toHero() }
+            val heroes = response.data.results.map { it.toDomain() }
             val entities = response.data.results.map { it.toEntity() }
             localDataSource.insertHeroes(entities)
             MyResult.Success(heroes)
@@ -60,8 +49,6 @@ class HeroRepositoryImpl @Inject constructor(
 
         }
     }
-
-
     override suspend fun getHeroById(heroId: Int): MyResult<Hero> {
         return try {
             val localHero = localDataSource.getHeroById(heroId)
@@ -85,5 +72,4 @@ class HeroRepositoryImpl @Inject constructor(
             MyResult.Error("Ошибка загрузки героя: ${e.localizedMessage ?: "Unknown error"}")
         }
     }
-
 }

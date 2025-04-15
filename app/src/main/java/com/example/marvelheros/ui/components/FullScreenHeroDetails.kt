@@ -10,21 +10,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
@@ -64,18 +59,6 @@ fun FullScreenHeroDetails(
                     modifier = Modifier.size(32.dp)
                 )
             }
-          /*  IconButton (
-                onClick = onDismiss,
-                modifier = Modifier.align(Alignment.Start)
-            ) {
-                Icon(
-                   // imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                   // contentDescription = "Back",
-
-                    tint = Color.White
-                )
-            }
-*/
             // Контент героя
             Column(
                 modifier = Modifier
@@ -90,23 +73,17 @@ fun FullScreenHeroDetails(
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize(),
-                        //.size(300.dp)
-                        //.clip(RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
                 Log.d("ImageDebug", "Image URL: ${hero.imageUrl}")
-
                 Spacer(modifier = Modifier.height(24.dp))
-
                 // Имя героя
                 Text(
                     text = hero.name,
                     style = MaterialTheme.typography.displayMedium,
                     color = Color.White
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 // Описание
                 Text(
                     text = hero.description,

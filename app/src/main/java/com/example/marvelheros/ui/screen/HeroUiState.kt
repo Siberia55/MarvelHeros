@@ -8,5 +8,4 @@ data class HeroUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
     val onDismissHero: (() -> Unit)? = null,
-    //val onHeroClick: (() -> Unit)
-)
+   )

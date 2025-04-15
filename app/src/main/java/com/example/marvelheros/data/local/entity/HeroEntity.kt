@@ -1,9 +1,7 @@
 package com.example.marvelheros.data.local.entity
 
-import android.icu.text.SymbolTable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import retrofit2.http.Url
 
 @Entity (tableName = "heroes")
 
