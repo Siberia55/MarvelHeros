@@ -9,6 +9,7 @@ import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
 import com.example.marvelheros.utils.MyResult
+import com.example.marvelheros.utils.safeApiCall
 
 interface HeroRepository {
     suspend fun getHeroes(): MyResult<List<Hero>>
@@ -21,7 +22,45 @@ class HeroRepositoryImpl @Inject constructor(
     ) : HeroRepository {
 
     override suspend fun getHeroes(): MyResult<List<Hero>> {
-        return try {
+        return safeApiCall(
+            apiCall = {
+                val ts = marvelAuth.getTimestamp()
+                val hash = marvelAuth.generateHash(ts)
+                val response = apiService.getHeroes(ts, marvelAuth.publicKey, hash)
+                val heroes = response.data.results.map { it.toDomain() }
+                val entities = response.data.results.map { it.toEntity() }
+                localDataSource.insertHeroes(entities)
+                heroes
+            },
+            fallback = {
+                val localHeroes = localDataSource.getAllHeroes().map { it.toDomain() }
+                if (localHeroes.isNotEmpty()) localHeroes else null
+            },
+            errorTag = "HeroRepository"
+        )
+    }
+
+    override suspend fun getHeroById(heroId: Int): MyResult<Hero> {
+        return safeApiCall(
+            apiCall = {
+                val ts = marvelAuth.getTimestamp()
+                val hash = marvelAuth.generateHash(ts)
+                val response = apiService.getHeroById(heroId, ts, marvelAuth.publicKey, hash)
+                val heroDto = response.data.results.firstOrNull()
+                    ?: throw Exception("Герой не найден")
+                val entity = heroDto.toEntity()
+                localDataSource.insertHero(entity)
+                entity.toDomain()
+            },
+            fallback = {
+                val localHero = localDataSource.getHeroById(heroId)
+                localHero?.toDomain()
+            },
+            errorTag = "HeroRepository"
+        )
+    }
+}
+ /*       return try {
 // из БД
             val localHeroes = localDataSource.getAllHeroes().map { it.toDomain() }
             if (localHeroes.isNotEmpty()) {
@@ -73,3 +112,5 @@ class HeroRepositoryImpl @Inject constructor(
         }
     }
 }
+
+ */
