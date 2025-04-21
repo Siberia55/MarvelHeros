@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">MarvelHeros</string>
+    <string name="app_name">MarvelHeroes</string>
     <string name="description">description</string>
+    <string name="back">Back</string>
+    <string name="error_loading">Error loading data</string>
+    <string name="choose_hero">Choose your hero</string>
+    <string name="Error">Error</string>
+    <string name="description_missing">description missing</string>
+    <string name="no_network_error">no network connect</string>
+    <string name="server_error">server error: %1$s</string>
+    <string name="unknown_error">unknown error: %1$s</string>
 </resources>
 

@@ -19,9 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 
 @Composable
@@ -52,12 +54,12 @@ fun FullScreenHeroDetails(
         ) {
             androidx.compose.material3.Icon(
                 imageVector = Icons.Default.ArrowBackIosNew,
-                contentDescription = "Назад",
-                tint = Color.White,
+                contentDescription = "Back",
+                tint = MaterialTheme.colorScheme.primaryContainer,//Color.White,
                 modifier = Modifier.size(32.dp)
             )
         }
-        // Контент с именем и описанием героя
+
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -68,6 +70,7 @@ fun FullScreenHeroDetails(
                 )
                 .padding(24.dp)
         ) {
+            val descriptionText = stringResource(R.string.description_missing)
             Text(
                 text = hero.name,
                 style = MaterialTheme.typography.displayMedium,
@@ -75,7 +78,7 @@ fun FullScreenHeroDetails(
             )
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = if (hero.description.isNotBlank()) hero.description else "Описание отсутствует.",
+                text = if (hero.description.isNotBlank()) hero.description else descriptionText,
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White.copy(alpha = 0.9f),
                 textAlign = TextAlign.Center

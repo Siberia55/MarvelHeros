@@ -1,7 +1,8 @@
 package com.example.marvelheros.domain.usecase
 
-import com.example.marvelheros.data.repository.HeroRepository
+//import com.example.marvelheros.data.repository.HeroRepository
 import com.example.marvelheros.domain.model.Hero
+import com.example.marvelheros.domain.repository.HeroRepository
 import com.example.marvelheros.utils.MyResult
 import javax.inject.Inject
 

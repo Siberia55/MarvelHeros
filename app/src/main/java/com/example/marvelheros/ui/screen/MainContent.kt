@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CheckboxDefaults.colors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
@@ -40,7 +42,7 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
         val height = size.height
         drawRect(color = color2)
 // разделение экрана
-        val path =Path().apply {
+        val path = Path().apply {
             moveTo(0f, height)  //левый нижний угол //(0f, 0f) начало правый верхний угол
             lineTo(width, 0f)   //линия к правому верхнему углу //(width, height)
             lineTo(0f, 0f)      //замыкание треугольника
@@ -58,8 +60,8 @@ fun MainContent(
         modifier = Modifier
             .fillMaxSize()
             .diagonalSplit(
-                color1 = Color.DarkGray,
-                color2 = Color.Red
+                color1 = MaterialTheme.colorScheme.background,//Color.DarkGray,
+                color2 = MaterialTheme.colorScheme.primary//Color.Red
             )
     ) {
         Column(
@@ -75,13 +77,13 @@ fun MainContent(
                     .width(100.dp)
                     .height(50.dp)
                     .padding(top = 20.dp)
-                    .background(Color.DarkGray)
+                    .background(MaterialTheme.colorScheme.background)//(Color.DarkGray)
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Choose your hero",
+                text = stringResource(R.string.choose_hero),
                 style = MaterialTheme.typography.headlineMedium,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onBackground//Color.White
             )
             Spacer(modifier = Modifier.height(80.dp))
             val lazyListState = rememberLazyListState()

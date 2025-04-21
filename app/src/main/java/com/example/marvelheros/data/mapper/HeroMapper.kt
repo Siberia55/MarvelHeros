@@ -12,7 +12,7 @@ object HeroMapper {
             description = this.description,
             thumbnailPath = this.thumbnail.path.replace("http", "https"),
             thumbnailExtension = this.thumbnail.extension,
-            modified = "", // если нет поля в DTO — пока ставим пустую строку
+            modified = "",
             imageUrl = "${this.thumbnail.path.replace("http", "https")}.${this.thumbnail.extension}"
         )
     }

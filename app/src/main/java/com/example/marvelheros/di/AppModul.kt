@@ -3,7 +3,6 @@ package com.example.marvelheros.di
 import androidx.room.Room
 import com.example.marvelheros.data.api.ApiService
 import com.example.marvelheros.data.local.db.AppDatabase
-import com.example.marvelheros.data.repository.HeroRepository
 import com.example.marvelheros.data.repository.HeroRepositoryImpl
 import com.example.marvelheros.domain.usecase.GetHeroesUseCase
 import com.example.marvelheros.utils.MarvelAuth
@@ -20,6 +19,7 @@ import javax.inject.Singleton
 import android.content.Context
 import com.example.marvelheros.data.local.LocalDataSource
 import com.example.marvelheros.data.local.dao.HeroDao
+import com.example.marvelheros.domain.repository.HeroRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,7 +44,7 @@ object AppModule {
     @Singleton
     fun provideHeroRepository(
         apiService: ApiService,
-        marvelAuth: MarvelAuth, // Добавляем зависимость
+        marvelAuth: MarvelAuth,
         localDataSource: LocalDataSource
     ): HeroRepository {
         return HeroRepositoryImpl(apiService, marvelAuth,localDataSource)

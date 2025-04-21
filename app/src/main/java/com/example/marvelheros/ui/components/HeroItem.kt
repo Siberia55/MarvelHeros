@@ -35,7 +35,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
             AsyncImage(
                 model = hero.imageUrl,
                 contentDescription = hero.name,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
             )
              Column(

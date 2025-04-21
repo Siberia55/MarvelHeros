@@ -13,27 +13,16 @@ suspend fun <T> safeApiCall(
         val result = apiCall()
         MyResult.Success(result)
     } catch (e: IOException) {
-        e.printStackTrace()
-        Log.e(errorTag, "Нет подключения к сети: ${e.message}")
-        val fallbackResult = fallback()
-        if (fallbackResult != null) {
-            MyResult.Success(fallbackResult)
-        } else {
-            MyResult.Error("Нет подключения к сети")
-        }
+        Log.e(errorTag, "Нет подключения: ${e.message}")
+        fallback()?.let { MyResult.Success(it) }
+            ?: MyResult.Error(ErrorCode.NETWORK_ERROR)
     } catch (e: HttpException) {
-        e.printStackTrace()
         Log.e(errorTag, "Ошибка сервера: ${e.message}")
-        MyResult.Error("Ошибка сервера: ${e.message}")
+        MyResult.Error(ErrorCode.SERVER_ERROR, e.message())
     } catch (e: Exception) {
-        e.printStackTrace()
         Log.e(errorTag, "Неизвестная ошибка: ${e.message}")
-        val fallbackResult = fallback()
-        if (fallbackResult != null) {
-            MyResult.Success(fallbackResult)
-        } else {
-            MyResult.Error("Ошибка: ${e.localizedMessage ?: "Неизвестная ошибка"}")
-        }
+        fallback()?.let { MyResult.Success(it) }
+            ?: MyResult.Error(ErrorCode.UNKNOWN_ERROR, e.localizedMessage)
     }
 }
 

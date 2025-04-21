@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Герои Marvel</string>
+    <string name="description">Описание</string>
+    <string name="back">Назад</string>
+    <string name="error_loading">Ошибка загрузки данных</string>
+    <string name="choose_hero">Выбери своего героя</string>
+    <string name="Error">Ошибка</string>
+    <string name="description_missing">Описание отсутствует</string>
+    <string name="no_network_error">Нет подключения к сети</string>
+    <string name="server_error">Ошибка сервера: %1$s</string>
+    <string name="unknown_error">Неизвестная ошибка: %1$s</string>
+</resources>
