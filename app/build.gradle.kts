@@ -1,4 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.android.build.gradle.internal.utils.KSP_PLUGIN_ID
+import com.google.wireless.android.sdk.stats.AnnotationProcessorInfo.InclusionType.KSP
 //import org.jetbrains.kotlin.konan.properties.Properties
 
 //import com.android.tools.r8.internal.kt
@@ -17,6 +19,7 @@ plugins {
 
  */
     kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 val localProperties = Properties().apply {
@@ -112,6 +115,10 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.7.0")
     implementation ("androidx.room:room-ktx:2.7.0")
     kapt ("androidx.room:room-compiler:2.7.0")
+//--------- переход на ksp
+// ksp("androidx.room:room-compiler:2.5.0")
+
+
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)
