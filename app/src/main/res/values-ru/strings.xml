@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Герои Marvel</string>
     <string name="description">Описание</string>
-    <string name="back">Назад</string>
+    <string name="button_back">Назад</string>
     <string name="error_loading">Ошибка загрузки данных</string>
     <string name="choose_hero">Выбери своего героя</string>
     <string name="Error">Ошибка</string>

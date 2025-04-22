@@ -9,6 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
+import com.example.marvelheros.ui.components.LocalDirectionWrapper
 import com.example.marvelheros.ui.screen.HeroEvent
 import com.example.marvelheros.ui.screen.HeroViewModel
 import com.example.marvelheros.ui.screen.MainScreen
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+            LocalDirectionWrapper {
                 MarvelHerosTheme {
                     val state = viewModel.uiState.collectAsState().value
                         MainScreen(

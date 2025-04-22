@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.marvelheros.domain.model.Hero
+import com.example.marvelheros.ui.theme.diments.Dimens
 
 @Composable
 fun HeroItem(hero: Hero, onClick: () -> Unit) {
@@ -41,15 +44,15 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
              Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(16.dp),
+                .padding(Dimens.paddingLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Dimens.heightSmall))
             Text(
                 text = hero.name,
                 fontSize = 35.sp,
-                color = Color.White,
-                modifier = Modifier.padding(top = 4.dp)
+                color =  MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.padding(top = Dimens.paddingSmall)
             )
         }
     }

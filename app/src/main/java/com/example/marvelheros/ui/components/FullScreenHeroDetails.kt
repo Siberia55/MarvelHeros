@@ -7,10 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
+import com.example.marvelheros.ui.components.buttons.ButtonBack
+import com.example.marvelheros.ui.theme.diments.Dimens
 
 @Composable
 fun FullScreenHeroDetails(
@@ -37,29 +35,16 @@ fun FullScreenHeroDetails(
             .fillMaxSize()
             .background(Color.Black)
     ) {
-        // Фоновое изображение героя на весь экран
+        // Hero full screen
         AsyncImage(
             model = hero.imageUrl,
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-        // Верхняя панель с кнопкой "Назад"
-        IconButton(
-            onClick = onDismiss,
-            modifier = Modifier
-                .padding(16.dp)
-                .size(48.dp)
-                .align(Alignment.TopStart)
-        ) {
-            androidx.compose.material3.Icon(
-                imageVector = Icons.Default.ArrowBackIosNew,
-                contentDescription = "Back",
-                tint = MaterialTheme.colorScheme.primaryContainer,//Color.White,
-                modifier = Modifier.size(32.dp)
-            )
-        }
-
+        ButtonBack(
+            onDismiss = onDismiss,
+            modifier = Modifier.align(Alignment.TopStart))
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -68,15 +53,15 @@ fun FullScreenHeroDetails(
                         colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f))
                     )
                 )
-                .padding(24.dp)
+                .padding(Dimens.paddingLarge)
         ) {
             val descriptionText = stringResource(R.string.description_missing)
             Text(
                 text = hero.name,
                 style = MaterialTheme.typography.displayMedium,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onBackground
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.heightSmall))
             Text(
                 text = if (hero.description.isNotBlank()) hero.description else descriptionText,
                 style = MaterialTheme.typography.bodyLarge,

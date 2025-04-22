@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.LayoutDirection
 @Composable
 fun LocalDirectionWrapper( content: @Composable () -> Unit){
     val config = LocalConfiguration.current
-    val layoutDirection = if (config.locales.get(0).language in listOf("ar", "he", "fa")){
+    val layoutDirection = if (config.locales.get(0).language in listOf("ar", "iw", "fa")){
         LayoutDirection.Rtl
     }
     else {LayoutDirection.Ltr}

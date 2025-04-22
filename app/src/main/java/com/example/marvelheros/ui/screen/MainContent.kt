@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.HeroItem
+import com.example.marvelheros.ui.theme.diments.Dimens
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -67,25 +68,25 @@ fun MainContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(Dimens.paddingLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(R.drawable.logo),
                 contentDescription = null,
                 modifier = Modifier
-                    .width(100.dp)
-                    .height(50.dp)
-                    .padding(top = 20.dp)
-                    .background(MaterialTheme.colorScheme.background)//(Color.DarkGray)
+                    .width(Dimens.widthMedium)
+                    .height(Dimens.heightMedium)
+                    .padding(top = Dimens.paddingLarge)
+                    .background(MaterialTheme.colorScheme.background)
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(R.string.choose_hero),
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onBackground//Color.White
+                color = MaterialTheme.colorScheme.onBackground
             )
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(Dimens.heightMedium))
             val lazyListState = rememberLazyListState()
             val snapLayoutInfoProvider = remember(lazyListState) {
                 SnapLayoutInfoProvider(
@@ -102,8 +103,8 @@ fun MainContent(
                 state = lazyListState,
                 flingBehavior = snapFlingBehavior,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = 10.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier.padding(horizontal = Dimens.paddingMedium),
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 items(heroes) { hero ->
                     HeroItem(

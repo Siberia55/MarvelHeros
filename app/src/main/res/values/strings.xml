@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MarvelHeroes</string>
     <string name="description">description</string>
-    <string name="back">Back</string>
+    <string name="button_back">Back</string>
     <string name="error_loading">Error loading data</string>
     <string name="choose_hero">Choose your hero</string>
     <string name="Error">Error</string>

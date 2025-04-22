@@ -20,8 +20,8 @@ private val DarkColorScheme = darkColorScheme(
     secondary = Color.Gray,
     background = BackgroundDark,
     surface = BackgroundDark,
-    onPrimary = TextLight,
-    onBackground = TextLight,
+    onPrimary = TextDark,
+    onBackground = TextDark,
     primaryContainer = ColorButtonDark,
     tertiary = ColorLoaderDark
 
@@ -37,8 +37,8 @@ private val LightColorScheme = lightColorScheme(
     secondary = Color.Gray,
     background = BackgroundLight,
     surface = BackgroundLight,
-    onPrimary = TextDark,
-    onBackground = TextDark,
+    onPrimary = TextLight,
+    onBackground = TextLight,
     primaryContainer = ColorButtonLight,
     tertiary = ColorLoaderLight
 
@@ -72,8 +72,6 @@ fun MarvelHerosTheme(
 
      */
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

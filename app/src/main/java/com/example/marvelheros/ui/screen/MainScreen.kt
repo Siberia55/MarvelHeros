@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.FullScreenHeroDetails
 import com.example.marvelheros.ui.components.LocalDirectionWrapper
+import com.example.marvelheros.ui.theme.diments.DimensProgressIndicator
 
 @Composable
 fun MainScreen(
@@ -26,8 +27,8 @@ fun MainScreen(
                 CircularProgressIndicator(
                     modifier = Modifier
                         .align(androidx.compose.ui.Alignment.Center)
-                        .size(150.dp),
-                    strokeWidth = 20.dp,
+                        .size(DimensProgressIndicator.sizeMax),
+                    strokeWidth = DimensProgressIndicator.strokeWidthSmall,
                     color = MaterialTheme.colorScheme.tertiary
                 )
             } else if (state.errorMessage != null) {
