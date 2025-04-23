@@ -7,13 +7,17 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.FullScreenHeroDetails
 import com.example.marvelheros.ui.components.LocalDirectionWrapper
+import com.example.marvelheros.ui.theme.diments.Dimens
 import com.example.marvelheros.ui.theme.diments.DimensProgressIndicator
+
 
 @Composable
 fun MainScreen(
@@ -26,14 +30,19 @@ fun MainScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .align(androidx.compose.ui.Alignment.Center)
+                        .align(Alignment.Center)
                         .size(DimensProgressIndicator.sizeMax),
                     strokeWidth = DimensProgressIndicator.strokeWidthSmall,
                     color = MaterialTheme.colorScheme.tertiary
                 )
             } else if (state.errorMessage != null) {
                 val errorText = stringResource(id = state.errorMessage)
-                Text(errorText)
+                val fullError = state.serverErrorMessage?.let { "$errorText: $it" } ?: errorText
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = fullError,
+                    fontSize = 30.sp
+                )
             } else {
                 if (state.selectedHero != null) {
                     FullScreenHeroDetails(hero = state.selectedHero, onDismiss = onDismissHero)

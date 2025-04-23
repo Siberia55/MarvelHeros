@@ -37,7 +37,8 @@ class HeroViewModel @Inject constructor(
                             ErrorCode.NETWORK_ERROR -> R.string.no_network_error
                             ErrorCode.SERVER_ERROR -> R.string.server_error
                             ErrorCode.UNKNOWN_ERROR -> R.string.unknown_error
-                            }
+                            },
+                        serverErrorMessage = result.message
                        )
                    }
                 }

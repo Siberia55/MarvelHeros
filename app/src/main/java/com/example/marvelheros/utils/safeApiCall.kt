@@ -17,8 +17,10 @@ suspend fun <T> safeApiCall(
         fallback()?.let { MyResult.Success(it) }
             ?: MyResult.Error(ErrorCode.NETWORK_ERROR)
     } catch (e: HttpException) {
-        Log.e(errorTag, "Ошибка сервера: ${e.message}")
-        MyResult.Error(ErrorCode.SERVER_ERROR, e.message())
+        val code = e.code()
+        val message = e.message()
+        Log.e(errorTag, "Server error:$code e.message}")
+        MyResult.Error(ErrorCode.SERVER_ERROR, "$code: $message")
     } catch (e: Exception) {
         Log.e(errorTag, "Неизвестная ошибка: ${e.message}")
         fallback()?.let { MyResult.Success(it) }

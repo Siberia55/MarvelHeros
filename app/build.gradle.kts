@@ -1,10 +1,10 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.android.build.gradle.internal.utils.KSP_PLUGIN_ID
 import com.google.wireless.android.sdk.stats.AnnotationProcessorInfo.InclusionType.KSP
-//import org.jetbrains.kotlin.konan.properties.Properties
+import org.jetbrains.kotlin.konan.properties.Properties
 
-//import com.android.tools.r8.internal.kt
-import java.util.Properties
+import com.android.tools.r8.internal.kt
+//import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -12,12 +12,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.hilt.android)
-   // id("com.google.dagger.hilt.android") version "2.51.1" apply false
-/*
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
 
- */
     kotlin("kapt")
     id("com.google.devtools.ksp")
 }
@@ -89,12 +84,12 @@ dependencies {
     implementation(libs.coil.compose)
     implementation (libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
-//
-    //implementation ("androidx.compose.material:material-icons-extended:2.51.1")
+
+// implementation ("androidx.compose.material:material-icons-extended:2.51.1")
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
 // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-//Coroutines
+// Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
 // retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -106,10 +101,10 @@ dependencies {
     implementation ("com.squareup.moshi:moshi:1.14.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
-//Hilt
+// Hilt
    implementation("com.google.dagger:hilt-android:2.51.1")
    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-//для логирования
+// для логирования
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 // Room
     implementation ("androidx.room:room-runtime:2.7.0")
@@ -118,13 +113,10 @@ dependencies {
 //--------- переход на ksp
 // ksp("androidx.room:room-compiler:2.5.0")
 
-
-
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
 }
 
 kapt {
