@@ -7,7 +7,7 @@ import java.io.IOException
 suspend fun <T> safeApiCall(
     apiCall: suspend () -> T,
     fallback: suspend () -> T? = { null },
-    errorTag: String = "safeApiCall"
+    errorTag: String = ""//"safeApiCall"
 ): MyResult<T> {
     return try {
         val result = apiCall()
