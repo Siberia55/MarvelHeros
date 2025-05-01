@@ -35,6 +35,7 @@ fun MainScreen(
                     strokeWidth = DimensProgressIndicator.strokeWidthSmall,
                     color = MaterialTheme.colorScheme.tertiary
                 )
+
             } else if (state.errorMessage != null) {
                 val errorText = stringResource(id = state.errorMessage)
                 val fullError = state.serverErrorMessage?.let { "$errorText: $it" } ?: errorText
@@ -43,15 +44,27 @@ fun MainScreen(
                     text = fullError,
                     fontSize = 30.sp
                 )
-            } else {
-                if (state.selectedHero != null) {
+                //
+            } else if (state.selectedHero != null) {
+                if(state.heroDetailsLoading) {
+                    CircularProgressIndicator()}
+                else if (state.heroDetailsError != null){
+                val errorText = stringResource(id = state.heroDetailsError )
+                val fullError = state.serverErrorMessage?.let { "$errorText: $it" } ?: errorText
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = fullError,
+                    fontSize = 20.sp
+                )
+                } else {
                     FullScreenHeroDetails(hero = state.selectedHero, onDismiss = onDismissHero)
+                }
                 } else {
                     MainContent(heroes = state.heroes, onHeroClick = onHeroClick)
                 }
             }
         }
     }
-}
+
 
 
