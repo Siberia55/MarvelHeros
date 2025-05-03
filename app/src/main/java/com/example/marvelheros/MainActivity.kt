@@ -5,10 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.graphics.StrokeCap
 import com.example.marvelheros.ui.components.LocalDirectionWrapper
 import com.example.marvelheros.ui.screen.HeroEvent
 import com.example.marvelheros.ui.screen.HeroViewModel
@@ -26,10 +24,11 @@ class MainActivity : ComponentActivity() {
                 MarvelHerosTheme {
                     val state = viewModel.uiState.collectAsState().value
                         MainScreen(
-                        state = state,
-                        onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },
-                        onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) }
-                   )
+                            state = state,
+                            onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },
+                            onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) },
+                            StrokeCap = StrokeCap
+                        )
                 }
             }
         }

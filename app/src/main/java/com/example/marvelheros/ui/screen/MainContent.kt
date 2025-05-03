@@ -42,7 +42,6 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
         val width = size.width
         val height = size.height
         drawRect(color = color2)
-// разделение экрана
         val path = Path().apply {
             moveTo(0f, height)  //левый нижний угол //(0f, 0f) начало правый верхний угол
             lineTo(width, 0f)   //линия к правому верхнему углу //(width, height)

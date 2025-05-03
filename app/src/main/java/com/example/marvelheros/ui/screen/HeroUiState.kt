@@ -10,5 +10,6 @@ data class HeroUiState(
     val serverErrorMessage: String? = null,
     val onDismissHero: (() -> Unit)? = null,
     val heroDetailsLoading: Boolean = false,
+    val heroDetailsProgress: Float = 0f,
     val heroDetailsError: Int? = null,
    )
