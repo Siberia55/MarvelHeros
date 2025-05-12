@@ -15,6 +15,7 @@ plugins {
 
     kotlin("kapt")
     id("com.google.devtools.ksp")
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 val localProperties = Properties().apply {
@@ -87,8 +88,12 @@ dependencies {
 
 // implementation ("androidx.compose.material:material-icons-extended:2.51.1")
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
+// Navigation
+    implementation ("androidx.navigation:navigation-compose:2.9.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
 // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 // Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
 // retrofit
@@ -96,11 +101,11 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 //  Для проверки интернет-соединения
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
-
 // Moshi (для преобразования JSON)
     implementation ("com.squareup.moshi:moshi:1.14.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 // Hilt
    implementation("com.google.dagger:hilt-android:2.51.1")
    kapt("com.google.dagger:hilt-android-compiler:2.51.1")

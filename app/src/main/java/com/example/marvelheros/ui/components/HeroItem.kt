@@ -24,7 +24,7 @@ import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 
 @Composable
-fun HeroItem(hero: Hero, onClick: () -> Unit) {
+fun HeroItem(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,8 +49,8 @@ fun HeroItem(hero: Hero, onClick: () -> Unit) {
             Text(
                 text = hero.name,
                 fontSize = 35.sp,
-                color =  MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(top = Dimens.paddingSmall)
+                color =  MaterialTheme.colorScheme.onBackground
+                //modifier = Modifier.padding(top = Dimens.paddingSmall)
             )
         }
     }
