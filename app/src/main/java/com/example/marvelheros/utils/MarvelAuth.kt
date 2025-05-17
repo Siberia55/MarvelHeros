@@ -4,7 +4,7 @@ import com.example.marvelheros.BuildConfig
 import com.example.marvelheros.BuildConfig.MARVEL_PUBLIC_KEY
 import java.security.MessageDigest
 
-class MarvelAuth (
+class MarvelAuth(
     val publicKey: String = MARVEL_PUBLIC_KEY,
     private val privateKey: String = BuildConfig.MARVEL_PRIVATE_KEY
 ) {

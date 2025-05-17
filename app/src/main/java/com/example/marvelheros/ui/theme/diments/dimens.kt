@@ -11,6 +11,7 @@ object DimensProgressIndicator {
     val strokeWidthMedium = 20.dp
     val strokeWidthMax = 40.dp
 }
+
 object Dimens {
     val paddingSmall = 5.dp
     val paddingMedium = 10.dp

@@ -12,12 +12,14 @@ interface ApiService {
 
 
     }
+
     @GET("characters")
     suspend fun getHeroes(
         @Query("ts") timestamp: String,
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String,
-        ): MarvelResponse
+    ): MarvelResponse
+
     @GET("characters/{characterId}")
     suspend fun getHeroById(
         @Path("characterId") characterId: Int,

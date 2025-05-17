@@ -36,6 +36,7 @@ object AppModule {
             .build()
             .create(ApiService::class.java)
     }
+
     @Provides
     @Singleton
     fun provideMarvelAuth(): MarvelAuth = MarvelAuth()
@@ -47,13 +48,15 @@ object AppModule {
         marvelAuth: MarvelAuth,
         localDataSource: LocalDataSource
     ): HeroRepository {
-        return HeroRepositoryImpl(apiService, marvelAuth,localDataSource)
+        return HeroRepositoryImpl(apiService, marvelAuth, localDataSource)
     }
+
     @Provides
     @Singleton
-    fun provideGetHeroesUseCase (repository: HeroRepository): GetHeroesUseCase {
+    fun provideGetHeroesUseCase(repository: HeroRepository): GetHeroesUseCase {
         return GetHeroesUseCase(repository)
     }
+
     @Provides
     @Singleton
     fun provideAppDataBase(@ApplicationContext context: Context): AppDatabase {
@@ -63,11 +66,13 @@ object AppModule {
             "marvel_heroes_db"
         ).build()
     }
+
     @Provides
     @Singleton
     fun provideHeroDao(database: AppDatabase): HeroDao {
         return database.heroDao()
     }
+
     @Provides
     @Singleton
     fun provideLocalDataSource(appDatabase: AppDatabase): LocalDataSource {

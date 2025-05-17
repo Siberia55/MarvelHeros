@@ -9,5 +9,6 @@
     <string name="no_network_error">No network connect</string>
     <string name="server_error">Server error</string>
     <string name="unknown_error">Unknown error:</string>
+    <string name="unauthorized_error">Unauthorized Error</string>
 </resources>
 

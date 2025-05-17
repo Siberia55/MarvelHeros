@@ -7,6 +7,6 @@ import com.example.marvelheros.data.local.entity.HeroEntity
 
 @Database(entities = [HeroEntity::class], version = 1)
 
-abstract class AppDatabase: RoomDatabase() {
-    abstract fun heroDao (): HeroDao
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun heroDao(): HeroDao
 }

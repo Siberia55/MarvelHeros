@@ -21,32 +21,42 @@ class HeroViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HeroUiState())
     val uiState: StateFlow<HeroUiState> = _uiState
+
     init {
         loadHeroes()
     }
+
     fun loadHeroes() {
         viewModelScope.launch {
-          _uiState.update { it.copy( isLoading = true) }
+            _uiState.update { it.copy(isLoading = true) }
             when (val result = getHeroesUseCase()) {
                 is MyResult.Success -> {
-                    _uiState.update { it.copy(isLoading = false,
-                        heroes = result.data,
-                        errorMessage = null) }
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            heroes = result.data,
+                            errorMessage = null
+                        )
+                    }
                 }
-                is MyResult.Error -> { _uiState.update {
-                    it.copy( isLoading = false,
-                        errorMessage = when (result.errorCode){
-                            ErrorCode.NETWORK_ERROR -> R.string.no_network_error
-                            ErrorCode.SERVER_ERROR -> R.string.server_error
-                            ErrorCode.UNKNOWN_ERROR -> R.string.unknown_error
+
+                is MyResult.Error -> {
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = when (result.errorCode) {
+                                ErrorCode.NETWORK_ERROR -> R.string.no_network_error
+                                ErrorCode.SERVER_ERROR -> R.string.server_error
+                                ErrorCode.UNKNOWN_ERROR -> R.string.unknown_error
                             },
-                        serverErrorMessage = result.message
-                       )
-                   }
+                            serverErrorMessage = result.message
+                        )
+                    }
                 }
             }
         }
     }
+
     fun loadHeroDetails(heroId: Int) {
         viewModelScope.launch {
             _uiState.update {
@@ -65,6 +75,7 @@ class HeroViewModel @Inject constructor(
                         )
                     }
                 }
+
                 is MyResult.Error -> {
                     _uiState.update {
                         it.copy(
@@ -81,23 +92,27 @@ class HeroViewModel @Inject constructor(
             }
         }
     }
+
     fun onEvent(event: HeroEvent) {
         when (event) {
             is HeroEvent.HeroSelected -> {
                 _uiState.update { it.copy(selectedHero = event.hero) }
                 loadHeroDetails(event.hero.id)
             }
+
             HeroEvent.DismissHero -> {
                 _uiState.update { it.copy(selectedHero = null) }
             }
-           is HeroEvent.ShowError -> {
-               _uiState.update {
-                   it.copy(
-                       isLoading = false,
-                       errorMessage = event.message
-                   )
-               }
-           }
+
+            is HeroEvent.ShowError -> {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = event.message
+                    )
+                }
+            }
+
             else -> {}
         }
     }

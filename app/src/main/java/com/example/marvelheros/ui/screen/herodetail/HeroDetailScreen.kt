@@ -12,26 +12,26 @@ import com.example.marvelheros.ui.components.LoadingView
 import com.example.marvelheros.ui.components.ErrorView
 
 
-
 @Composable
 fun HeroDetailScreen(
-    heroId : Int,
-    onBackClick : () -> Unit,
+    heroId: Int,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HeroDetailViewModel = hiltViewModel()
-){
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(heroId) {
         viewModel.loadHero(heroId)
     }
-    when{
+    when {
         state.isLoading -> LoadingView(modifier)
         state.error != null -> ErrorView(
             errorMessage = state.error,
-            onRetry = {viewModel.loadHero(heroId ) },
-            modifier = modifier
+            onRetry = { viewModel.loadHero(heroId) },
+            //modifier = modifier
         )
+
         state.hero != null -> FullScreenHeroDetails(
             hero = state.hero!!,
             onDismiss = onBackClick,

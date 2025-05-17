@@ -9,12 +9,13 @@ import androidx.compose.ui.unit.LayoutDirection
 
 
 @Composable
-fun LocalDirectionWrapper( content: @Composable () -> Unit){
+fun LocalDirectionWrapper(content: @Composable () -> Unit) {
     val config = LocalConfiguration.current
-    val layoutDirection = if (config.locales.get(0).language in listOf("ar", "iw", "fa")){
+    val layoutDirection = if (config.locales.get(0).language in listOf("ar", "iw", "fa")) {
         LayoutDirection.Rtl
+    } else {
+        LayoutDirection.Ltr
     }
-    else {LayoutDirection.Ltr}
     CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
         content()
     }

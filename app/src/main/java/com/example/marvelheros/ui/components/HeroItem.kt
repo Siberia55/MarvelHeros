@@ -4,6 +4,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,19 +29,20 @@ import com.example.marvelheros.ui.theme.diments.Dimens
 fun HeroItem(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .width(330.dp)
-            .height(450.dp)
+            .fillMaxWidth(0.95f)
+            //.width(330.dp)
+            //.height(450.dp)
+            .aspectRatio(0.52f)
             .clip(RoundedCornerShape(20.dp))
             .clickable { onClick() }
     ) {
-            AsyncImage(
-                model = hero.imageUrl,
-                contentDescription = hero.name,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.fillMaxSize()
-            )
-             Column(
+        AsyncImage(
+            model = hero.imageUrl,
+            contentDescription = hero.name,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
+        Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(Dimens.paddingLarge),
@@ -49,8 +52,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
             Text(
                 text = hero.name,
                 fontSize = 35.sp,
-                color =  MaterialTheme.colorScheme.onBackground
-                //modifier = Modifier.padding(top = Dimens.paddingSmall)
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

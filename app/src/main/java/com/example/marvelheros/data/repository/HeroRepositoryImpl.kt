@@ -15,7 +15,7 @@ class HeroRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val marvelAuth: MarvelAuth,
     private val localDataSource: LocalDataSource
-    ) : HeroRepository {
+) : HeroRepository {
 
     override suspend fun getHeroes(): MyResult<List<Hero>> {
         return safeApiCall(

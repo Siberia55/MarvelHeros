@@ -12,4 +12,4 @@ data class HeroUiState(
     val heroDetailsLoading: Boolean = false,
     val heroDetailsProgress: Float = 0f,
     val heroDetailsError: Int? = null,
-   )
+)

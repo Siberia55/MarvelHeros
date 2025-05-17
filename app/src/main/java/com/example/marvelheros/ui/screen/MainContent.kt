@@ -51,13 +51,15 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
         drawPath(path = path, color = color1)
     }
 )
+
 @Composable
 fun MainContent(
     heroes: List<Hero>,
-    onHeroClick: (Hero) -> Unit
+    onHeroClick: (Hero) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .diagonalSplit(
                 color1 = MaterialTheme.colorScheme.background,//Color.DarkGray,
@@ -109,9 +111,9 @@ fun MainContent(
                     HeroItem(
                         hero = hero,
                         onClick = { onHeroClick(hero) }
-                         )
-                     }
+                    )
                 }
             }
         }
     }
+}

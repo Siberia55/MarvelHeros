@@ -16,7 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.marvelheros.ui.components.LocalDirectionWrapper
 import com.example.marvelheros.ui.screen.HeroEvent
 import com.example.marvelheros.ui.screen.HeroViewModel
-import com.example.marvelheros.ui.screen.MainScreen
+//import com.example.marvelheros.ui.screen.MainScreen
 import com.example.marvelheros.ui.theme.MarvelHerosTheme
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.marvelheros.ui.navigation.NavGraph
@@ -38,8 +38,10 @@ class MainActivity : ComponentActivity() {
                         )
                      */
                     //-------------------
-                    Surface (modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background){
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
                         val navController = rememberNavController()
                         NavGraph(navController = navController)
                     }

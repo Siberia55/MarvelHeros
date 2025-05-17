@@ -16,22 +16,29 @@ import javax.inject.Inject
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val getHeroesUseCase: GetHeroesUseCase
-) : ViewModel () {
+) : ViewModel() {
     private val _state = MutableStateFlow(HeroListState())
-    val state : StateFlow<HeroListState> = _state.asStateFlow()
-    fun loadHeroes (){
+    val state: StateFlow<HeroListState> = _state.asStateFlow()
+    fun loadHeroes() {
         viewModelScope.launch {
-        _state.update { it.copy(isLoading =  true, error = null,) }
-            when (val result  = getHeroesUseCase ()) {
-            is MyResult.Success -> {
-                _state.update { it.copy(isLoading = false,
-                    heroes = result.data,
-                    error = null
+            _state.update { it.copy(isLoading = true, error = null) }
+            when (val result = getHeroesUseCase()) {
+                is MyResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            heroes = result.data,
+                            error = null
                         )
                     }
                 }
-                is MyResult.Error -> {_state.update { it.copy(isLoading = false,
-                    error = result.message)
+
+                is MyResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.message
+                        )
                     }
                 }
             }

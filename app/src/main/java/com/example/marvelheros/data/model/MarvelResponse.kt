@@ -8,6 +8,7 @@ data class MarvelResponse(
     val code: Int,
     val status: String
 )
+
 @JsonClass(generateAdapter = true)
 data class MarvelData(
     val results: List<MarvelHeroDTO>

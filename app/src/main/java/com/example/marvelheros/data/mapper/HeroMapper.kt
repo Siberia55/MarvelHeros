@@ -16,6 +16,7 @@ object HeroMapper {
             imageUrl = "${this.thumbnail.path.replace("http", "https")}.${this.thumbnail.extension}"
         )
     }
+
     fun HeroEntity.toDomain(): Hero {
         return Hero(
             id = this.id,
@@ -24,7 +25,8 @@ object HeroMapper {
             description = this.description
         )
     }
-    fun  MarvelHeroDTO.toDomain(): Hero {
+
+    fun MarvelHeroDTO.toDomain(): Hero {
         return Hero(
             id = this.id,
             name = this.name,

@@ -9,4 +9,6 @@
     <string name="no_network_error">Нет подключения к сети</string>
     <string name="server_error">Ошибка сервера</string>
     <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="unauthorized_error">Отказ в доступе</string>
+
 </resources>

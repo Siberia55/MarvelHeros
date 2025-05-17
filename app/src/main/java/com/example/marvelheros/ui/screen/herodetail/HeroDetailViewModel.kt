@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-    class HeroDetailViewModel @Inject constructor(
+class HeroDetailViewModel @Inject constructor(
     private val repository: HeroRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(HeroDetailState())
@@ -23,16 +23,24 @@ import javax.inject.Inject
     fun loadHero(heroId: Int) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
-            when ( val result = repository.getHeroById(heroId)) {
+            when (val result = repository.getHeroById(heroId)) {
                 is MyResult.Success -> {
-                    _state.update { it.copy(isLoading = false,
-                    hero = result.data,
-                        error = null)
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            hero = result.data,
+                            error = null
+                        )
                     }
                 }
-                is MyResult.Error ->{
-                    _state.update { it.copy(isLoading = false,
-                        error = result.message) }
+
+                is MyResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            error = result.message
+                        )
+                    }
                 }
             }
         }

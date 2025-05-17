@@ -43,7 +43,8 @@ fun FullScreenHeroDetails(
         )
         ButtonBack(
             onDismiss = onDismiss,
-            modifier = Modifier.align(Alignment.TopStart))
+            modifier = Modifier.align(Alignment.TopStart)
+        )
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)

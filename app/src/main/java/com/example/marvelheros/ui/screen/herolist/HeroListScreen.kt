@@ -19,20 +19,21 @@ fun HeroListScreen(
     viewModel: HeroListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-LaunchedEffect(Unit) {viewModel.loadHeroes()}
+    LaunchedEffect(Unit) { viewModel.loadHeroes() }
     when {
         state.isLoading -> LoadingView(modifier = modifier)
         state.error != null -> ErrorView(
             errorMessage = state.error,
-            onRetry = {viewModel.loadHeroes()},
+            onRetry = { viewModel.loadHeroes() },
             modifier = modifier
         )
+
         else -> MainContent(
             heroes = state.heroes,
             onHeroClick = { hero ->
                 navController.navigate(Screen.HeroDetails.createRoute(hero.id))
             },
-            //modifier = modifier
+            modifier = modifier
         )
     }
 }
