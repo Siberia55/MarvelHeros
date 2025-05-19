@@ -71,6 +71,7 @@
 # Сохраняем свои модели (замени на реальный пакет!)
 -keep class com.example.marvelheros.data.model.** { *; }
 -keep class com.example.marvelheros.data.api.** { *; }
+-keep class com.example.marvelheros.data.local.entity.** { *; }
 
 # --------- Room ---------
 -keep class androidx.room.** { *; }
