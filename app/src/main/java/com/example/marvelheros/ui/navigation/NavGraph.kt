@@ -1,9 +1,12 @@
 package com.example.marvelheros.ui.navigation
 
 import android.R.attr.type
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -31,7 +34,9 @@ fun NavGraph(
         composable(route = Screen.HeroList.route) {
             HeroListScreen(
                 navController = navController,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.systemBars)
             )
         }
         composable(
@@ -46,7 +51,9 @@ fun NavGraph(
             HeroDetailScreen(
                 heroId = heroId,
                 onBackClick = { navController.popBackStack() },
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.systemBars)
             )
         }
         /*   composable(

@@ -9,6 +9,7 @@ import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -56,7 +57,8 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
 fun MainContent(
     heroes: List<Hero>,
     onHeroClick: (Hero) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues()
 ) {
     Box(
         modifier = modifier
@@ -69,7 +71,8 @@ fun MainContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(Dimens.paddingLarge),
+                .padding(Dimens.paddingLarge)
+                .padding(contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(

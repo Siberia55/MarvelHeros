@@ -1,5 +1,9 @@
 package com.example.marvelheros.ui.screen.herolist
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -20,6 +24,9 @@ fun HeroListScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) { viewModel.loadHeroes() }
+    val safeModifier = modifier
+        .fillMaxSize()
+        .windowInsetsPadding(WindowInsets.systemBars)
     when {
         state.isLoading -> LoadingView(modifier = modifier)
         state.error != null -> ErrorView(
@@ -33,7 +40,7 @@ fun HeroListScreen(
             onHeroClick = { hero ->
                 navController.navigate(Screen.HeroDetails.createRoute(hero.id))
             },
-            modifier = modifier
+            modifier = safeModifier
         )
     }
 }

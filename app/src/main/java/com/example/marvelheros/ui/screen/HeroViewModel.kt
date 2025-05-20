@@ -20,7 +20,7 @@ class HeroViewModel @Inject constructor(
     private val repository: HeroRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HeroUiState())
-    val uiState: StateFlow<HeroUiState> = _uiState
+   // val uiState: StateFlow<HeroUiState> = _uiState
 
     init {
         loadHeroes()

@@ -1,5 +1,12 @@
 package com.example.marvelheros.ui.screen.herodetail
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -17,25 +24,33 @@ fun HeroDetailScreen(
     heroId: Int,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HeroDetailViewModel = hiltViewModel()
+    viewModel: HeroDetailViewModel = hiltViewModel(),
+
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(heroId) {
         viewModel.loadHero(heroId)
     }
-    when {
-        state.isLoading -> LoadingView(modifier)
-        state.error != null -> ErrorView(
-            errorMessage = state.error,
-            onRetry = { viewModel.loadHero(heroId) },
-            //modifier = modifier
-        )
+    Scaffold { padding ->
+        val safeModifier = modifier
+            .fillMaxSize()
+            .padding(padding)
 
-        state.hero != null -> FullScreenHeroDetails(
-            hero = state.hero!!,
-            onDismiss = onBackClick,
-            modifier = modifier
-        )
+        when {
+            state.isLoading -> LoadingView(modifier)
+            state.error != null -> ErrorView(
+                errorMessage = state.error,
+                onRetry = { viewModel.loadHero(heroId) },
+                modifier = safeModifier
+            )
+
+            state.hero != null -> FullScreenHeroDetails(
+                hero = state.hero!!,
+                onDismiss = onBackClick,
+                modifier = safeModifier
+            )
+
+        }
     }
 }
