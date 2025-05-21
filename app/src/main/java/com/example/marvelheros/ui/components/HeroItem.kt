@@ -18,15 +18,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coil3.size.Scale
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 
 @Composable
-fun HeroItem(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun HeroItem(
+    hero: Hero,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+
+    ) {
     Box(
         modifier = Modifier
             .fillMaxWidth(0.95f)
@@ -35,6 +42,7 @@ fun HeroItem(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
             .aspectRatio(0.52f)
             .clip(RoundedCornerShape(20.dp))
             .clickable { onClick() }
+
     ) {
         AsyncImage(
             model = hero.imageUrl,

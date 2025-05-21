@@ -1,5 +1,7 @@
 package com.example.marvelheros
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.marvelheros.ui.navigation.NavGraph
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import coil3.request.Disposable
 import com.example.marvelheros.ui.components.EdgeToEdgeTheme
 
 @AndroidEntryPoint
@@ -37,31 +41,37 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-                MarvelHerosTheme {
-                    EdgeToEdgeTheme {
-                        LocalDirectionWrapper {
+            DisposableEffect(Unit) {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+                onDispose {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                }
+            }
+            MarvelHerosTheme {
+                EdgeToEdgeTheme {
+                    LocalDirectionWrapper {
 
-                            /*val state = viewModel.uiState.collectAsState().value
-                        MainScreen(
-                            state = state,
-                            onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },
-                            onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) },
-                            StrokeCap = StrokeCap
-                        )
-                     */
-                            //-------------------
-                            Surface(
-                                modifier = Modifier.fillMaxSize(),
-                                color = MaterialTheme.colorScheme.background
-                            ) {
-                                val navController = rememberNavController()
-                                NavGraph(navController = navController)
-                            }
+                        /*val state = viewModel.uiState.collectAsState().value
+                    MainScreen(
+                        state = state,
+                        onHeroClick = { hero -> viewModel.onEvent(HeroEvent.HeroSelected(hero)) },
+                        onDismissHero = { viewModel.onEvent(HeroEvent.DismissHero) },
+                        StrokeCap = StrokeCap
+                    )
+                 */
+                        //-------------------
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = MaterialTheme.colorScheme.background
+                        ) {
+                            val navController = rememberNavController()
+                            NavGraph(navController = navController)
                         }
                     }
                 }
             }
         }
     }
+}
 
 
