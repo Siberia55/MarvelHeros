@@ -1,0 +1,67 @@
+package com.example.marvelheros.ui.screen
+
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import com.example.marvelheros.domain.model.Hero
+import com.example.marvelheros.ui.components.HeroItem
+import kotlin.math.abs
+
+@Composable
+fun HeroItemWithScale(
+    hero: Hero,
+    index: Int,
+    lazyListState: LazyListState,
+    onHeroClick: (Hero) -> Unit
+) {
+    val itemInfo by remember {
+        derivedStateOf {
+            lazyListState.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }
+        }
+    }
+
+    val scale by remember(itemInfo) {
+        derivedStateOf {
+            itemInfo?.let {
+                val viewportWidth = lazyListState.layoutInfo.viewportEndOffset -
+                        lazyListState.layoutInfo.viewportStartOffset
+                val centerOffset = lazyListState.layoutInfo.viewportStartOffset + viewportWidth / 2
+                val itemCenter = it.offset + it.size / 2
+                val distanceFromCenter = abs(itemCenter - centerOffset).toFloat()
+                val maxDistance = (viewportWidth / 2).toFloat()
+                val fraction = (distanceFromCenter / maxDistance).coerceIn(0f, 1f)
+                1f - 0.3f * fraction
+            } ?: 0.7f
+        }
+    }
+
+    val animatedScale by animateFloatAsState(
+        targetValue = scale,
+        animationSpec = tween(
+            durationMillis = 400,
+            easing = LinearOutSlowInEasing
+        ),
+        label = "hero-scale"
+    )
+
+    Box(
+        modifier = Modifier
+            .graphicsLayer {
+                scaleX = animatedScale
+                scaleY = animatedScale
+            }
+    ) {
+        HeroItem(
+            hero = hero,
+            onClick = { onHeroClick(hero) }
+        )
+    }
+}

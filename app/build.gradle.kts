@@ -1,10 +1,10 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.android.build.gradle.internal.utils.KSP_PLUGIN_ID
 import com.google.wireless.android.sdk.stats.AnnotationProcessorInfo.InclusionType.KSP
-import org.jetbrains.kotlin.konan.properties.Properties
+//import org.jetbrains.kotlin.konan.properties.Properties
 
 import com.android.tools.r8.internal.kt
-//import java.util.Properties
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -42,6 +42,7 @@ android {
 
     buildTypes {
         release {
+            isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -97,10 +98,9 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 //  Для проверки интернет-соединения
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
-
 // Moshi (для преобразования JSON)
-    implementation ("com.squareup.moshi:moshi:1.14.0")
-    implementation ("com.squareup.moshi:moshi-kotlin:1.14.0")
+    implementation ("com.squareup.moshi:moshi:1.15.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 // Hilt
    implementation("com.google.dagger:hilt-android:2.51.1")
@@ -110,9 +110,11 @@ dependencies {
 // Room
     implementation ("androidx.room:room-runtime:2.7.0")
     implementation ("androidx.room:room-ktx:2.7.0")
-    kapt ("androidx.room:room-compiler:2.7.0")
+// kapt
+//    kapt ("androidx.room:room-compiler:2.7.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
 //--------- переход на ksp
-// ksp("androidx.room:room-compiler:2.5.0")
+ ksp("androidx.room:room-compiler:2.7.1")
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)

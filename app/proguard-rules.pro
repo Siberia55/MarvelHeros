@@ -38,6 +38,37 @@
 #-renamesourcefileattribute SourceFile
 
 # ======================== Main Libraries ========================
+# ========== Moshi & Retrofit Generic Fix ==========
+# Оставить DAO и Entity классы
+-keep class com.example.marvelheros.data.local.** { *; }
+-keepclassmembers class * {
+    @androidx.room.* <methods>;
+    @androidx.room.* <fields>;
+}
+-keepattributes Signature
+-keepattributes InnerClasses, EnclosingMethod
+-keepattributes *Annotation*
+
+-keep @com.squareup.moshi.JsonClass class * { *; }
+-keep class **JsonAdapter { *; }
+-keep class com.squareup.moshi.** { *; }
+
+-keepclassmembers class * {
+    @com.squareup.moshi.* <fields>;
+    @com.squareup.moshi.* <methods>;
+}
+-keep class com.example.marvelheros.data.local.dao.** { *; }
+
+# Не удалять аннотированные методы и поля
+-keepclassmembers class * {
+    @androidx.room.* <methods>;
+    @androidx.room.* <fields>;
+}
+
+-keep interface com.example.marvelheros.data.api.** { *; }
+-keepclassmembers interface * {
+    @retrofit2.http.* <methods>;
+}
 
 # --------- Hilt & Dagger ---------
 -keep class dagger.hilt.** { *; }
@@ -47,26 +78,41 @@
 -keep class * extends dagger.hilt.internal.GeneratedComponent { *; }
 
 # --------- Retrofit ---------
+-keep interface com.example.marvelheros.data.api.** { *; }
+-keepclassmembers interface * {
+    @retrofit2.http.* <methods>;
+}
+-keep interface retrofit2.http.* { *; }
 -keep class retrofit2.** { *; }
 -keep class okhttp3.** { *; }
 -dontwarn okhttp3.**
 -dontwarn retrofit2.**
 
 # --------- Moshi ---------
--keepattributes Signature, InnerClasses, RuntimeVisibleAnnotations
+-keepattributes InnerClasses, RuntimeVisibleAnnotations
+-keepattributes Signature
 -keep class com.squareup.moshi.** { *; }
 -keep class kotlin.Metadata { *; }
+-keep @com.squareup.moshi.JsonClass class * {
+    *;
+}
+-keep class **JsonAdapter { *; }
+-keep class com.example.marvelheros.data.model.**JsonAdapter { *; }
 
 # Сохраняем адаптеры, если @JsonClass(generateAdapter = true)
 -keep @com.squareup.moshi.JsonClass class * {
     *;
 }
--keep class **JsonAdapter { *; }
+# Сохраняем все DTO, включая вложенные
+-keep class com.example.marvelheros.data.model.** { *; }
 
 # Сохраняем generic-структуры в моделях
+-keep class com.squareup.moshi.** { *; }
 -keepclassmembers class * {
     @com.squareup.moshi.* <fields>;
 }
+-keepattributes Signature
+-keepattributes *Annotation*
 
 # Сохраняем свои модели (замени на реальный пакет!)
 -keep class com.example.marvelheros.data.model.** { *; }
@@ -105,7 +151,17 @@
 -keepclassmembers class * {
     @com.squareup.moshi.* <fields>;
 }
--keepattributes RuntimeVisibleAnnotations
+# Иногда помогает сохранить конструкторы
+-keepclassmembers class * {
+    public <init>(...);
+}
+-keep class com.example.marvelheros.data.model.MarvelHeroDTOJsonAdapter { *; }
+-keep @com.squareup.moshi.JsonClass class * { *; }
 -keep class **JsonAdapter { *; }
+-keepattributes Signature
+
+-keepattributes RuntimeVisibleAnnotations
+
+
 # =========================================================
 -printusage build/outputs/mapping/release/usage.txt
