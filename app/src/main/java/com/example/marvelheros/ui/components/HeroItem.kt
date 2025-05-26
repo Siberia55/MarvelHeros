@@ -27,8 +27,6 @@ import com.example.marvelheros.ui.theme.diments.Dimens
 fun HeroItem(
     hero: Hero,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-
     ) {
     Box(
         modifier = Modifier
