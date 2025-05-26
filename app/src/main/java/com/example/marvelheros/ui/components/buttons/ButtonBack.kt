@@ -16,7 +16,6 @@ import com.example.marvelheros.ui.theme.diments.Dimens
 @Composable
 fun ButtonBack(
     onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     IconButton(
         onClick = onDismiss,

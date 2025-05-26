@@ -1,6 +1,5 @@
 package com.example.marvelheros.ui.components
 
-import android.content.res.Resources
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
