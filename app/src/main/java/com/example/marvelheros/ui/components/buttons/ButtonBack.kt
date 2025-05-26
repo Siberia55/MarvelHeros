@@ -25,9 +25,9 @@ fun ButtonBack(
             .size(48.dp)
     ) {
         androidx.compose.material3.Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,///backIcon,
+            imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,
             contentDescription = stringResource(R.string.button_back),
-            tint = MaterialTheme.colorScheme.primaryContainer,//Color.White,
+            tint = MaterialTheme.colorScheme.primaryContainer,
             modifier = Modifier.size(32.dp)
         )
     }

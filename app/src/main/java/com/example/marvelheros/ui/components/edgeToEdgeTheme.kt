@@ -12,7 +12,8 @@ import androidx.core.view.WindowInsetsControllerCompat
 @Composable
 fun EdgeToEdgeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit) {
+    content: @Composable () -> Unit
+) {
     val view = LocalView.current
     if (!view.isInEditMode) {
         val window = (view.context as ComponentActivity).window
@@ -21,8 +22,8 @@ fun EdgeToEdgeTheme(
         window.navigationBarColor = Color.Transparent.toArgb()
 
         WindowInsetsControllerCompat(window, view).apply {
-            isAppearanceLightStatusBars = !darkTheme//!isSystemInDarkTheme()
-            isAppearanceLightNavigationBars = !darkTheme//!isSystemInDarkTheme()
+            isAppearanceLightStatusBars = !darkTheme
+            isAppearanceLightNavigationBars = !darkTheme
         }
     }
     content()

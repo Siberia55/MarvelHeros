@@ -21,7 +21,7 @@ fun HeroDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: HeroDetailViewModel = hiltViewModel(),
 
-) {
+    ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(heroId) {
