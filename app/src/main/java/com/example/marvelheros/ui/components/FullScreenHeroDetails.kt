@@ -29,7 +29,8 @@ import com.example.marvelheros.ui.theme.diments.Dimens
 @Composable
 fun FullScreenHeroDetails(
     hero: Hero,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = Modifier
