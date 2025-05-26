@@ -2,7 +2,6 @@ package com.example.marvelheros.ui.screen.herodetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.marvelheros.domain.repository.HeroRepository
 import com.example.marvelheros.ui.screen.heroState.HeroDetailState
 import com.example.marvelheros.utils.MyResult

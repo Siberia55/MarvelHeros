@@ -20,55 +20,50 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#my text
+#============= my Rules ============
 
-
-# ======================== ProGuard Rules ========================
-
-# --- WebView JS interface (если используется) ---
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# --- Debug stack traces (по желанию) ---
-# Сохраняем line number в stack trace
 -keepattributes SourceFile,LineNumberTable
 
-# Скрываем имена файлов (опционально)
-#-renamesourcefileattribute SourceFile
-
-# ======================== Main Libraries ========================
-# ========== Moshi & Retrofit Generic Fix ==========
-# Оставить DAO и Entity классы
+# ------------- DAO и Entity классы -----------
 -keep class com.example.marvelheros.data.local.** { *; }
+-keep class com.example.marvelheros.data.local.dao.** { *; }
+-keep class com.example.marvelheros.data.local.entity.** { *; }
+
+# ---------- Room annotations ------------
 -keepclassmembers class * {
     @androidx.room.* <methods>;
     @androidx.room.* <fields>;
 }
--keepattributes Signature
--keepattributes InnerClasses, EnclosingMethod
--keepattributes *Annotation*
 
+-keepattributes Signature, InnerClasses, EnclosingMethod, *Annotation*, RuntimeVisibleAnnotations
+
+# -------------Moshi ----------------
 -keep @com.squareup.moshi.JsonClass class * { *; }
 -keep class **JsonAdapter { *; }
 -keep class com.squareup.moshi.** { *; }
-
 -keepclassmembers class * {
     @com.squareup.moshi.* <fields>;
     @com.squareup.moshi.* <methods>;
 }
--keep class com.example.marvelheros.data.local.dao.** { *; }
 
-# Не удалять аннотированные методы и поля
--keepclassmembers class * {
-    @androidx.room.* <methods>;
-    @androidx.room.* <fields>;
-}
+# ---------- Kotlin metadata --------
+-keep class kotlin.Metadata { *; }
 
+# ------------ Retrofit -------------
 -keep interface com.example.marvelheros.data.api.** { *; }
 -keepclassmembers interface * {
     @retrofit2.http.* <methods>;
 }
+-keep interface retrofit2.http.* { *; }
+-keep class retrofit2.** { *; }
+
+# ------------ OkHttp ------------
+-keep class okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn retrofit2.**
+
+# ---------- Data Model -----------
+-keep class com.example.marvelheros.data.model.** { *; }
 
 # --------- Hilt & Dagger ---------
 -keep class dagger.hilt.** { *; }
@@ -77,54 +72,8 @@
 -keep class * extends dagger.hilt.android.internal.lifecycle.HiltViewModelFactory { *; }
 -keep class * extends dagger.hilt.internal.GeneratedComponent { *; }
 
-# --------- Retrofit ---------
--keep interface com.example.marvelheros.data.api.** { *; }
--keepclassmembers interface * {
-    @retrofit2.http.* <methods>;
-}
--keep interface retrofit2.http.* { *; }
--keep class retrofit2.** { *; }
--keep class okhttp3.** { *; }
--dontwarn okhttp3.**
--dontwarn retrofit2.**
-
-# --------- Moshi ---------
--keepattributes InnerClasses, RuntimeVisibleAnnotations
--keepattributes Signature
--keep class com.squareup.moshi.** { *; }
--keep class kotlin.Metadata { *; }
--keep @com.squareup.moshi.JsonClass class * {
-    *;
-}
--keep class **JsonAdapter { *; }
--keep class com.example.marvelheros.data.model.**JsonAdapter { *; }
-
-# Сохраняем адаптеры, если @JsonClass(generateAdapter = true)
--keep @com.squareup.moshi.JsonClass class * {
-    *;
-}
-# Сохраняем все DTO, включая вложенные
--keep class com.example.marvelheros.data.model.** { *; }
-
-# Сохраняем generic-структуры в моделях
--keep class com.squareup.moshi.** { *; }
--keepclassmembers class * {
-    @com.squareup.moshi.* <fields>;
-}
--keepattributes Signature
--keepattributes *Annotation*
-
-# Сохраняем свои модели (замени на реальный пакет!)
--keep class com.example.marvelheros.data.model.** { *; }
--keep class com.example.marvelheros.data.api.** { *; }
--keep class com.example.marvelheros.data.local.entity.** { *; }
-
 # --------- Room ---------
 -keep class androidx.room.** { *; }
--keepclassmembers class * {
-    @androidx.room.* <methods>;
-    @androidx.room.* <fields>;
-}
 -dontwarn androidx.room.paging.**
 
 # --------- ViewModel & SavedStateHandle ---------
@@ -134,9 +83,7 @@
 -keep class androidx.compose.** { *; }
 -keep class androidx.activity.ComponentActivity { *; }
 
-# ======================== Optional ========================
-
-# --------- Debug logs (удалить из релиза) ---------
+# --------- Debug logs ---------
 -assumenosideeffects class android.util.Log {
     public static int v(...);
     public static int d(...);
@@ -144,24 +91,10 @@
     public static int w(...);
     public static int e(...);
 }
-# Сохраняем модели, адаптеры и аннотации Moshi
--keep class com.example.marvelheros.data.model.** { *; }
--keep class **JsonAdapter { *; }
--keep class com.squareup.moshi.** { *; }
--keepclassmembers class * {
-    @com.squareup.moshi.* <fields>;
-}
-# Иногда помогает сохранить конструкторы
 -keepclassmembers class * {
     public <init>(...);
 }
--keep class com.example.marvelheros.data.model.MarvelHeroDTOJsonAdapter { *; }
--keep @com.squareup.moshi.JsonClass class * { *; }
--keep class **JsonAdapter { *; }
 -keepattributes Signature
-
 -keepattributes RuntimeVisibleAnnotations
-
-
 # =========================================================
 -printusage build/outputs/mapping/release/usage.txt

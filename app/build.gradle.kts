@@ -1,16 +1,9 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import com.android.build.gradle.internal.utils.KSP_PLUGIN_ID
-import com.google.wireless.android.sdk.stats.AnnotationProcessorInfo.InclusionType.KSP
-//import org.jetbrains.kotlin.konan.properties.Properties
-
-import com.android.tools.r8.internal.kt
 import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
     alias(libs.plugins.hilt.android)
 
     kotlin("kapt")
@@ -34,11 +27,19 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "MARVEL_PUBLIC_KEY", "\"${localProperties.getProperty("MARVEL_PUBLIC_KEY")}\"")
-        buildConfigField("String", "MARVEL_PRIVATE_KEY", "\"${localProperties.getProperty("MARVEL_PRIVATE_KEY")}\"")
+        buildConfigField(
+            "String",
+            "MARVEL_PUBLIC_KEY",
+            "\"${localProperties.getProperty("MARVEL_PUBLIC_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "MARVEL_PRIVATE_KEY",
+            "\"${localProperties.getProperty("MARVEL_PRIVATE_KEY")}\""
+        )
     }
 
-    buildFeatures {buildConfig = true}
+    buildFeatures { buildConfig = true }
 
     buildTypes {
         release {
@@ -50,8 +51,18 @@ android {
             )
         }
     }
+
+    applicationVariants.all {
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                if (buildType.name == "release") "Marvel Heroes.apk"
+                else "my-app-debug.apk"
+        }
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11 // по документации Hilt использует функции Java 8
+        sourceCompatibility =
+            JavaVersion.VERSION_11 // по документации Hilt использует функции Java 8
         targetCompatibility = JavaVersion.VERSION_11 //
     }
     kotlinOptions {
@@ -83,38 +94,38 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 // coil
     implementation(libs.coil.compose)
-    implementation (libs.coil3.coil.compose)
+    implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
 // Edge-to-Edge
     implementation("androidx.activity:activity-ktx:1.10.1")
 // implementation ("androidx.compose.material:material-icons-extended:2.51.1")
-    implementation ("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 // Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
 // retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 //  Для проверки интернет-соединения
-    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 // Moshi (для преобразования JSON)
-    implementation ("com.squareup.moshi:moshi:1.15.0")
-    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi:1.15.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 // Hilt
-   implementation("com.google.dagger:hilt-android:2.51.1")
-   kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 // для логирования
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 // Room
-    implementation ("androidx.room:room-runtime:2.7.0")
-    implementation ("androidx.room:room-ktx:2.7.0")
+    implementation("androidx.room:room-runtime:2.7.0")
+    implementation("androidx.room:room-ktx:2.7.0")
 // kapt
 //    kapt ("androidx.room:room-compiler:2.7.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
 //--------- переход на ksp
- ksp("androidx.room:room-compiler:2.7.1")
+    ksp("androidx.room:room-compiler:2.7.1")
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)
@@ -123,5 +134,5 @@ dependencies {
 }
 
 kapt {
-  correctErrorTypes = true
+    correctErrorTypes = true
 }

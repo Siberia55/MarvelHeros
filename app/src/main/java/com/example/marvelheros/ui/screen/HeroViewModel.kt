@@ -6,7 +6,6 @@ import com.example.marvelheros.R
 import com.example.marvelheros.domain.repository.HeroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +19,6 @@ class HeroViewModel @Inject constructor(
     private val repository: HeroRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HeroUiState())
-   // val uiState: StateFlow<HeroUiState> = _uiState
 
     init {
         loadHeroes()

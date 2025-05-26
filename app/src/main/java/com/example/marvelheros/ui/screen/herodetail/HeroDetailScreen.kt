@@ -1,11 +1,7 @@
 package com.example.marvelheros.ui.screen.herodetail
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -13,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.marvelheros.ui.components.FullScreenHeroDetails
-import com.example.marvelheros.ui.screen.herolist.HeroListViewModel
 import androidx.compose.runtime.getValue
 import com.example.marvelheros.ui.components.LoadingView
 import com.example.marvelheros.ui.components.ErrorView
