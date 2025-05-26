@@ -24,7 +24,7 @@
 
 -keepattributes SourceFile,LineNumberTable
 
-# ------------- DAO и Entity классы -----------
+# ------------- DAO и Entity classes -----------
 -keep class com.example.marvelheros.data.local.** { *; }
 -keep class com.example.marvelheros.data.local.dao.** { *; }
 -keep class com.example.marvelheros.data.local.entity.** { *; }
