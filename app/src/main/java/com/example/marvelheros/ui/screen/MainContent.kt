@@ -39,8 +39,7 @@ import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 import androidx.compose.ui.platform.LocalConfiguration
-import com.example.marvelheros.ui.theme.diments.Dimens.Spaced
-
+import com.example.marvelheros.ui.theme.diments.Spaced
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(

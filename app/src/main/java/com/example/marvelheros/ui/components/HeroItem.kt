@@ -17,11 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
+import com.example.marvelheros.ui.theme.diments.OtherConstants
 
 @Composable
 fun HeroItem(
@@ -31,9 +30,9 @@ fun HeroItem(
     ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth(0.95f)
-            .aspectRatio(0.52f)
-            .clip(RoundedCornerShape(20.dp))
+            .fillMaxWidth(OtherConstants.CARD_WIDTH_RATIO_LARGE)
+            .aspectRatio(OtherConstants.CARD_ASPECT_RATIO_MEDIUM)
+            .clip(RoundedCornerShape(OtherConstants.radiusShape))
             .clickable { onClick() }
 
     ) {
@@ -52,7 +51,7 @@ fun HeroItem(
             Spacer(modifier = Modifier.height(Dimens.heightSmall))
             Text(
                 text = hero.name,
-                fontSize = 35.sp,
+                fontSize = OtherConstants.fontSize,
                 color = MaterialTheme.colorScheme.onBackground
             )
         }

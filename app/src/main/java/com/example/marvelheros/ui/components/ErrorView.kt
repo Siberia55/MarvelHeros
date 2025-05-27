@@ -19,6 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
+import com.example.marvelheros.ui.theme.diments.Dimens
+import com.example.marvelheros.ui.theme.diments.OtherConstants
 
 @Composable
 fun ErrorView(
@@ -42,25 +44,26 @@ fun ErrorView(
                         " ${stringResource(R.string.unauthorized_error)}",
                 color = Color.Black,
                 modifier = Modifier
-                    .padding(bottom = 10.dp),
+                    .padding(bottom = Dimens.paddingMedium),
             )
             Button(
                 onClick = onRetry,
                 modifier = Modifier
-                    .padding(bottom = 10.dp)
-                    .fillMaxWidth(0.5f)
+                    .padding(bottom = Dimens.paddingMedium)
+                    .fillMaxWidth(OtherConstants.FILL_MAX_WIDTH_MEDIUM)
 
             ) {
-                Text( text = stringResource(R.string.retry)
-                    )
+                Text(
+                    text = stringResource(R.string.retry)
+                )
             }
             Image(
                 painter = painterResource(R.drawable.oops),
                 contentDescription = "error",
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .padding(30.dp)
-                    .width(300.dp)
+                    .fillMaxWidth(OtherConstants.FILL_MAX_WIDTH_MEDIUM)
+                    .padding(Dimens.paddingExtraLarge)
+                    .width(OtherConstants.appointedSizeOne)
             )
         }
     }

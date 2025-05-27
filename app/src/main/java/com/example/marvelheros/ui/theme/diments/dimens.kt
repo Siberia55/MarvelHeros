@@ -1,15 +1,20 @@
 package com.example.marvelheros.ui.theme.diments
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-object DimensProgressIndicator {
-    val sizeSmall = 50.dp
-    val sizeMedium = 100.dp
-    val sizeMax = 150.dp
+object OtherConstants {
+    const val DURATION_OF_ACTION = 400
+    const val CARD_WIDTH_RATIO_LARGE = 0.95f
+    const val CARD_ASPECT_RATIO_MEDIUM = 0.5f
+    const val TRANSPARENT_ALFA = 0.8f
+    const val FILL_MAX_WIDTH_MEDIUM = 0.5f
 
-    val strokeWidthSmall = 10.dp
-    val strokeWidthMedium = 20.dp
-    val strokeWidthMax = 40.dp
+    val appointedSizeOne = 300.dp
+    val smallSize = 32.dp
+    val mediumSIze = 48.dp
+    val fontSize = 32.sp
+    val radiusShape = 16.dp
 }
 
 object Dimens {
@@ -26,16 +31,14 @@ object Dimens {
     val heightSmall = 24.dp
     val heightMedium = 48.dp
     val heightMax = 72.dp
+}
 
-    object Spaced {
-        val extraSmall = 4.dp
-        val small = 8.dp
-        val medium = 16.dp
-        val large = 24.dp
-    }
+object Spaced {
+    val extraSmall = 4.dp
+    val small = 8.dp
+    val medium = 16.dp
+    val large = 24.dp
 }
-object Icons {
-    val Small = 24.dp
-    val Medium = 32.dp
-    val Large = 48.dp
-}
+
+
+

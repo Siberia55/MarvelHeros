@@ -9,9 +9,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.ui.theme.diments.Dimens
+import com.example.marvelheros.ui.theme.diments.OtherConstants
 
 @Composable
 fun ButtonBack(
@@ -22,13 +22,13 @@ fun ButtonBack(
         onClick = onDismiss,
         modifier = Modifier
             .padding(Dimens.paddingLarge)
-            .size(48.dp)
+            .size(OtherConstants.mediumSIze)
     ) {
         androidx.compose.material3.Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,
             contentDescription = stringResource(R.string.button_back),
             tint = MaterialTheme.colorScheme.primaryContainer,
-            modifier = Modifier.size(32.dp)
+            modifier = Modifier.size(OtherConstants.smallSize)
         )
     }
 }

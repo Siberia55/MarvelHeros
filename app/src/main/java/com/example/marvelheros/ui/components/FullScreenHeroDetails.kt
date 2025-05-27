@@ -25,6 +25,7 @@ import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.buttons.ButtonBack
 import com.example.marvelheros.ui.theme.diments.Dimens
+import com.example.marvelheros.ui.theme.diments.OtherConstants
 
 @Composable
 fun FullScreenHeroDetails(
@@ -53,7 +54,11 @@ fun FullScreenHeroDetails(
                 .align(Alignment.BottomCenter)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.8f))
+                        colors = listOf(
+                            Color.Transparent, Color.Black.copy(
+                                alpha = OtherConstants.TRANSPARENT_ALFA
+                            )
+                        )
                     )
                 )
                 .padding(Dimens.paddingLarge)
@@ -68,7 +73,7 @@ fun FullScreenHeroDetails(
             Text(
                 text = if (hero.description.isNotBlank()) hero.description else descriptionText,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White.copy(alpha = 0.9f),
+                color = Color.White.copy(alpha = OtherConstants.TRANSPARENT_ALFA),
                 textAlign = TextAlign.Center
             )
         }

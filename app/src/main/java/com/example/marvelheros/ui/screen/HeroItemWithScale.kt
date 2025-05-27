@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.components.HeroItem
 import kotlin.math.abs
+import com.example.marvelheros.ui.theme.diments.OtherConstants
 
 @Composable
 fun HeroItemWithScale(
@@ -27,7 +28,6 @@ fun HeroItemWithScale(
             lazyListState.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }
         }
     }
-
     val scale by remember(itemInfo) {
         derivedStateOf {
             itemInfo?.let {
@@ -46,7 +46,7 @@ fun HeroItemWithScale(
     val animatedScale by animateFloatAsState(
         targetValue = scale,
         animationSpec = tween(
-            durationMillis = 400,
+            durationMillis = OtherConstants.DURATION_OF_ACTION,
             easing = LinearOutSlowInEasing
         ),
         label = "hero-scale"
