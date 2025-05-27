@@ -51,7 +51,8 @@ fun ErrorView(
                     .fillMaxWidth(0.5f)
 
             ) {
-                Text("RETRY")
+                Text( text = stringResource(R.string.retry)
+                    )
             }
             Image(
                 painter = painterResource(R.drawable.oops),

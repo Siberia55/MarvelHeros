@@ -10,5 +10,6 @@
     <string name="server_error">Ошибка сервера</string>
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="unauthorized_error">Отказ в доступе</string>
+    <string name="retry">повторить попытку</string>
 
 </resources>

@@ -96,6 +96,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    implementation ("androidx.core:core-ktx:1.16.0")
 // Edge-to-Edge
     implementation("androidx.activity:activity-ktx:1.10.1")
 // implementation ("androidx.compose.material:material-icons-extended:2.51.1")

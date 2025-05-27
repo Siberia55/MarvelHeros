@@ -13,16 +13,29 @@ object DimensProgressIndicator {
 }
 
 object Dimens {
-    val paddingSmall = 5.dp
-    val paddingMedium = 10.dp
-    val paddingLarge = 20.dp
-    val paddingExtraLarge = 40.dp
+    val paddingSmall = 4.dp
+    val paddingMedium = 8.dp
+    val paddingLarge = 16.dp
+    val paddingExtraLarge = 24.dp
+    val paddingScreen = 16.dp
 
-    val widthSmall = 50.dp
-    val widthMedium = 100.dp
-    val widthMax = 150.dp
+    val widthSmall = 48.dp
+    val widthMedium = 96.dp
+    val widthLarge = 144.dp
 
-    val heightSmall = 10.dp
-    val heightMedium = 50.dp
-    val heightMax = 100.dp
+    val heightSmall = 24.dp
+    val heightMedium = 48.dp
+    val heightMax = 72.dp
+
+    object Spaced {
+        val extraSmall = 4.dp
+        val small = 8.dp
+        val medium = 16.dp
+        val large = 24.dp
+    }
+}
+object Icons {
+    val Small = 24.dp
+    val Medium = 32.dp
+    val Large = 48.dp
 }

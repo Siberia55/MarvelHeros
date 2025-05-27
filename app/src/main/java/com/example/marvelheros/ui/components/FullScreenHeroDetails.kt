@@ -38,7 +38,6 @@ fun FullScreenHeroDetails(
             .background(Color.Transparent)
             .windowInsetsPadding(WindowInsets.systemBars)
     ) {
-        // Hero full screen
         AsyncImage(
             model = hero.imageUrl,
             contentDescription = null,

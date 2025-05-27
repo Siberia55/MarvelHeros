@@ -11,9 +11,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeGestures
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -30,11 +35,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 import androidx.compose.ui.platform.LocalConfiguration
+import com.example.marvelheros.ui.theme.diments.Dimens.Spaced
+
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -90,7 +96,7 @@ fun MainContent(
                     .padding(top = Dimens.paddingLarge)
                     .background(MaterialTheme.colorScheme.background)
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Dimens.heightSmall))
             Text(
                 text = stringResource(R.string.choose_hero),
                 style = MaterialTheme.typography.headlineMedium,
@@ -104,15 +110,17 @@ fun MainContent(
                     snapPosition = SnapPosition.Center
                 )
             }
-
             val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
 
             LazyRow(
                 state = lazyListState,
                 flingBehavior = snapFlingBehavior,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = Dimens.paddingMedium),
-                horizontalArrangement = Arrangement.spacedBy(20.dp)
+                modifier = Modifier.padding(
+                    WindowInsets.safeGestures.only(WindowInsetsSides.Horizontal)
+                        .asPaddingValues()
+                ),
+                horizontalArrangement = Arrangement.spacedBy(Spaced.large)
             ) {
                 itemsIndexed(heroes) { index, hero ->
                     HeroItemWithScale(
