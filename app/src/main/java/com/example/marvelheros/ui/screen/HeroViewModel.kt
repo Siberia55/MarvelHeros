@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen
+/*package com.example.marvelheros.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,9 +20,23 @@ class HeroViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HeroUiState())
 
+
+    val uiState = _uiState
+
     init {
+        observeHeroes()
         loadHeroes()
     }
+
+    private fun observeHeroes() {
+        viewModelScope.launch {
+            repository.observeHeroes().collect { heroes ->
+                _uiState.update { it.copy(heroes = heroes) }
+            }
+        }
+    }
+
+
 
     fun loadHeroes() {
         viewModelScope.launch {
@@ -110,9 +124,8 @@ class HeroViewModel @Inject constructor(
                     )
                 }
             }
-
             else -> {}
         }
     }
 }
-
+*/

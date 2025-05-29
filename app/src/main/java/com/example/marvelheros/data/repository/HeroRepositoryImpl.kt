@@ -10,12 +10,21 @@ import com.example.marvelheros.utils.MarvelAuth
 import javax.inject.Inject
 import com.example.marvelheros.utils.MyResult
 import com.example.marvelheros.utils.safeApiCall
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class HeroRepositoryImpl @Inject constructor(
+
     private val apiService: ApiService,
     private val marvelAuth: MarvelAuth,
     private val localDataSource: LocalDataSource
 ) : HeroRepository {
+//---
+    override fun observeHeroes(): Flow<List<Hero>> {
+        return localDataSource.observeAllHeroes()
+            .map { entities -> entities.map { it.toDomain() } }
+    }
+//--
 
     override suspend fun getHeroes(): MyResult<List<Hero>> {
         return safeApiCall(

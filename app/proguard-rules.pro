@@ -28,6 +28,8 @@
 -keep class com.example.marvelheros.data.local.** { *; }
 -keep class com.example.marvelheros.data.local.dao.** { *; }
 -keep class com.example.marvelheros.data.local.entity.** { *; }
+-keep class com.example.marvelheros.data.model.** { *; }
+-keep class com.example.marvelheros.domain.model.** { *; }
 
 # ---------- Room annotations ------------
 -keepclassmembers class * {
@@ -35,12 +37,11 @@
     @androidx.room.* <fields>;
 }
 
--keepattributes Signature, InnerClasses, EnclosingMethod, *Annotation*, RuntimeVisibleAnnotations
-
 # -------------Moshi ----------------
 -keep @com.squareup.moshi.JsonClass class * { *; }
 -keep class **JsonAdapter { *; }
 -keep class com.squareup.moshi.** { *; }
+-dontwarn com.squareup.moshi.**
 -keepclassmembers class * {
     @com.squareup.moshi.* <fields>;
     @com.squareup.moshi.* <methods>;
@@ -71,10 +72,16 @@
 -keep class dagger.** { *; }
 -keep class * extends dagger.hilt.android.internal.lifecycle.HiltViewModelFactory { *; }
 -keep class * extends dagger.hilt.internal.GeneratedComponent { *; }
-
 # --------- Room ---------
+
 -keep class androidx.room.** { *; }
 -dontwarn androidx.room.paging.**
+
+# --------- Coil ----------
+-keep class coil.** { *; }
+-dontwarn coil.**
+-keep class okhttp3.** { *; }
+-dontwarn okhttp3.**
 
 # --------- ViewModel & SavedStateHandle ---------
 -keep class androidx.lifecycle.SavedStateHandle { *; }
@@ -96,5 +103,6 @@
 }
 -keepattributes Signature
 -keepattributes RuntimeVisibleAnnotations
-# =========================================================
 -printusage build/outputs/mapping/release/usage.txt
+-keepattributes Signature, InnerClasses, EnclosingMethod, *Annotation*, RuntimeVisibleAnnotations
+#========================================================================

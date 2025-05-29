@@ -4,7 +4,13 @@ import com.example.marvelheros.data.local.dao.HeroDao
 import com.example.marvelheros.data.local.entity.HeroEntity
 import javax.inject.Inject
 
+
 class LocalDataSource @Inject constructor(private val heroDao: HeroDao) {
+
+    fun observeAllHeroes(): kotlinx.coroutines.flow.Flow<List<HeroEntity>> {
+        return heroDao.observeAllHeroes()
+    }
+
     suspend fun getAllHeroes(): List<HeroEntity> {
         return heroDao.getAllHeroes()
     }

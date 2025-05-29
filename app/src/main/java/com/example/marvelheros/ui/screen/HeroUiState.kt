@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen
+/*package com.example.marvelheros.ui.screen
 
 import com.example.marvelheros.domain.model.Hero
 
@@ -13,3 +13,4 @@ data class HeroUiState(
     val heroDetailsProgress: Float = 0f,
     val heroDetailsError: Int? = null,
 )
+*/

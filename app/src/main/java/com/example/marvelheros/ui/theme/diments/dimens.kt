@@ -29,7 +29,7 @@ object Dimens {
     val widthLarge = 144.dp
 
     val heightSmall = 24.dp
-    val heightMedium = 48.dp
+    val heightMedium = 32.dp
     val heightMax = 72.dp
 }
 

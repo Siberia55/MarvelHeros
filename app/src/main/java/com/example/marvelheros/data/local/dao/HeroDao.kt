@@ -21,6 +21,9 @@ interface HeroDao {
     @Query("SELECT * FROM heroes WHERE id = :heroId")
     suspend fun getHeroById(heroId: Int): HeroEntity?
 
+    @Query("SELECT * FROM heroes")
+    fun observeAllHeroes(): kotlinx.coroutines.flow.Flow<List<HeroEntity>>
+
     @Update
     suspend fun updateHero(hero: HeroEntity)
 }
