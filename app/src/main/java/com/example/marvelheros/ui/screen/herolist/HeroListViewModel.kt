@@ -37,7 +37,8 @@ class HeroListViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            error = result.message
+                            error = result.message,
+                            errorCode = result.errorCode
                         )
                     }
                 }
