@@ -15,7 +15,7 @@ fun LoadingView(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .diagonalSplit(
+           .diagonalSplit(
                 color1 = MaterialTheme.colorScheme.background,
                 color2 = MaterialTheme.colorScheme.primary
             ),
@@ -23,4 +23,5 @@ fun LoadingView(modifier: Modifier = Modifier) {
     ) {
         CircularProgressIndicator(color = Color.Blue)
     }
+
 }

@@ -14,17 +14,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class HeroRepositoryImpl @Inject constructor(
-
     private val apiService: ApiService,
     private val marvelAuth: MarvelAuth,
     private val localDataSource: LocalDataSource
 ) : HeroRepository {
-//---
+
     override fun observeHeroes(): Flow<List<Hero>> {
         return localDataSource.observeAllHeroes()
             .map { entities -> entities.map { it.toDomain() } }
     }
-//--
 
     override suspend fun getHeroes(): MyResult<List<Hero>> {
         return safeApiCall(
@@ -32,8 +30,9 @@ class HeroRepositoryImpl @Inject constructor(
                 val ts = marvelAuth.getTimestamp()
                 val hash = marvelAuth.generateHash(ts)
                 val response = apiService.getHeroes(ts, marvelAuth.publicKey, hash)
-                val heroes = response.data.results.map { it.toDomain() }
-                val entities = response.data.results.map { it.toEntity() }
+                val sortedResult = response.data.results.sortedBy { it.name }
+                val heroes = sortedResult.map { it.toDomain() }
+                val entities = sortedResult.map { it.toEntity() }
                 localDataSource.insertHeroes(entities)
                 heroes
             },
@@ -52,7 +51,7 @@ class HeroRepositoryImpl @Inject constructor(
                 val hash = marvelAuth.generateHash(ts)
                 val response = apiService.getHeroById(heroId, ts, marvelAuth.publicKey, hash)
                 val heroDto = response.data.results.firstOrNull()
-                    ?: throw Exception("Герой не найден")
+                    ?: throw Exception("Hero not found")
                 val entity = heroDto.toEntity()
                 localDataSource.insertHero(entity)
                 entity.toDomain()

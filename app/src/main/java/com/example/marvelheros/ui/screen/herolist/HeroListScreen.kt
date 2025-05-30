@@ -18,6 +18,7 @@ import coil3.imageLoader
 import coil3.request.ImageRequest
 import com.example.marvelheros.ui.components.ErrorView
 import com.example.marvelheros.ui.components.LoadingView
+import com.example.marvelheros.utils.ErrorCode
 
 @Composable
 fun HeroListScreen(
@@ -43,6 +44,7 @@ fun HeroListScreen(
     when {
         state.isLoading -> LoadingView(modifier = modifier)
         state.error != null -> ErrorView(
+            errorCode = ErrorCode.UNKNOWN_ERROR ,
             errorMessage = state.error,
             onRetry = { viewModel.loadHeroes() },
             modifier = modifier

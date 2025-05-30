@@ -19,7 +19,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGestures
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -39,6 +41,7 @@ import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
 import com.example.marvelheros.ui.theme.diments.Spaced
 
 @SuppressLint("SuspiciousModifierThen")
@@ -80,11 +83,14 @@ fun MainContent(
             )
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(Dimens.paddingLarge)
-                .padding(contentPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
+
+                modifier = Modifier
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.statusBars)
+                    .padding(Dimens.paddingLarge)
+                    .padding(contentPadding),
+                horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
             Image(
                 painter = painterResource(R.drawable.logo),

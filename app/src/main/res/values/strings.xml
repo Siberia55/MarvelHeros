@@ -8,6 +8,7 @@
     <string name="description_missing">Description missing</string>
     <string name="no_network_error">No network connect</string>
     <string name="server_error">Server error</string>
+    <string name="network_error">Network error</string>
     <string name="unknown_error">Unknown error:</string>
     <string name="unauthorized_error">Unauthorized Error</string>
     <string name="retry">retry</string>

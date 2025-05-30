@@ -20,10 +20,12 @@ import androidx.compose.ui.res.stringResource
 import com.example.marvelheros.R
 import com.example.marvelheros.ui.theme.diments.Dimens
 import com.example.marvelheros.ui.theme.diments.OtherConstants
+import com.example.marvelheros.utils.ErrorCode
 
 @Composable
 fun ErrorView(
     errorMessage: String?,
+    errorCode: ErrorCode,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -39,8 +41,18 @@ fun ErrorView(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
+                text = when (errorCode) {
+                    ErrorCode.NETWORK_ERROR -> stringResource(R.string.network_error)
+                    ErrorCode.SERVER_ERROR -> stringResource(R.string.server_error)
+                    ErrorCode.UNKNOWN_ERROR -> stringResource(R.string.unknown_error)
+                } + (errorMessage?.let { ": $it" } ?: ""),
+
+
+/*
                 text = "${stringResource(R.string.error)} $errorMessage" +
                         " ${stringResource(R.string.unauthorized_error)}",
+
+ */
                 color = Color.Black,
                 modifier = Modifier
                     .padding(bottom = Dimens.paddingMedium),
