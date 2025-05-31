@@ -8,14 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.marvelheros.ui.screen.diagonalSplit
 
 @Composable
 fun LoadingView(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-           .diagonalSplit(
+            .diagonalSplit(
                 color1 = MaterialTheme.colorScheme.background,
                 color2 = MaterialTheme.colorScheme.primary
             ),

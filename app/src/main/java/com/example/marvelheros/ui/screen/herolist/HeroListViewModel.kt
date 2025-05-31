@@ -3,7 +3,7 @@ package com.example.marvelheros.ui.screen.herolist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvelheros.domain.usecase.GetHeroesUseCase
-import com.example.marvelheros.ui.screen.heroState.HeroListState
+import com.example.marvelheros.ui.screen.herolist.state.HeroListState
 import com.example.marvelheros.utils.MyResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

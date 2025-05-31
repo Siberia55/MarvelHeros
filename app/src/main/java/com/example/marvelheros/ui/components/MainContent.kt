@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen
+package com.example.marvelheros.ui.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -41,7 +41,6 @@ import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.unit.dp
 import com.example.marvelheros.ui.theme.diments.Spaced
 
 @SuppressLint("SuspiciousModifierThen")
@@ -84,12 +83,12 @@ fun MainContent(
     ) {
         Column(
 
-                modifier = Modifier
-                    .fillMaxSize()
-                    .windowInsetsPadding(WindowInsets.statusBars)
-                    .padding(Dimens.paddingLarge)
-                    .padding(contentPadding),
-                horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(Dimens.paddingLarge)
+                .padding(contentPadding),
+            horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
             Image(

@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen
+package com.example.marvelheros.ui.components
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import com.example.marvelheros.domain.model.Hero
-import com.example.marvelheros.ui.components.HeroItem
 import kotlin.math.abs
 import com.example.marvelheros.ui.theme.diments.OtherConstants
 

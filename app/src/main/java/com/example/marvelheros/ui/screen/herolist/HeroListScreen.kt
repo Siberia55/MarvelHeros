@@ -10,14 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.marvelheros.ui.navigation.Screen
-import com.example.marvelheros.ui.screen.MainContent
+import com.example.marvelheros.ui.components.MainContent
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import coil3.imageLoader
 import coil3.request.ImageRequest
 import com.example.marvelheros.ui.components.LoadingView
-import com.example.marvelheros.ui.screen.errorScreen.ErrorScreen
+import com.example.marvelheros.ui.components.errorScreen.ErrorScreen
 import com.example.marvelheros.utils.ErrorCode
 
 @Composable

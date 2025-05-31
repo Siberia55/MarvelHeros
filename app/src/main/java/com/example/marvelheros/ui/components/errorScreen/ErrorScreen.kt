@@ -1,4 +1,4 @@
-package com.example.marvelheros.ui.screen.errorScreen
+package com.example.marvelheros.ui.components.errorScreen
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.Image

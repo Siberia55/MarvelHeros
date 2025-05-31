@@ -27,7 +27,7 @@ fun HeroItem(
     hero: Hero,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
-    ) {
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth(OtherConstants.CARD_WIDTH_RATIO_LARGE)

@@ -14,9 +14,8 @@ import com.example.marvelheros.ui.components.FullScreenHeroDetails
 import androidx.compose.runtime.getValue
 import com.example.marvelheros.ui.components.LoadingView
 //import com.example.marvelheros.ui.components.ErrorView
-import com.example.marvelheros.ui.screen.errorScreen.ErrorScreen
+import com.example.marvelheros.ui.components.errorScreen.ErrorScreen
 import com.example.marvelheros.utils.ErrorCode
-import com.example.marvelheros.utils.MyResult
 
 
 @Composable
