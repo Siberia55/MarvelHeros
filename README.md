@@ -1,6 +1,6 @@
 # Marvel Heroes App
 
-<img src="marvel-studios_logo.jpg" width="63%"> 
+<img src="Screenshots/marvel-studios_logo.jpg" width="63%"> 
 
 Приложение для просмотра информации о героях Marvel с современным интерфейсом, создано как учебный проект с целью ознакомится с современнным стеком технологий.
 
@@ -9,21 +9,21 @@
 **Поддержка RTL (Right-to-Left) интерфейса**
 <table>
   <tr>
-    <td><img src="Screenshot_2025-05-31-09-43-04-717_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
-    <td><img src="Screenshot_2025-05-31-09-42-49-246_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-43-04-717_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-42-49-246_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
 </table>
 
 **Реализация edge-to-edge дизайна**
 
-  <img src="Screenshot_2025-05-31-10-24-12-289_com.example.marvelheros.jpg" width="73%">
+  <img src="Screenshots/Screenshot_2025-05-31-10-24-12-289_com.example.marvelheros.jpg" width="73%">
 
 
 **Локализация (русский/английский)**
 <table>
   <tr>
-    <td><img src="Screenshot_2025-05-31-09-50-15-947_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
-    <td><img src="Screenshot_2025-05-31-09-40-36-070_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-50-15-947_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-40-36-070_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
 <table>
 
@@ -31,8 +31,8 @@
 
 <table>
   <tr>
-    <td><img src="Screenshot_2025-05-31-09-38-28-524_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
-    <td><img src="Screenshot_2025-05-31-09-39-00-471_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-38-28-524_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-39-00-471_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
 <table>
 
