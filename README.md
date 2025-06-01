@@ -75,6 +75,8 @@ MARVEL_PRIVATE_KEY=your_private_key
 - Data caching: Results may not be stored for more than 24 hours
 - Commercial use: Requires separate approval for commercial applications
 
-## Контакты
-- Telegram: omichfly -  [My telegram](https://t.me/omichfly)
+## Contacts
+- [My telegram](https://t.me/omichfly)
+
+## [Download Marvel Heroes](https://github.com/Siberia55/MarvelHeros/blob/master/app/release/Marvel%20Heroes.apk)
 
