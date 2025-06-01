@@ -14,15 +14,11 @@ An application for viewing information about characters in the Marvel universe w
 </table>
 
 **RTL (Right-to-Left) Interface Support**
-
 #
-
   <img src="Screenshots/Screenshot_2025-05-31-10-24-12-289_com.example.marvelheros.jpg" width="73%">
 
 **Implementation of Edge-to-Edge Design**
-
 #
-
 <table>
   <tr>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-50-15-947_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
@@ -31,7 +27,6 @@ An application for viewing information about characters in the Marvel universe w
 <table>
 
 **Localization (English/Russian)**
-
 #
 <table>
   <tr>
@@ -43,7 +38,6 @@ An application for viewing information about characters in the Marvel universe w
 **Dark/Light Theme**
 #
 ## Features
-
 - Dark/Light Theme with smooth animations
 - Right-to-Left (RTL) layout support
 - MVI architecture (state management)
@@ -51,7 +45,6 @@ An application for viewing information about characters in the Marvel universe w
 - Full localization (English and Russian)
 - Intelligent Offline Mode with Room caching
 - Marvel character browser with detail screen
-
 ## Tech Stack
 - **Jetpack Compose** - Modern declarative UI framework
 - **Dagger Hilt** - dependency injection
@@ -61,13 +54,11 @@ An application for viewing information about characters in the Marvel universe w
 - **Marvel API** - Data source
 - **Coil** -  Image loading
 - **Coroutines + Flow** - Asynchronous operations
-- **Navigation Compose** - In-app navigation
-  
+- **Navigation Compose** - In-app navigation  
 ## Requirements
 - Android 8.0+ (API 24)
 - Kotlin 1.9.0+
 - Android Studio Meerkat+
-
 ## Installation
 1. Get API keys from [developer.marvel.com](https://developer.marvel.com/)
 2. Add them to `local.properties` :
@@ -76,7 +67,7 @@ For example
 MARVEL_PUBLIC_KEY="85366ee982e642d7957abb89a7559431"
 MARVEL_PRIVATE_KEY=your_private_key
 ```
-3.  Соберите проект через Android Studio
+3. "Build the project using Android Studio"
 
 ## The API has certain limitations for developers.
 - Rate limiting: ~3,000 requests/day (varies by authentication method)
