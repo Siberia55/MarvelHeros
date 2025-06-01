@@ -38,7 +38,7 @@ An application for viewing information about characters in the Marvel universe w
     <td><img src="Screenshots/Screenshot_2025-05-31-09-38-28-524_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-39-00-471_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
-<table>
+</table>
 
 **Dark/Light Theme**
 #
