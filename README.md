@@ -62,8 +62,8 @@ An application for viewing information about characters in the Marvel universe w
 - **Coil** -  Image loading
 - **Coroutines + Flow** - Asynchronous operations
 - **Navigation Compose** - In-app navigation
-- 
-- ## Requirements
+  
+## Requirements
 - Android 8.0+ (API 24)
 - Kotlin 1.9.0+
 - Android Studio Meerkat+
