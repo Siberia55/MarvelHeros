@@ -76,7 +76,7 @@ MARVEL_PRIVATE_KEY=your_private_key
 - Commercial use: Requires separate approval for commercial applications
 
 ## Contacts
-- [My telegram](https://t.me/omichfly)
+[![My telegram](https://github.com/Siberia55/MarvelHeros/blob/master/Screenshots/icons8-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-48.png)](https://t.me/omichfly)
 
 ## [Download Marvel Heroes](https://github.com/Siberia55/MarvelHeros/blob/master/app/release/Marvel%20Heroes.apk)
 
