@@ -24,7 +24,7 @@ An application for viewing information about characters in the Marvel universe w
     <td><img src="Screenshots/Screenshot_2025-05-31-09-50-15-947_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-40-36-070_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
-<table>
+</table>
 
 **Localization (English/Russian)**
 #
