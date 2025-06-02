@@ -22,14 +22,16 @@ import androidx.compose.foundation.layout.safeGestures
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -37,11 +39,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
-import androidx.compose.ui.platform.LocalConfiguration
 import com.example.marvelheros.ui.theme.diments.Spaced
+import com.example.marvelheros.utils.findCenteredItemIndex
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -62,15 +70,27 @@ fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
 @Composable
 fun MainContent(
     heroes: List<Hero>,
-    onHeroClick: (Hero) -> Unit,
+    onHeroClick: (Hero, Int) -> Unit,
+    listState: LazyListState,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues()
+    contentPadding: PaddingValues = PaddingValues(),
+    initialScrollIndex: Int? = null,
 ) {
-    val configuration = LocalConfiguration.current
-    val lazyListState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(configuration.orientation) {
-        lazyListState.scrollToItem(0)
+    LaunchedEffect(initialScrollIndex) {
+        initialScrollIndex?.let {
+            listState.scrollToItem(it)
+        }
+    }
+
+    OnLifecycleEvent(Lifecycle.Event.ON_RESUME) {
+        coroutineScope.launch {
+            delay(32)
+            val centered = listState.findCenteredItemIndex()
+            centered?.let { listState.scrollToItem(it) }
+
+        }
     }
 
     Box(
@@ -108,16 +128,16 @@ fun MainContent(
             )
             Spacer(modifier = Modifier.height(Dimens.heightMedium))
 
-            val snapLayoutInfoProvider = remember(lazyListState) {
+            val snapLayoutInfoProvider = remember(listState) {
                 SnapLayoutInfoProvider(
-                    lazyListState = lazyListState,
+                    lazyListState = listState,
                     snapPosition = SnapPosition.Center
                 )
             }
             val snapFlingBehavior = rememberSnapFlingBehavior(snapLayoutInfoProvider)
 
             LazyRow(
-                state = lazyListState,
+                state = listState,
                 flingBehavior = snapFlingBehavior,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(
@@ -130,11 +150,29 @@ fun MainContent(
                     HeroItemWithScale(
                         hero = hero,
                         index = index,
-                        lazyListState = lazyListState,
+                        lazyListState = listState,
                         onHeroClick = onHeroClick
                     )
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+fun OnLifecycleEvent(event: Lifecycle.Event, onEvent: () -> Unit) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    DisposableEffect(lifecycleOwner, event) {
+        val observer = LifecycleEventObserver { _, e ->
+            if (e == event) {
+                onEvent()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 }

@@ -20,8 +20,9 @@ fun HeroItemWithScale(
     hero: Hero,
     index: Int,
     lazyListState: LazyListState,
-    onHeroClick: (Hero) -> Unit
+    onHeroClick: (Hero, Int) -> Unit
 ) {
+
     val itemInfo by remember {
         derivedStateOf {
             lazyListState.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }
@@ -60,7 +61,7 @@ fun HeroItemWithScale(
     ) {
         HeroItem(
             hero = hero,
-            onClick = { onHeroClick(hero) }
+            onClick = { onHeroClick(hero, index) }
         )
     }
 }

@@ -14,15 +14,11 @@ An application for viewing information about characters in the Marvel universe w
 </table>
 
 **RTL (Right-to-Left) Interface Support**
-
 #
-
   <img src="Screenshots/Screenshot_2025-05-31-10-24-12-289_com.example.marvelheros.jpg" width="73%">
 
 **Implementation of Edge-to-Edge Design**
-
 #
-
 <table>
   <tr>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-50-15-947_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
@@ -31,19 +27,17 @@ An application for viewing information about characters in the Marvel universe w
 <table>
 
 **Localization (English/Russian)**
-
 #
 <table>
   <tr>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-38-28-524_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
     <td><img src="Screenshots/Screenshot_2025-05-31-09-39-00-471_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
   </tr>
-<table>
+</table>
 
 **Dark/Light Theme**
 #
 ## Features
-
 - Dark/Light Theme with smooth animations
 - Right-to-Left (RTL) layout support
 - MVI architecture (state management)
@@ -51,7 +45,6 @@ An application for viewing information about characters in the Marvel universe w
 - Full localization (English and Russian)
 - Intelligent Offline Mode with Room caching
 - Marvel character browser with detail screen
-
 ## Tech Stack
 - **Jetpack Compose** - Modern declarative UI framework
 - **Dagger Hilt** - dependency injection
@@ -62,12 +55,10 @@ An application for viewing information about characters in the Marvel universe w
 - **Coil** -  Image loading
 - **Coroutines + Flow** - Asynchronous operations
 - **Navigation Compose** - In-app navigation
-  
 ## Requirements
 - Android 8.0+ (API 24)
 - Kotlin 1.9.0+
 - Android Studio Meerkat+
-
 ## Installation
 1. Get API keys from [developer.marvel.com](https://developer.marvel.com/)
 2. Add them to `local.properties` :
@@ -76,7 +67,7 @@ For example
 MARVEL_PUBLIC_KEY="85366ee982e642d7957abb89a7559431"
 MARVEL_PRIVATE_KEY=your_private_key
 ```
-3.  Соберите проект через Android Studio
+3. "Build the project using Android Studio"
 
 ## The API has certain limitations for developers.
 - Rate limiting: ~3,000 requests/day (varies by authentication method)
@@ -84,6 +75,8 @@ MARVEL_PRIVATE_KEY=your_private_key
 - Data caching: Results may not be stored for more than 24 hours
 - Commercial use: Requires separate approval for commercial applications
 
-## Контакты
-- Telegram: omichfly -  [My telegram](https://t.me/omichfly)
+## Contacts
+[![My telegram](https://github.com/Siberia55/MarvelHeros/blob/master/Screenshots/icons8-%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC-48.png)](https://t.me/omichfly)
+
+## [Download Marvel Heroes](https://github.com/Siberia55/MarvelHeros/blob/master/app/release/Marvel%20Heroes.apk)
 

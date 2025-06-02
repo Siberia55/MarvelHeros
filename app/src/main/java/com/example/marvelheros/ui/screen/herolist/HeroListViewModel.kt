@@ -1,5 +1,6 @@
 package com.example.marvelheros.ui.screen.herolist
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marvelheros.domain.usecase.GetHeroesUseCase
@@ -19,6 +20,9 @@ class HeroListViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = MutableStateFlow(HeroListState())
     val state: StateFlow<HeroListState> = _state.asStateFlow()
+    val listState = LazyListState()
+    var lastSelectedIndex: Int? = null
+
     fun loadHeroes() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }

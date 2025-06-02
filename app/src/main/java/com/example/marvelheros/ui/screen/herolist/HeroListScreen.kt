@@ -52,10 +52,14 @@ fun HeroListScreen(
 
         else -> MainContent(
             heroes = state.heroes,
-            onHeroClick = { hero ->
+            onHeroClick = { hero, index ->
+                viewModel.lastSelectedIndex = index
                 navController.navigate(Screen.HeroDetails.createRoute(hero.id))
             },
-            modifier = safeModifier
-        )
+            modifier = safeModifier,
+            listState = viewModel.listState,
+            initialScrollIndex = viewModel.lastSelectedIndex,
+
+            )
     }
 }
