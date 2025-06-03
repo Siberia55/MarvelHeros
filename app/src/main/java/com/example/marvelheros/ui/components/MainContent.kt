@@ -28,7 +28,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -40,8 +39,6 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
@@ -49,7 +46,7 @@ import com.example.marvelheros.ui.theme.diments.Spaced
 import com.example.marvelheros.utils.findCenteredItemIndex
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import com.example.marvelheros.utils.lifecycle.OnLifecycleEvent
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -144,35 +141,17 @@ fun MainContent(
                     WindowInsets.safeGestures.only(WindowInsetsSides.Horizontal)
                         .asPaddingValues()
                 ),
-                horizontalArrangement = Arrangement.spacedBy(Spaced.large)
+                horizontalArrangement = Arrangement.spacedBy(Spaced.large),
             ) {
                 itemsIndexed(heroes) { index, hero ->
                     HeroItemWithScale(
                         hero = hero,
                         index = index,
                         lazyListState = listState,
-                        onHeroClick = onHeroClick
+                        onHeroClick = onHeroClick,
                     )
                 }
             }
-        }
-    }
-}
-
-
-@Composable
-fun OnLifecycleEvent(event: Lifecycle.Event, onEvent: () -> Unit) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-
-    DisposableEffect(lifecycleOwner, event) {
-        val observer = LifecycleEventObserver { _, e ->
-            if (e == event) {
-                onEvent()
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 }

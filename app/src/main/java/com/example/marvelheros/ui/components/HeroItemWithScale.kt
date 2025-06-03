@@ -20,7 +20,10 @@ fun HeroItemWithScale(
     hero: Hero,
     index: Int,
     lazyListState: LazyListState,
-    onHeroClick: (Hero, Int) -> Unit
+    onHeroClick: (Hero, Int) -> Unit,
+
+    modifier: Modifier = Modifier
+
 ) {
 
     val itemInfo by remember {
@@ -53,7 +56,7 @@ fun HeroItemWithScale(
     )
 
     Box(
-        modifier = Modifier
+        modifier = Modifier //modifier
             .graphicsLayer {
                 scaleX = animatedScale
                 scaleY = animatedScale

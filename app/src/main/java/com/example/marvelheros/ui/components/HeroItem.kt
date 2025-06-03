@@ -29,7 +29,7 @@ fun HeroItem(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(OtherConstants.CARD_WIDTH_RATIO_LARGE)
             .aspectRatio(OtherConstants.CARD_ASPECT_RATIO_MEDIUM)
             .clip(RoundedCornerShape(OtherConstants.radiusShape))
