@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             MarvelHerosTheme {
-               EdgeToEdgeTheme {
+                EdgeToEdgeTheme {
                     LocalDirectionWrapper {
                         Surface(
                             modifier = Modifier.fillMaxSize(),

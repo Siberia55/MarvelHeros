@@ -1,6 +1,5 @@
 package com.example.marvelheros.ui.components
 
-import android.util.Log
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -26,13 +25,12 @@ fun HeroItemWithScale(
     modifier: Modifier = Modifier
 
 ) {
-
     val itemInfo by remember {
         derivedStateOf {
             lazyListState.layoutInfo.visibleItemsInfo.firstOrNull { it.index == index }
         }
     }
-    val scale = remember(itemInfo) {//val scale by remember(itemInfo) {
+    val scale = remember(itemInfo) {
         derivedStateOf {
             itemInfo?.let {
                 val viewportWidth = lazyListState.layoutInfo.viewportEndOffset -
@@ -43,19 +41,10 @@ fun HeroItemWithScale(
                 val maxDistance = (viewportWidth / 2).toFloat()
                 val fraction = (distanceFromCenter / maxDistance).coerceIn(0f, 1f)
                 1f - 0.5f * fraction
-            } //?: 1f
+            }
         }
     }
-/*
-    val animatedScale by animateFloatAsState(
-        targetValue = scale,
-        animationSpec = tween(
-            durationMillis = OtherConstants.DURATION_OF_ACTION,
-            easing = LinearOutSlowInEasing
-        ),
-        label = "hero-scale"
-    )
-*/
+
     val animatedScale = scale.value?.let { target ->
         animateFloatAsState(
             targetValue = target,
@@ -65,11 +54,11 @@ fun HeroItemWithScale(
             ),
             label = "hero-scale"
         )
-    }?.value ?: 0.9f
+    }?.value ?: 1f
 
 
     Box(
-        modifier = Modifier //modifier
+        modifier = Modifier
             .graphicsLayer {
                 scaleX = animatedScale
                 scaleY = animatedScale

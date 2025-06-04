@@ -58,8 +58,6 @@ fun HeroListScreen(
             },
             modifier = safeModifier,
             listState = viewModel.listState,
-            //initialScrollIndex = viewModel.lastSelectedIndex,
-
-            )
+        )
     }
 }

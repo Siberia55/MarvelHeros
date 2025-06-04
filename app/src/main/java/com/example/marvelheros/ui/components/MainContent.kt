@@ -14,27 +14,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGestures
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -43,15 +37,11 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.Lifecycle
 import com.example.marvelheros.R
 import com.example.marvelheros.domain.model.Hero
 import com.example.marvelheros.ui.theme.diments.Dimens
 import com.example.marvelheros.ui.theme.diments.Spaced
 import com.example.marvelheros.utils.findCenteredItemIndex
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import com.example.marvelheros.utils.lifecycle.OnLifecycleEvent
 
 @SuppressLint("SuspiciousModifierThen")
 fun Modifier.diagonalSplit(color1: Color, color2: Color): Modifier = this.then(
@@ -75,15 +65,11 @@ fun MainContent(
     onHeroClick: (Hero, Int) -> Unit,
     listState: LazyListState,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(),
-    initialScrollIndex: Int? = null,
+    contentPadding: PaddingValues = PaddingValues()
 ) {
     val configuration = LocalConfiguration.current
-    //val coroutineScope = rememberCoroutineScope()
-
     LaunchedEffect(configuration.orientation) {
         if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            //delay(10) // Подождать пересоздание LazyRow
             listState.findCenteredItemIndex()?.let {
                 listState.scrollToItem(it)
             }
@@ -93,18 +79,18 @@ fun MainContent(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            //.windowInsetsPadding(WindowInsets.systemBars) // Учитываем и статусбар, и навбар
             .diagonalSplit(
                 color1 = MaterialTheme.colorScheme.background,
                 color2 = MaterialTheme.colorScheme.primary
             )
     ) {
         Column(
-
             modifier = Modifier
                 .fillMaxSize()
-                //.windowInsetsPadding(WindowInsets.systemBars/*statusBars*/)
-                .windowInsetsPadding(WindowInsets.safeGestures.only(WindowInsetsSides.Top + WindowInsetsSides.Bottom))
+                .windowInsetsPadding(
+                    WindowInsets.safeGestures
+                        .only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
+                )
                 .padding(Dimens.paddingLarge)
                 .padding(contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -141,8 +127,6 @@ fun MainContent(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(
                     horizontal = Dimens.paddingLarge
-                  /*  WindowInsets.safeGestures.only(WindowInsetsSides.Horizontal)
-                        .asPaddingValues()*/
                 ),
                 horizontalArrangement = Arrangement.spacedBy(Spaced.large),
             ) {
