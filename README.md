@@ -37,6 +37,14 @@ An application for viewing information about characters in the Marvel universe w
 
 **Dark/Light Theme**
 #
+**Preview and details**
+<table>
+  <tr>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-38-28-524_com.example.marvelheros.jpg" width="60%" alt="Описание 1"></td>
+    <td><img src="Screenshots/Screenshot_2025-05-31-09-39-00-471_com.example.marvelheros.jpg" width="60%" alt="Описание 2"></td>
+  </tr>
+</table>
+#
 ## Features
 - Dark/Light Theme with smooth animations
 - Right-to-Left (RTL) layout support
