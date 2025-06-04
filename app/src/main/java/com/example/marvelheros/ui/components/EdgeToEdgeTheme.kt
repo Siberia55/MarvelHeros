@@ -23,9 +23,10 @@ fun EdgeToEdgeTheme(
         window.navigationBarColor = Color.Transparent.toArgb()
 
         WindowInsetsControllerCompat(window, view).apply {
-            isAppearanceLightStatusBars = !darkTheme
-            isAppearanceLightNavigationBars = !darkTheme
-            hide(WindowInsetsCompat.Type.navigationBars())
+           isAppearanceLightStatusBars = !darkTheme
+           isAppearanceLightNavigationBars = !darkTheme
+
+            hide(WindowInsetsCompat.Type.navigationBars()) //systemBars()) скрывать все бары
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }

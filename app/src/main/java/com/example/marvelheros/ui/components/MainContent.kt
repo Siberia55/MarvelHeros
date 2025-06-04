@@ -1,6 +1,7 @@
 package com.example.marvelheros.ui.components
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
@@ -20,22 +21,26 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGestures
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
@@ -73,26 +78,22 @@ fun MainContent(
     contentPadding: PaddingValues = PaddingValues(),
     initialScrollIndex: Int? = null,
 ) {
-    val coroutineScope = rememberCoroutineScope()
+    val configuration = LocalConfiguration.current
+    //val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(initialScrollIndex) {
-        initialScrollIndex?.let {
-            listState.scrollToItem(it)
+    LaunchedEffect(configuration.orientation) {
+        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //delay(10) // Подождать пересоздание LazyRow
+            listState.findCenteredItemIndex()?.let {
+                listState.scrollToItem(it)
+            }
         }
     }
-
-    OnLifecycleEvent(Lifecycle.Event.ON_RESUME) {
-        coroutineScope.launch {
-            delay(32)
-            val centered = listState.findCenteredItemIndex()
-            centered?.let { listState.scrollToItem(it) }
-
-        }
-    }
-
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            //.windowInsetsPadding(WindowInsets.systemBars) // Учитываем и статусбар, и навбар
             .diagonalSplit(
                 color1 = MaterialTheme.colorScheme.background,
                 color2 = MaterialTheme.colorScheme.primary
@@ -102,7 +103,8 @@ fun MainContent(
 
             modifier = Modifier
                 .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.statusBars)
+                //.windowInsetsPadding(WindowInsets.systemBars/*statusBars*/)
+                .windowInsetsPadding(WindowInsets.safeGestures.only(WindowInsetsSides.Top + WindowInsetsSides.Bottom))
                 .padding(Dimens.paddingLarge)
                 .padding(contentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -138,8 +140,9 @@ fun MainContent(
                 flingBehavior = snapFlingBehavior,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(
-                    WindowInsets.safeGestures.only(WindowInsetsSides.Horizontal)
-                        .asPaddingValues()
+                    horizontal = Dimens.paddingLarge
+                  /*  WindowInsets.safeGestures.only(WindowInsetsSides.Horizontal)
+                        .asPaddingValues()*/
                 ),
                 horizontalArrangement = Arrangement.spacedBy(Spaced.large),
             ) {

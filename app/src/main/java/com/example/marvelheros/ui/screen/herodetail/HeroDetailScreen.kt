@@ -38,7 +38,7 @@ fun HeroDetailScreen(
             .windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets.systemBars)
         when {
             state.isLoading -> LoadingView(modifier)
-            state.error != null -> ErrorScreen(//ErrorView(
+            state.error != null -> ErrorScreen(
                 errorMessage = state.error,
                 onRetry = { viewModel.loadHero(heroId) },
                 errorCode = state.errorCode ?: ErrorCode.UNKNOWN_ERROR,
