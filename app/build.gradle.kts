@@ -74,6 +74,7 @@ android {
         buildConfig = true
     }
 }
+
 dependencies {
 // default
     implementation(libs.androidx.core.ktx)

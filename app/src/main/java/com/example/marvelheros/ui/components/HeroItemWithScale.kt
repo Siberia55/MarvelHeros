@@ -21,9 +21,7 @@ fun HeroItemWithScale(
     index: Int,
     lazyListState: LazyListState,
     onHeroClick: (Hero, Int) -> Unit,
-
     modifier: Modifier = Modifier
-
 ) {
     val itemInfo by remember {
         derivedStateOf {
@@ -55,7 +53,6 @@ fun HeroItemWithScale(
             label = "hero-scale"
         )
     }?.value ?: 1f
-
 
     Box(
         modifier = Modifier
