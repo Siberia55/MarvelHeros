@@ -20,7 +20,7 @@ interface HeroDao {
     suspend fun getHeroById(heroId: Int): HeroEntity?
 
     @Query("SELECT * FROM heroes ORDER BY name ASC")
-     fun observeAllHeroes(): Flow<List<HeroEntity>>
+    fun observeAllHeroes(): Flow<List<HeroEntity>>
 
     @Query("SELECT * FROM heroes ORDER BY name ASC")
     suspend fun getAllHeroes(): List<HeroEntity>

@@ -74,7 +74,6 @@ android {
         buildConfig = true
     }
 }
-
 dependencies {
 // default
     implementation(libs.androidx.core.ktx)
@@ -93,42 +92,25 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+// my connect
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.moshi.kotlin.codegen)
+    ksp(libs.room.compiler)
 // coil
     implementation(libs.coil.compose)
     implementation(libs.coil3.coil.compose)
     implementation(libs.coil.network.okhttp)
-
-    implementation ("androidx.core:core-ktx:1.16.0")
-// Edge-to-Edge
-    implementation("androidx.activity:activity-ktx:1.10.1")
-// implementation ("androidx.compose.material:material-icons-extended:2.51.1")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-// ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-// Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
-// retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-//  Для проверки интернет-соединения
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-// Moshi (для преобразования JSON)
-    implementation("com.squareup.moshi:moshi:1.15.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-// Hilt
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-// для логирования
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-// Room
-    implementation("androidx.room:room-runtime:2.7.0")
-    implementation("androidx.room:room-ktx:2.7.0")
-// kapt
-//    kapt ("androidx.room:room-compiler:2.7.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
-//--------- переход на ksp
-    ksp("androidx.room:room-compiler:2.7.1")
 
     kapt(libs.hilt.android)
     implementation(libs.hilt.android)

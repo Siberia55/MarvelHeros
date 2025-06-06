@@ -45,7 +45,7 @@ fun EdgeToEdgeTheme(
         insetsController.isAppearanceLightNavigationBars = !darkTheme
         insetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-       /*comment the line below if you want to show system bars*/
+        /*comment the line below if you want to show system bars*/
         insetsController.hide(WindowInsetsCompat.Type.navigationBars()) //hide systemBars())
     }
     /* /*uncomment if you need to show system bars */
